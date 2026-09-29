@@ -1,0 +1,3 @@
+# Store every file byte-for-byte: many files are SHA-256 locked (source-lock, prompts-lock,
+# item_manifest_lock, vendor-lock); line-ending conversion would break verification on checkout.
+* -text

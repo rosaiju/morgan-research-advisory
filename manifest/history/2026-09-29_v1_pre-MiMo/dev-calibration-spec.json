@@ -1,0 +1,16 @@
+{
+  "schema": "morgan-dev-calibration/1",
+  "created": "2026-09-29",
+  "status": "SPECIFICATION + generated item list (manifest/items/items_dev.json, 216 items: 70 MMLU-Pro validation, 100 MATH-500, 46 BBEH); NO inference executed",
+  "purpose": "development-only budget/plumbing calibration, disjoint from all final items",
+  "generator": "manifest/generate_item_manifests.py (run 2026-09-29; deterministic; hashes in items/item_manifest_lock.json)",
+  "sets": [
+    {"benchmark": "mmlu_pro", "source_split": "validation (data/validation-00000-of-00001.parquet)", "n": 70, "rule": "all 70 validation items (5 per subject); disjoint from final by split"},
+    {"benchmark": "math500", "source_split": "test.jsonl", "n": 100, "rule": "proportional (subject, level) reserve described in evaluation.json; the final 400 are the complement"},
+    {"benchmark": "bbeh_sampled", "source_split": "pinned task files", "n": 46, "rule": "2 per task x 23 tasks, drawn before the final 20 per task with the same seeded shuffle; disjoint"}
+  ],
+  "ifeval": "no development items (the 541 prompts are all final); IFEval uses the same ceiling C",
+  "repeats": 1,
+  "outputs_recorded": ["status", "generated tokens (reasoning/final if separable)", "stop reason", "rendered prompt hash"],
+  "decision_rule": "see manifest/evaluation.json budget_policy.development_calibration; accuracy on these items cannot change any setting"
+}

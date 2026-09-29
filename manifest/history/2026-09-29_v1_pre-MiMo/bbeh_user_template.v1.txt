@@ -1,0 +1,3 @@
+{input}
+
+Think step by step, and when you provide the final answer, please use the prefix "The answer is:" without any modification, and provide the answer directly, with no formatting, no bolding, and no markup.

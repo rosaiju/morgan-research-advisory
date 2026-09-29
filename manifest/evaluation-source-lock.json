@@ -1,0 +1,52 @@
+﻿[
+    {
+        "kind":  "dataset",
+        "id":  "TIGER-Lab/MMLU-Pro",
+        "revision":  "b189ec765aa7ed75c8acfea42df31fdae71f97be",
+        "files":  [
+                      ".gitattributes",
+                      "README.md",
+                      "data/test-00000-of-00001.parquet",
+                      "data/validation-00000-of-00001.parquet",
+                      "eval.yaml",
+                      "run_claude3.py",
+                      "run_gpt4o.py"
+                  ]
+    },
+    {
+        "kind":  "dataset",
+        "id":  "HuggingFaceH4/MATH-500",
+        "revision":  "6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be",
+        "files":  [
+                      ".gitattributes",
+                      "README.md",
+                      "eval.yaml",
+                      "test.jsonl"
+                  ]
+    },
+    {
+        "kind":  "github",
+        "id":  "google-deepmind/bbeh",
+        "revision":  "80d12ca916b7158f22293fcf3144f4d3d854d4be"
+    },
+    {
+        "kind":  "github",
+        "id":  "google-research/google-research",
+        "revision":  "d36068b845da4c2b24927fee2cea1e6ef98dadda"
+    },
+    {
+        "kind":  "github",
+        "id":  "UKGovernmentBEIS/inspect_evals",
+        "revision":  "b49df6bc9e30b2d24571084bc710b9439b9ffa77"
+    },
+    {
+        "kind":  "github",
+        "id":  "UKGovernmentBEIS/inspect_ai",
+        "revision":  "18acb828a23e581c4a9e8b5a78bf2d556c29e32b"
+    },
+    {
+        "kind":  "github",
+        "id":  "huggingface/Math-Verify",
+        "revision":  "ba3d3aaff23b3f4cac7a14672b4f6e293d97c98b"
+    }
+]

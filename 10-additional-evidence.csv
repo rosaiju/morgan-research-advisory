@@ -1,0 +1,9 @@
+record_id,model_id,benchmark,reported_metric,value,unit,provenance,comparison_status,source_url,accessed_date
+E21,Qwen/Qwen3.8-27B,GPQA Diamond,publisher table,89.2,percent,publisher,screening only; per-task protocol not fully audited,https://huggingface.co/Qwen/Qwen3.8-27B,2026-09-29
+E22,Qwen/Qwen3.8-27B,LiveCodeBench v6,publisher table,90.3,percent,publisher,screening only; execution and sampling details unresolved,https://huggingface.co/Qwen/Qwen3.8-27B,2026-09-29
+E23,google/gemma-4-31B-it,MMLU-Pro,publisher table,85.2,percent,publisher,screening only; no cross-publisher matching established,https://huggingface.co/google/gemma-4-31B-it,2026-09-29
+E24,google/gemma-4-31B-it,GPQA Diamond,publisher table,84.3,percent,publisher,screening only; generation protocol unresolved,https://huggingface.co/google/gemma-4-31B-it,2026-09-29
+E25,google/gemma-4-26B-A4B-it,MMLU-Pro,publisher table,82.6,percent,publisher,screening only; family table attribution explicit,https://huggingface.co/google/gemma-4-31B-it,2026-09-29
+E26,google/gemma-4-26B-A4B-it,GPQA Diamond,publisher table,82.3,percent,publisher,screening only; generation protocol unresolved,https://huggingface.co/google/gemma-4-31B-it,2026-09-29
+E27,google/gemma-4-12B-it,MMLU-Pro,12B Unified column,77.2,percent,publisher,screening only; verify pinned artifact matches table release,https://huggingface.co/google/gemma-4-31B-it,2026-09-29
+E28,google/gemma-4-12B-it,GPQA Diamond,12B Unified column,78.8,percent,publisher,screening only; verify pinned artifact matches table release,https://huggingface.co/google/gemma-4-31B-it,2026-09-29

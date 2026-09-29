@@ -1,0 +1,1298 @@
+[
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "c3b6c49b7629eaa2548d45dd1f807b369716dc0029e516f7ca2ae1ad40053e36",
+  "item_id": "mmlu_pro/20",
+  "stratum": "biology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "876a873e53c14e8813581a8e11239ad71cd226ea720d014df1aabf5eec2f9664",
+  "item_id": "mmlu_pro/21",
+  "stratum": "biology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "aa83bb7098c8322c14cc68815c6dffa3663dd42d848d40c907dcec538685fd21",
+  "item_id": "mmlu_pro/22",
+  "stratum": "biology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "4f5a4b28b83edf141b1b7054a56e790547a66caff48d1b833019be90e5b49420",
+  "item_id": "mmlu_pro/23",
+  "stratum": "biology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "77d4c717b238a7ce839d28627ec0d1fa43138ddee9d8a2b9ef38d1876327fe76",
+  "item_id": "mmlu_pro/24",
+  "stratum": "biology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "140514dc5325de90fbe8e07034a3b9b6ab611e0a20128facb8be5ac8a22d9231",
+  "item_id": "mmlu_pro/15",
+  "stratum": "business"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "86f1d8cf4896416834b486adadc7d153f69cfda9b6d1509a07edeb6ab51bbd3f",
+  "item_id": "mmlu_pro/16",
+  "stratum": "business"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "f6bd51f6a06d3d6c1a80b8a9aa1144bcac8038300a9bcf75c4ba802f8865019e",
+  "item_id": "mmlu_pro/17",
+  "stratum": "business"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "d88afb1f49bad50c10e5dfa5399ab0360cacccd0dd5c4b6d95ff1b1da084e8bf",
+  "item_id": "mmlu_pro/18",
+  "stratum": "business"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "e57b3ec4316a766d5ea0f7892d943483a76facf3b47e1a4552b9c53ce3aca57b",
+  "item_id": "mmlu_pro/19",
+  "stratum": "business"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "d167bef9e8e9bae39d66c72d5910b85d18a21f5d12b543ed1b077b60addac3f8",
+  "item_id": "mmlu_pro/25",
+  "stratum": "chemistry"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "36d45c4a07b0557000623e3b695dee1aae4ec3c2a90286dfabeaa07227a99384",
+  "item_id": "mmlu_pro/26",
+  "stratum": "chemistry"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0846de7c8966f4bdcbd9b9c42fca4f6a5ccca1e98faf3c22c42100e9ef75a359",
+  "item_id": "mmlu_pro/27",
+  "stratum": "chemistry"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "5b31cf3f889e55f3fd21cca8296c9a44bf2b8e347088a502ddc10de45f6fec2d",
+  "item_id": "mmlu_pro/28",
+  "stratum": "chemistry"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0677c933701d280623573bf480f77b447040b2b605105bc969797aaa9ba866e3",
+  "item_id": "mmlu_pro/29",
+  "stratum": "chemistry"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "13fed4b8fe825bb4b45394833e489f02f0e6d4296cc07d27ff8dd1b3bee464b3",
+  "item_id": "mmlu_pro/30",
+  "stratum": "computer science"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "181d5e37b41c0f8f05a68ca6f2f67e61e518322f01d878aabbac30036a4e253a",
+  "item_id": "mmlu_pro/31",
+  "stratum": "computer science"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "66d9448234fe4aa81c111ec04e6f5f522774ec4ed3ec0127c1484bdd48397265",
+  "item_id": "mmlu_pro/32",
+  "stratum": "computer science"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "adce8fd0a203326703c2b8aff2573623c2e0c48cb520bfe30daf1ccb0d7d8705",
+  "item_id": "mmlu_pro/33",
+  "stratum": "computer science"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "3e7d3a712292c6fbc2d62ebcacdae155b114cbb8ce5f8cfba9162b62420694da",
+  "item_id": "mmlu_pro/34",
+  "stratum": "computer science"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0b4cac084148c9f9b74ef904a5b1bc0b61b277a2138cdc6f17825c19c55c49cc",
+  "item_id": "mmlu_pro/35",
+  "stratum": "economics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "d194a0555bb43bc2451209f7c90960d15339aa54c3e76b721c34591f75e2781a",
+  "item_id": "mmlu_pro/36",
+  "stratum": "economics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "62c19aa5de007135c9b364a1bddcd9c533e70e71bd0f7b7a5e8d5478c317f125",
+  "item_id": "mmlu_pro/37",
+  "stratum": "economics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "f050100346f4c6e1c086608186a006148dc1b54a0212719e522c1f308fc6aa37",
+  "item_id": "mmlu_pro/38",
+  "stratum": "economics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "331178f530725ec2c58a5a42520835f1a4362c1f8e5c4e3ecfda106f51410350",
+  "item_id": "mmlu_pro/39",
+  "stratum": "economics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "712a0bc0bffd376f714ec1a1cd8a212671caacfbbb94c4dbabe3ef129b0b8c61",
+  "item_id": "mmlu_pro/40",
+  "stratum": "engineering"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0101e89c66292b3ab109d40e540adbf1a50f2f97f53e775d0737ed6c37d1e1b6",
+  "item_id": "mmlu_pro/41",
+  "stratum": "engineering"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "6d3713b78745856d4f5731d3ffce4a4cfa245a87385e1a5c5e15f65cfbeddad9",
+  "item_id": "mmlu_pro/42",
+  "stratum": "engineering"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0628021cec71927b5667a01592ae2f160bc55092eac2070db30a85624621f9a2",
+  "item_id": "mmlu_pro/43",
+  "stratum": "engineering"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "93b4d4ac90ee9e312f1d8c7e738612bf372c13e0d13a6344586e637b6ea3d9e3",
+  "item_id": "mmlu_pro/44",
+  "stratum": "engineering"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "04ccc4d5591b7de504690a38438054c229af6cfa4cbedcffae1f7f104303401d",
+  "item_id": "mmlu_pro/5",
+  "stratum": "health"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "408501a900258ce788653416de34cfb8090ab012a38ca40292a904c73ad070e0",
+  "item_id": "mmlu_pro/6",
+  "stratum": "health"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "33d92f5450fbbcff85cc8da0730271d0b9f6f76735745a8b88c9f902f8a46c2b",
+  "item_id": "mmlu_pro/7",
+  "stratum": "health"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "59e325bd9b3075e6bfd5d79bee7c5cbc7f6d51a4acb16c49040f003d8d4c7da7",
+  "item_id": "mmlu_pro/8",
+  "stratum": "health"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "d7f8a48a55c9bce0b64c7922c8df9507fc4068865e0e3a36de396e0b405214b5",
+  "item_id": "mmlu_pro/9",
+  "stratum": "health"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "caa09887dbd35ad2e5c009603441e63b0e1729ccbe086b325f8782aa13d90522",
+  "item_id": "mmlu_pro/55",
+  "stratum": "history"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "4d6c72a47dba8abdf4f81b9ceb3bbffe354516d265d8905d1d5840dded12e7d7",
+  "item_id": "mmlu_pro/56",
+  "stratum": "history"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "987891475ef27ce8abc42aa43d5eb7974b50567d2b7817ea6af32e0f4f659405",
+  "item_id": "mmlu_pro/57",
+  "stratum": "history"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "bfb756f3883066093efcaee3bec4ac26eef5178572614b4c876a86dfa6891dd0",
+  "item_id": "mmlu_pro/58",
+  "stratum": "history"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "481e045e79121fc404e05c3ffc1aa750bacb759b26a80a29f839f03310248211",
+  "item_id": "mmlu_pro/59",
+  "stratum": "history"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "cd4e0a981e63c82d86ac311d06376f15f5b131cc85a2edb1351de728aec249ca",
+  "item_id": "mmlu_pro/65",
+  "stratum": "law"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "60e0d33d512cc78c66e631b1ee7dba0913e9779f60a3fff45d76c8c8a6025443",
+  "item_id": "mmlu_pro/66",
+  "stratum": "law"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "b7a4d38b22b1e98c9209d2e3786040faa89dc2d9273a091f79eb14973c8db3ea",
+  "item_id": "mmlu_pro/67",
+  "stratum": "law"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "9316e7d876d4e795e5e907c7ee4444ab4b1610f8ffdcbea09fa9bddcf3077b4e",
+  "item_id": "mmlu_pro/68",
+  "stratum": "law"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "caf939b03442d5e8419848cf76dbcf0b009b2d005e0504517acfb5c4cbd1716d",
+  "item_id": "mmlu_pro/69",
+  "stratum": "law"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "7fb389823b89d9f8144ffd910d21698deaa20ba5646d3c7b24daf00e0e2466dc",
+  "item_id": "mmlu_pro/0",
+  "stratum": "math"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "f81059644a65bed4a7e21d02c29fd7e3086c5bfcade25bfbd96311034fd127dd",
+  "item_id": "mmlu_pro/1",
+  "stratum": "math"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "4a637b61d363e2f1e19b4071fa4ea7ef8432e46a6153a3e153309c406494108d",
+  "item_id": "mmlu_pro/2",
+  "stratum": "math"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "1bb25ba14f1b2caeb4a995898610330f856ce4ec4141c6859ae8e1f5e244319d",
+  "item_id": "mmlu_pro/3",
+  "stratum": "math"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "bb67f1214102404dde572fd6a200cf18fa25fd030462bda85dba6ee7ec94a779",
+  "item_id": "mmlu_pro/4",
+  "stratum": "math"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "bb13b87a81b046e7cdb7350e15fd14b21780949fab839d01c382c87456dde057",
+  "item_id": "mmlu_pro/50",
+  "stratum": "other"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "30a908cb0f3ca219acd73bd8c5f353965f49225a248b6fa2bb03acb1e618c410",
+  "item_id": "mmlu_pro/51",
+  "stratum": "other"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "994ceb46cb6db0d74bee558aba5f1935cb6afc14e84d765fa278010e283b795b",
+  "item_id": "mmlu_pro/52",
+  "stratum": "other"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "ac26516443daf7cf3a71d51c231591a0c658a2a4f686ff0285003ddcdeb67e1d",
+  "item_id": "mmlu_pro/53",
+  "stratum": "other"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0eff48d0266a53a162a1d4e16fa992e5940d6f2713d00df8d12e2d3ea8cbe404",
+  "item_id": "mmlu_pro/54",
+  "stratum": "other"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "a34d12b852805cdf48deb938f987668bbe4aebfd796366de5087c450cfa64cde",
+  "item_id": "mmlu_pro/45",
+  "stratum": "philosophy"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "bfe446239cb474a4147a4608809936301bc6d21d94a976718605b53682f28dd6",
+  "item_id": "mmlu_pro/46",
+  "stratum": "philosophy"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "f8fd7e8ff6e2a6efb89e9099f2174c08b622667d4f89337feb52043908bfebe7",
+  "item_id": "mmlu_pro/47",
+  "stratum": "philosophy"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "ca5a33181fe44b2239056fff4604e6a34916a610167f667fd571b51726f69456",
+  "item_id": "mmlu_pro/48",
+  "stratum": "philosophy"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "39c991774ac72ac8d852fa26fc66b23225af7fb9541fae2c68e6f91fe6d36cc3",
+  "item_id": "mmlu_pro/49",
+  "stratum": "philosophy"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "8e461b017cd7195f5f40558a4960cbe717c700e71c62d31fdef117ed780ed1e3",
+  "item_id": "mmlu_pro/10",
+  "stratum": "physics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "0c028ff10d6459143d932082bbd1401a6b960a4f379f4095414b227bef76da1c",
+  "item_id": "mmlu_pro/11",
+  "stratum": "physics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "cf178a839e3c2a126cb770f4a732dddc3c781b4206a342f0f0a5c350c100d614",
+  "item_id": "mmlu_pro/12",
+  "stratum": "physics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "a696a3c6478fdd5393b8d66788392812ece6635146b40c0400fca32c6d4b41bf",
+  "item_id": "mmlu_pro/13",
+  "stratum": "physics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "66df89b69bc2d04960e69551ead9c5db44965ecfa2b574226490daf7a76f43db",
+  "item_id": "mmlu_pro/14",
+  "stratum": "physics"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "2ef0181475fecbf19b36613dd4f5e984fa5d4e51ac983ec2cae0d7d47146dd93",
+  "item_id": "mmlu_pro/60",
+  "stratum": "psychology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "ef43779e5bc7f033b1d81d93766aba307a61243947991a70b6a4459a341df3b7",
+  "item_id": "mmlu_pro/61",
+  "stratum": "psychology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "b8356ca46a8399a91f398594f6b28e26cfc306b4be83f6622db7446ada0ce37c",
+  "item_id": "mmlu_pro/62",
+  "stratum": "psychology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "76f3813268f735536a7be7d953a0d07059837ce4cc3a5207f39cc1fbf88dc29c",
+  "item_id": "mmlu_pro/63",
+  "stratum": "psychology"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "content_sha256": "e92ee7fb247c3415c6386eda372c98ea89ebcce565200b3e669ebdfbd91be843",
+  "item_id": "mmlu_pro/64",
+  "stratum": "psychology"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "fc0b0712fe1587cc109003192450b630eb8c280d1272b6d6bbc88dc303ffe10f",
+  "item_id": "math500/test/algebra/2470.json",
+  "stratum": "Algebra|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "1e70b4456ea54b6e71d0e7a9028b39069525b4708c37712c61a44e8b7bc897dd",
+  "item_id": "math500/test/algebra/2551.json",
+  "stratum": "Algebra|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5acc6365946cc933628aa49ffbba745bb1c8eb846c7bc1c0970b509ea9fcbbb7",
+  "item_id": "math500/test/algebra/1303.json",
+  "stratum": "Algebra|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "44174d8b3df5f07b9a7029a6a3a178f7322805e379a27efcb36651a65c89abf6",
+  "item_id": "math500/test/algebra/2157.json",
+  "stratum": "Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ea43c5a8e79753bf8c40ac761fdb04467a7f134a801309fa3cf5c5ad7d21a4cd",
+  "item_id": "math500/test/algebra/2735.json",
+  "stratum": "Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "47ce32304552172918d9bdd8bfbb60688241230b47c19062ba5056d8371f49c8",
+  "item_id": "math500/test/algebra/1842.json",
+  "stratum": "Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "0113676309c9dc599829cfc763b3c1ff4bbe09efec8844660ba3af24654e62ce",
+  "item_id": "math500/test/algebra/251.json",
+  "stratum": "Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "c0364fc64487e4ecdb562a1fd4efb3265dd75c6c2ced96273c9d5df0312b1595",
+  "item_id": "math500/test/algebra/2036.json",
+  "stratum": "Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "76bb173b20d420b66bfe27e1889971ef7996fda0e8e7d9e62babcbee756a8c7c",
+  "item_id": "math500/test/algebra/1547.json",
+  "stratum": "Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d41930bf262e749bae06de29430114d68c4acd07bce757b91a1a03fd0b4b16e5",
+  "item_id": "math500/test/algebra/1332.json",
+  "stratum": "Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "150eaf9aec741382be431196a2ae740c69e39d5cd2ea259048decd0658cf9acf",
+  "item_id": "math500/test/algebra/351.json",
+  "stratum": "Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "afe7eeff1cb11ff977594529c02b98afce5e626337e80f71c6f1afb91e6dc8b0",
+  "item_id": "math500/test/algebra/1519.json",
+  "stratum": "Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "7ab99f8cb54794c5313705d9a1e285c8c4afc5d04ec93bc05abef5f2acce66ed",
+  "item_id": "math500/test/algebra/246.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "0410748c1e76e3d42db6965c8dc90de8deefc6453e280bf7d1016659bbaa0c8c",
+  "item_id": "math500/test/algebra/858.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "e684634d63b6e43ea1c59eb8f640a8c71b26261272f27dc44fd9d1cdc2af1e6d",
+  "item_id": "math500/test/algebra/893.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "b787f6e038899054d1924112f217430ac6ecf5c8d0104b4c98bfb105d0a84a8c",
+  "item_id": "math500/test/algebra/1578.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "20299b976dc21ef187537d023989ebed6117486aaef3fcdc22be51b47bc9000d",
+  "item_id": "math500/test/algebra/2570.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "50760fe764edbce09fcb217a65c54beff1dd46ba1d156a011a12751642aafcdc",
+  "item_id": "math500/test/algebra/1184.json",
+  "stratum": "Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "8f00399e3534c9da2113886c525c158c02fd180f51bfd70fac0e3f56f25fc454",
+  "item_id": "math500/test/algebra/1031.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "b0e97322dd5cc3a272cb010ff16f994a05d7d160a91cd54b40efc438d17b6bee",
+  "item_id": "math500/test/algebra/297.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "cd12e854a059eefc9afad021db0273281c48689ea0067f8d15a531d5d26a9ca7",
+  "item_id": "math500/test/algebra/2264.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "7ae13788fcc36e0882098c64c7f8c28a622691e36a91c8242a9e6bdf197320ae",
+  "item_id": "math500/test/algebra/1796.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "0809a483e113340db8da3c4f16443001d12ab90d03150053e819ee5539dae187",
+  "item_id": "math500/test/algebra/2176.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "70591ff5c06a05836ede5483cd139924e35f5ce23926d3efdb9ecc269fa8f32e",
+  "item_id": "math500/test/algebra/853.json",
+  "stratum": "Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ee02cd5b28fb246421a02d67e994fe9a2ab8ac30a70dd349ce65f60e2e4d87e0",
+  "item_id": "math500/test/counting_and_probability/14.json",
+  "stratum": "Counting & Probability|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "176154b491f4d70c82cdb260c9045e3ef61f8e6fc6443b9861b0e6fb2606655c",
+  "item_id": "math500/test/counting_and_probability/199.json",
+  "stratum": "Counting & Probability|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "3808c227b8b95556a87934db0d3956810196a7af033fa45845ba3c21d32cc310",
+  "item_id": "math500/test/counting_and_probability/508.json",
+  "stratum": "Counting & Probability|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "2bf992caa662143d177dcb9aade5131039abfaf56ef05038d9e681f2ddae982c",
+  "item_id": "math500/test/counting_and_probability/10.json",
+  "stratum": "Counting & Probability|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "9b85603bc31a20300a1bae15663aad93309ecaa4d23de1d5291eee9dc713a0c7",
+  "item_id": "math500/test/counting_and_probability/119.json",
+  "stratum": "Counting & Probability|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "577259c853328305c63117db75d3d303aa507b35772f7a26a68b8d192d6bea96",
+  "item_id": "math500/test/counting_and_probability/134.json",
+  "stratum": "Counting & Probability|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "00b6972ed54573b5eba6f57c78bbf587bc78e51c163fb90c331035f8128610e8",
+  "item_id": "math500/test/counting_and_probability/731.json",
+  "stratum": "Counting & Probability|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "50d8fc4d7e16382c89e0c967824011ce3ddf9e079ab5d9eb3bf5c0f4e27c6779",
+  "item_id": "math500/test/counting_and_probability/870.json",
+  "stratum": "Counting & Probability|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "9762de06228ca9c932517a6223269bc3c671c803a703b25c15239692765f7b29",
+  "item_id": "math500/test/geometry/456.json",
+  "stratum": "Geometry|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "f429b0398ba58c597aeca2e1eca05e8bab39be8d5400a5d216c8cb0f1c05a54c",
+  "item_id": "math500/test/geometry/1108.json",
+  "stratum": "Geometry|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "bb96e38a44a1a82d0574f5736da18c8119445aa70ab554e5e3e083cda7cd39fc",
+  "item_id": "math500/test/geometry/221.json",
+  "stratum": "Geometry|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "fee7f83b365251b3d97eafb5cb3c0b2dde779d9129d6d0f787148f7c616bcc7e",
+  "item_id": "math500/test/geometry/65.json",
+  "stratum": "Geometry|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "a89fbb80da4fb26595fece88fff11e8d0bf0bc093a23f81f5e3fde5874b4f25b",
+  "item_id": "math500/test/geometry/353.json",
+  "stratum": "Geometry|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "3b3ed529a4b09aebcc4d3a6b61237641655c8bf70d6481e936475fd2ce4f6f80",
+  "item_id": "math500/test/geometry/465.json",
+  "stratum": "Geometry|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "4187df69fed89515b059fc51d95be4de2beb6d2c38c51bc233c211e018136079",
+  "item_id": "math500/test/geometry/702.json",
+  "stratum": "Geometry|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "dbe25f76577aa2277c03f3a024f71493a2c14a6b7d9b9ee4d160021dc45bb70b",
+  "item_id": "math500/test/geometry/229.json",
+  "stratum": "Geometry|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "88bd1d429ff4da88607a105612c2de0c8e98bd61cfdfa852a96a537fea183c3b",
+  "item_id": "math500/test/geometry/880.json",
+  "stratum": "Geometry|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "79b7b095949bd64cba563c068359e6ebb6c9fedd0b97216d62df474291741bd2",
+  "item_id": "math500/test/intermediate_algebra/149.json",
+  "stratum": "Intermediate Algebra|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5b1d584cfe23d7dfff67df8a57030f07ab525f50d4dbe0cb7cb63ae686a80456",
+  "item_id": "math500/test/intermediate_algebra/428.json",
+  "stratum": "Intermediate Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "9fda2e4d7321dd5cd8d9edc88c21b5a6a3febfd2e5efd5444d81b0b091a80981",
+  "item_id": "math500/test/intermediate_algebra/860.json",
+  "stratum": "Intermediate Algebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d3d6f4cae0a23167a04084fdf242acc12a77e0a3ea6a5f98ee502e5debd60991",
+  "item_id": "math500/test/intermediate_algebra/607.json",
+  "stratum": "Intermediate Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "79f928524590a41c0d216a6a3066129065fca61405a4b9708da7a70d68df350f",
+  "item_id": "math500/test/intermediate_algebra/1247.json",
+  "stratum": "Intermediate Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ce699925401ba6668902739f014ac20a2782f068f66a4e07f8bce91329350d23",
+  "item_id": "math500/test/intermediate_algebra/1837.json",
+  "stratum": "Intermediate Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "16d26a5ba5dd38dd97c5ed1a77495cedae2596c0b1747c30108e33d28d82e087",
+  "item_id": "math500/test/intermediate_algebra/1898.json",
+  "stratum": "Intermediate Algebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "234b319021dcf2a640fe9e5bd8c2650d15b10b08b088521c23cc99fb1ededaf5",
+  "item_id": "math500/test/intermediate_algebra/1063.json",
+  "stratum": "Intermediate Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "04f419fac8302d674668e968e6ba8da9e106f114b8fc442b3fb3ba58422f432b",
+  "item_id": "math500/test/intermediate_algebra/591.json",
+  "stratum": "Intermediate Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ccf0bb717c522e8d2e8555976c109e3a3eda3be53084c8938a52ade42e89129a",
+  "item_id": "math500/test/intermediate_algebra/1405.json",
+  "stratum": "Intermediate Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d03a1b8fc03cf76a4f4ec3147a0a64c4adb66c431a993cb3ca0b4515d9fdec7b",
+  "item_id": "math500/test/intermediate_algebra/1411.json",
+  "stratum": "Intermediate Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d134ecb6ff4b394f63d6faa4c32b947709dc02a13ef22330c507583c3b75986b",
+  "item_id": "math500/test/intermediate_algebra/776.json",
+  "stratum": "Intermediate Algebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ed48028c723f0855e35a7c124ace57fd4d719cf0fb7e45902faacfa40ddaccc6",
+  "item_id": "math500/test/intermediate_algebra/964.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "728365c3cb7fa74d6b87c6b28b21a8623f6ff21624dea483f0d1dbbf91d33eb5",
+  "item_id": "math500/test/intermediate_algebra/1930.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "3c2b62f64e03366e020b32cae2732cd93bf6cd90b5382f4b66e60a2b35c10a2a",
+  "item_id": "math500/test/intermediate_algebra/1994.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "96c5e6371e5bca20526fbf5be1174ec8c7b7e6d47932f61346eda9a4025c2e50",
+  "item_id": "math500/test/intermediate_algebra/232.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "26d4ec1a73873bbc880dec6492bc1c51a92773ab015986eb84fe19606377bf1b",
+  "item_id": "math500/test/intermediate_algebra/158.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ebebe01a18f218d63ea49b6b41f7a084a588d69128eb533d325b3bb1b010b4a1",
+  "item_id": "math500/test/intermediate_algebra/1544.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "07e22408c9d86bf198748e6e0ffd321d2d6b8d605ebab6f9a119cca4c7ce5785",
+  "item_id": "math500/test/intermediate_algebra/1849.json",
+  "stratum": "Intermediate Algebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d1c9cde9325101276a8fbd69bf0fd08a989ce894d7c421258a480def75548ff1",
+  "item_id": "math500/test/number_theory/132.json",
+  "stratum": "Number Theory|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "dbb138122c014ce8fa6e74fdf8a127cb606a36500777942f84eb2398bf464044",
+  "item_id": "math500/test/number_theory/931.json",
+  "stratum": "Number Theory|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "0887851f3251fb23711dfa16087b3269972272a1a04c807191666ebc292a05a1",
+  "item_id": "math500/test/number_theory/679.json",
+  "stratum": "Number Theory|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "a509f3e3d250cbc889fda01cf2c02a9358c47ae41cc88ead2493a1481bfcf519",
+  "item_id": "math500/test/number_theory/1185.json",
+  "stratum": "Number Theory|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "32c3cda4fa5ff5d18cbac4e45b23dcf4833ddf37179609d1614e2403e68096ef",
+  "item_id": "math500/test/number_theory/572.json",
+  "stratum": "Number Theory|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "28f0bde5896e1f46c2dafb4994cb83863c24fb56e56eb403d1661c2a23872f23",
+  "item_id": "math500/test/number_theory/864.json",
+  "stratum": "Number Theory|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "a5b3b535a7854a82f55a862af60787648fabd312599b1a524326a3ea5bc755c6",
+  "item_id": "math500/test/number_theory/634.json",
+  "stratum": "Number Theory|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5d688c1d01def1bc20b491e071f5abeed2f44f76de2495e004e568db8191c6d9",
+  "item_id": "math500/test/number_theory/911.json",
+  "stratum": "Number Theory|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "86dafa426d0346e1f4abba7b8a579538abd8690f808e3035fe01fa0a727855a3",
+  "item_id": "math500/test/number_theory/357.json",
+  "stratum": "Number Theory|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "cb95bc64c75cf167609883ccefcf227b838f7982d39863ff23e01225f62c69b1",
+  "item_id": "math500/test/number_theory/488.json",
+  "stratum": "Number Theory|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "a3f40663ba19390b7e8930b5eb10435bf1dcb1168e14bd129538559aa2248cb4",
+  "item_id": "math500/test/number_theory/737.json",
+  "stratum": "Number Theory|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "dfcde87bc9d442e3d15bf33057fbd5a0f93abd762b9fc9eed482cab0df9dfdec",
+  "item_id": "math500/test/number_theory/838.json",
+  "stratum": "Number Theory|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ec1f8b8255f9bd4e4f13c773a75cc0ac8f875f4d4d76a2c1660eff291ce5ed05",
+  "item_id": "math500/test/prealgebra/1317.json",
+  "stratum": "Prealgebra|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "ba83e92e963aa63c4c9ee18406b6d517b3c85c74e9f63a1b09b77f833515bb10",
+  "item_id": "math500/test/prealgebra/1840.json",
+  "stratum": "Prealgebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "e34bd9c4963190dc0c39fd380a2adfbfc56d965247007c902f15b14d171db9f0",
+  "item_id": "math500/test/prealgebra/930.json",
+  "stratum": "Prealgebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "210778075950cc2d47660836d13b39a298928d9da94fb9235240c6234f2c253e",
+  "item_id": "math500/test/prealgebra/1922.json",
+  "stratum": "Prealgebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "93d733b48692eae6f8495b189e802021a189e8d9a7dd79e8c7d6d138c6e3424d",
+  "item_id": "math500/test/prealgebra/1298.json",
+  "stratum": "Prealgebra|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "df8e8235424505aa040c100c67c2a861b27d5abc7f6fcf66cc99df557ac677d9",
+  "item_id": "math500/test/prealgebra/1804.json",
+  "stratum": "Prealgebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5138a0ae5f7d62944b8ca45e964a5db9809fff0512c83b84e99af5d2f78d93a8",
+  "item_id": "math500/test/prealgebra/631.json",
+  "stratum": "Prealgebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "cf868a55079c64b7ba1e8e04ffeb846d060675634d714df5734a5b3881029309",
+  "item_id": "math500/test/prealgebra/1686.json",
+  "stratum": "Prealgebra|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5c91e3632a6bed3d9e79a9734fadd4b7c2229a1c22fed53f22490d3e59d2e822",
+  "item_id": "math500/test/prealgebra/1356.json",
+  "stratum": "Prealgebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "8d14c583b8a876ea701c4fe492a956705120229a851ca60e317d887c46693d3b",
+  "item_id": "math500/test/prealgebra/1572.json",
+  "stratum": "Prealgebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "3d356b3168ea8edc02638c7dd1226970e9e9af1be2a45b8a7331a63da7093605",
+  "item_id": "math500/test/prealgebra/1973.json",
+  "stratum": "Prealgebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "3d1f09ed5cfd53dce0cdfa464313ae23908a90c6fb2ce32ec3d3e2ba3f403ac0",
+  "item_id": "math500/test/prealgebra/1388.json",
+  "stratum": "Prealgebra|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "02480d2c0415a28153e0ac654e2afb21e83a856d14503689ba3332db1548ffdc",
+  "item_id": "math500/test/prealgebra/954.json",
+  "stratum": "Prealgebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "5e2eb2d91eefc067679b366307eef8062be7da43ae0845d55bc011a9b74f2942",
+  "item_id": "math500/test/prealgebra/1297.json",
+  "stratum": "Prealgebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "2453029bc9e469f11c8b69dc0a94c6bbd927afa03b2e7c3f318f575c550bb6a9",
+  "item_id": "math500/test/prealgebra/1423.json",
+  "stratum": "Prealgebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "e38a82f125692ef36b9673fc3567988c2ddb1b719fdf96c8ba909b0eee646154",
+  "item_id": "math500/test/prealgebra/2066.json",
+  "stratum": "Prealgebra|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "a4363ea671d3da39e33e5cd154c34aec2532bf8a79064553c5b5647aa07da7c5",
+  "item_id": "math500/test/precalculus/1289.json",
+  "stratum": "Precalculus|L1"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "8b30a7be8ee0adc16f0a19edfda93f5dfca0e9d7d408326c2736e5098d06e1e9",
+  "item_id": "math500/test/precalculus/34.json",
+  "stratum": "Precalculus|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "7f218e0dec56d367fe24c53e4636286b021dee4f2eeb3a39327b9a737055ccf9",
+  "item_id": "math500/test/precalculus/285.json",
+  "stratum": "Precalculus|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "13bb5d32a5afacb3e2ae2e66ca9ada85919b8252f6eda7ad060b7dfa1ca004e5",
+  "item_id": "math500/test/precalculus/807.json",
+  "stratum": "Precalculus|L2"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "e5bac6a9050b2981ec9538eb50d1772f674315b2f84f3646069a67e2b9c34022",
+  "item_id": "math500/test/precalculus/819.json",
+  "stratum": "Precalculus|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "964c0ef0cb3da4cae4be60805e0a45f4330af8d169d5ce88757ee8237434f581",
+  "item_id": "math500/test/precalculus/1291.json",
+  "stratum": "Precalculus|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "fdc8aba1c1ade2de891c8acfc7e126e96fde232077c7c1b25ac07b4cb18aee37",
+  "item_id": "math500/test/precalculus/1300.json",
+  "stratum": "Precalculus|L3"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "4c8fff516b55a327cbae0a67318f8f1566faaf4c46d592ce8d1197ecc3d5abec",
+  "item_id": "math500/test/precalculus/1199.json",
+  "stratum": "Precalculus|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "d3823d137562e66d61543fc61fdd8a3551a53cc33ba49981c7682c5a44917fca",
+  "item_id": "math500/test/precalculus/190.json",
+  "stratum": "Precalculus|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "8f7c4ee7b7b0fb0095cffb83067510e6e33becd887721d67a1081208af51cadc",
+  "item_id": "math500/test/precalculus/881.json",
+  "stratum": "Precalculus|L4"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "cdb0a3539dd58be017d49c01271bbfc1505b84dc0a3d4ed3ecd798d2a961a90b",
+  "item_id": "math500/test/precalculus/990.json",
+  "stratum": "Precalculus|L5"
+ },
+ {
+  "benchmark": "math500",
+  "content_sha256": "f684c15cdf8a73c7d9df393368782c7c2bd22db92f0723232fabe5dd5d859c49",
+  "item_id": "math500/test/precalculus/703.json",
+  "stratum": "Precalculus|L5"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "08bffd5b4fc404534bac7d977ef26fcca2dd50c1f0014418d5c930c29a84059d",
+  "item_id": "bbeh/bbeh_boardgame_qa/56",
+  "stratum": "bbeh_boardgame_qa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "132f04bbc48e327808dd2301b1c79d2f5c888c0959ebaa35fb7e901bc81bf4fc",
+  "item_id": "bbeh/bbeh_boardgame_qa/22",
+  "stratum": "bbeh_boardgame_qa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "21b3323847e6c59d4bd2f33352a67366aeefd82e025f5b6db303f60c44933684",
+  "item_id": "bbeh/bbeh_boolean_expressions/178",
+  "stratum": "bbeh_boolean_expressions"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "2577e0c2e27fef3826047f46b3c0b5f4019608c7ee9dee404e9b4f04b7d9841a",
+  "item_id": "bbeh/bbeh_boolean_expressions/88",
+  "stratum": "bbeh_boolean_expressions"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "a2df52075f309eff5671192c1a396edf214b46642d3af55f2f1b3b0d064a6cce",
+  "item_id": "bbeh/bbeh_buggy_tables/27",
+  "stratum": "bbeh_buggy_tables"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "3e94c2ad6cab7a9b394f0c719b5c36fe58bc5810d55275258726e751f69ce9d5",
+  "item_id": "bbeh/bbeh_buggy_tables/156",
+  "stratum": "bbeh_buggy_tables"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "609cad845cdfe73a9a5c287bb4ace6ef9588c294ca40850cdd5f4deb4b01cf4b",
+  "item_id": "bbeh/bbeh_causal_understanding/140",
+  "stratum": "bbeh_causal_understanding"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "200cb3043ed4f5574afabc392980a98f62cf3ab420818bf8f625d424dd652200",
+  "item_id": "bbeh/bbeh_causal_understanding/90",
+  "stratum": "bbeh_causal_understanding"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "32f386b8c7b3745f646ee8bfe4923f6114ff81332e59c3c7294df4ca8a1c7ccb",
+  "item_id": "bbeh/bbeh_disambiguation_qa/98",
+  "stratum": "bbeh_disambiguation_qa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "4b7bd109c3a09ae92365175cfe7734177d858ca05fe1c7f3fc989a410eaf10ce",
+  "item_id": "bbeh/bbeh_disambiguation_qa/114",
+  "stratum": "bbeh_disambiguation_qa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "b2179dba10f29a789d760fe628aeb45efb2f4890429c1c3c083cc2fc703e1147",
+  "item_id": "bbeh/bbeh_dyck_languages/118",
+  "stratum": "bbeh_dyck_languages"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "ffcd976249bb1e1bdc08c41ee249be52822eba9fe1438533ce738a404058ff3d",
+  "item_id": "bbeh/bbeh_dyck_languages/92",
+  "stratum": "bbeh_dyck_languages"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "dadc88c2fa3e53712cc1efed1a4ef9eda9bb3e7f6968e0f8b80d9a582dc94e1e",
+  "item_id": "bbeh/bbeh_geometric_shapes/64",
+  "stratum": "bbeh_geometric_shapes"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "995aa5bf7a2815ab5912ccb920a8274823984f87dcd9327236adc9ffe8e6fd11",
+  "item_id": "bbeh/bbeh_geometric_shapes/160",
+  "stratum": "bbeh_geometric_shapes"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "e50e61ee4918bc43f6e1b8b6c192188dcfc5d7d85ae6376218c9c6040197aaf9",
+  "item_id": "bbeh/bbeh_hyperbaton/96",
+  "stratum": "bbeh_hyperbaton"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "0263859b01a2cc14cca1cc579c29ee254894e87288d107f7025f3bf3c91b618c",
+  "item_id": "bbeh/bbeh_hyperbaton/0",
+  "stratum": "bbeh_hyperbaton"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "03593bed1fcdcc9614aa5dcf4239cb9f065a6bf960d7288fcf96ebe78577aa92",
+  "item_id": "bbeh/bbeh_linguini/196",
+  "stratum": "bbeh_linguini"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "8b54d41859d6d72cc73285e26e5c041272391613ad190d17577eb023c65988a5",
+  "item_id": "bbeh/bbeh_linguini/172",
+  "stratum": "bbeh_linguini"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "798b3c03ad4fd61ccdfc7289f1f68f0b266ce52b2ea02ae86ccc122d4c31236b",
+  "item_id": "bbeh/bbeh_movie_recommendation/188",
+  "stratum": "bbeh_movie_recommendation"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "384de9593f5705bcc34f29bbe66a41708c17f57d756ebc6e6ba3b674cde8db7b",
+  "item_id": "bbeh/bbeh_movie_recommendation/193",
+  "stratum": "bbeh_movie_recommendation"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "504f42f450b559a3a2a88d066df0b73a207bc7eabc361fd016c65d2dd540d5a9",
+  "item_id": "bbeh/bbeh_multistep_arithmetic/174",
+  "stratum": "bbeh_multistep_arithmetic"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "d432c64ff369e2f56eb391fd93dc8d9e9f4e9550610acec9cc1a6e5eb1353b7f",
+  "item_id": "bbeh/bbeh_multistep_arithmetic/54",
+  "stratum": "bbeh_multistep_arithmetic"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "46631ca74447e833dbe784ca171b8a8aa0da441def1cac7c15c18c7f7b2d8b7a",
+  "item_id": "bbeh/bbeh_nycc/125",
+  "stratum": "bbeh_nycc"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "6d238ff2cb10b98626ac4df829ee3cdd9f7aa2fb2f1adc35c06c4ec71fe0c8aa",
+  "item_id": "bbeh/bbeh_nycc/157",
+  "stratum": "bbeh_nycc"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "38186f7d0a2f5583752878ad8714f6bb7fac0878793189d5d5d71ca097b72be6",
+  "item_id": "bbeh/bbeh_object_counting/70",
+  "stratum": "bbeh_object_counting"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "b92212050315c532e905fa95f0f9c6cdd4fade51f932bb0347a55543c15a8bd2",
+  "item_id": "bbeh/bbeh_object_counting/23",
+  "stratum": "bbeh_object_counting"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "d81c8f54f760d24fbb5cc49bab6455f43b8957b8a718cbf400d9dfff21e196e7",
+  "item_id": "bbeh/bbeh_object_properties/154",
+  "stratum": "bbeh_object_properties"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "6605bbdb614e2c0d5ddafff2552fefea593169b20204ca75dc3926c25e05d6fe",
+  "item_id": "bbeh/bbeh_object_properties/152",
+  "stratum": "bbeh_object_properties"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "c03a83c1672e177074c3446e0b595cc5d9bcd6be801de701be79eef656958d78",
+  "item_id": "bbeh/bbeh_sarc_triples/64",
+  "stratum": "bbeh_sarc_triples"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "73f2f1ef67f5afc230d7ea4854b0b74a8e61f9ff6be8de51929212b4c128def9",
+  "item_id": "bbeh/bbeh_sarc_triples/88",
+  "stratum": "bbeh_sarc_triples"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "f0e94c3042f9d40550a80ddb36ac8b2c6c6bbe9c57f3559d053fc84b6f9d37f3",
+  "item_id": "bbeh/bbeh_shuffled_objects/153",
+  "stratum": "bbeh_shuffled_objects"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "26ca9e1eb8a04db15e61ab63fa0058a7e70f084abd65ab12a4c6817e3813ae4e",
+  "item_id": "bbeh/bbeh_shuffled_objects/78",
+  "stratum": "bbeh_shuffled_objects"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "270d8a10421c9d361a431b32bb938d523aefa5d2b8d687cf4cd888e1557924cf",
+  "item_id": "bbeh/bbeh_spatial_reasoning/188",
+  "stratum": "bbeh_spatial_reasoning"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "870c0e1cfa6ef03149e5d96927fa056ad73bf9ee4d56abcfe33412ad3ed94fce",
+  "item_id": "bbeh/bbeh_spatial_reasoning/192",
+  "stratum": "bbeh_spatial_reasoning"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "65d655a600bd47f77aada287069d490861f0bdedc0d8c31a8099b2dcdb2cc3c2",
+  "item_id": "bbeh/bbeh_sportqa/151",
+  "stratum": "bbeh_sportqa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "0cb91eb877047ae7971deea96f6779f76b4cbe4bab97334f0e0012938c1c00fd",
+  "item_id": "bbeh/bbeh_sportqa/176",
+  "stratum": "bbeh_sportqa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "e523614618a4b6a22c3afa9d120298038715892c2e212ab33d31e3bb8e260cc0",
+  "item_id": "bbeh/bbeh_temporal_sequence/174",
+  "stratum": "bbeh_temporal_sequence"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "08ed3ac1208df4c39a55fa1a5f47fd9368523f3cac9fc2d7afc5cdffdc672d3c",
+  "item_id": "bbeh/bbeh_temporal_sequence/101",
+  "stratum": "bbeh_temporal_sequence"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "74a3c39294362e8cfb04faff5bb8da1072ee4e29e85a34ae6873028d693aa100",
+  "item_id": "bbeh/bbeh_time_arithmetic/86",
+  "stratum": "bbeh_time_arithmetic"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "e92845f3cbf30996d702c237de2d7ab37a02d0a2868130c7fc45dfba0970e194",
+  "item_id": "bbeh/bbeh_time_arithmetic/125",
+  "stratum": "bbeh_time_arithmetic"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "c626989b49a84d97416d4f2bea008654feb3235f3b99ab478304c26c11372617",
+  "item_id": "bbeh/bbeh_web_of_lies/61",
+  "stratum": "bbeh_web_of_lies"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "b371fa69312c48f80b0eafef2aca92eebfc610075885ee691358b3dda834ae13",
+  "item_id": "bbeh/bbeh_web_of_lies/55",
+  "stratum": "bbeh_web_of_lies"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "3df83fae7ede9852e6ec28721f872497c83cd448e767aa63062485239d697ec9",
+  "item_id": "bbeh/bbeh_word_sorting/17",
+  "stratum": "bbeh_word_sorting"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "78f4f880819eb545be0787df4dd1410bef6804423e1f10a5d1b67e7d0a40ea99",
+  "item_id": "bbeh/bbeh_word_sorting/158",
+  "stratum": "bbeh_word_sorting"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "198ebab4fbc0975b5d102311417dadf4fda0a19026bd344b27ab168d4cf947cc",
+  "item_id": "bbeh/bbeh_zebra_puzzles/92",
+  "stratum": "bbeh_zebra_puzzles"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "content_sha256": "3477d888178edc5f288420349077a2b9c1decb05a1292f86b410c17b098a0ba2",
+  "item_id": "bbeh/bbeh_zebra_puzzles/54",
+  "stratum": "bbeh_zebra_puzzles"
+ }
+]

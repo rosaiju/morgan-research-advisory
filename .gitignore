@@ -1,0 +1,32 @@
+# ---- secrets and authorisation (never commit) ----
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!runner/.env.example
+*.key
+*.pem
+runner/AUTHORIZATION.json
+**/AUTHORIZATION*.json
+
+# ---- generated evaluation data / model outputs ----
+runs/
+outputs/
+results/
+*.jsonl.log
+
+# ---- benchmark answer keys (current and archived) ----
+**/answer_key_*.json
+
+# ---- benchmark datasets and third-party source files (re-fetchable, hash-locked) ----
+# manifest/fetch_evaluation_sources.py re-downloads these and checks evaluation-files-lock.json
+manifest/evaluation-sources/
+
+# ---- environments and vendored third-party code (re-creatable) ----
+.venv*/
+scoring/vendor/*
+!scoring/vendor/vendor-lock.json
+__pycache__/
+*.pyc
+.pytest_cache/

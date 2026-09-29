@@ -1,0 +1,32 @@
+{
+  "schema": "morgan-integration-plan/1",
+  "status": "PLAN ONLY - not executed; requires the user to create runner/AUTHORIZATION.json for stage 'integration' and set MORGAN_ALLOW_NETWORK=1",
+  "prompts_are_synthetic": "no benchmark item, development item or answer key is used in this stage",
+  "prompts": {
+    "P_ARITH": {"text": "What is 17 + 25? Reply with only the number.", "expected_final": "42"},
+    "P_PUZZLE": {"text": "A farm has chickens and cows. There are 30 heads and 74 legs in total. How many cows are there? Reply with only the number.", "expected_final": "7"}
+  },
+  "tests": [
+    {"id": "T1", "prompt": "P_ARITH", "ceiling": 131072, "effort": "study value", "checks": ["HTTP 200: the route ACCEPTS a 131,072 output limit", "finish_reason == stop", "reasoning channel non-empty and separated from final", "usage present (prompt/completion, reasoning if documented)", "model echo recorded", "payload sha256 logged; key absent from every log line"]},
+    {"id": "T2", "prompt": "P_ARITH", "ceiling": 16, "effort": "study value", "checks": ["finish_reason == length", "completion_tokens <= 16 AND reasoning truncated => the output limit INCLUDES reasoning tokens (required for a common generated-token ceiling)", "classified BUDGET_TRUNCATED by status.py"]},
+    {"id": "T3a", "prompt": "P_PUZZLE", "ceiling": 32768, "effort": "study value (max / xhigh)", "checks": ["finish_reason == stop", "reasoning_tokens or completion_tokens recorded"]},
+    {"id": "T3b", "prompt": "P_PUZZLE", "ceiling": 32768, "effort": "low", "applies_to": "routes with an effort parameter", "checks": ["accepted", "record tokens; max >= low is recorded as weak evidence that the effort parameter reaches the model (single sample; not a pass/fail criterion unless the parameter is rejected)"]},
+    {"id": "T4", "prompt": "P_ARITH", "ceiling": 64, "effort": "invalid string 'maxx'", "applies_to": "routes with an effort parameter", "checks": ["HTTP 4xx expected; if accepted silently, record 'effort not validated server-side' (GLM templates map unknown values to max)"]},
+    {"id": "T5", "prompt": "P_ARITH", "ceiling": 131072, "effort": "study value", "checks": ["identical payload to T1 (same seed where supported)", "record whether outputs are identical (determinism is NOT required)"]}
+  ],
+  "routes_in_first_paid_test": {
+    "P35-deepinfra": ["T1", "T2", "T3a", "T5"],
+    "P25-deepseek": ["T1", "T2", "T3a", "T3b", "T4", "T5"],
+    "P28-zai": ["T1", "T2", "T3a", "T3b", "T4", "T5"],
+    "P27-zai": ["T1", "T2", "T3a", "T3b", "T4", "T5"],
+    "P29-moonshot": ["T1", "T2", "T3a", "T3b", "T4", "T5"],
+    "P34-deepinfra-fp4": ["T1", "T2", "T3a", "T3b", "T4", "T5"]
+  },
+  "request_count": {"total": 34, "by_route": {"P35-deepinfra": 4, "P25-deepseek": 6, "P28-zai": 6, "P27-zai": 6, "P29-moonshot": 6, "P34-deepinfra-fp4": 6}},
+  "deferred": {
+    "P34-dedicated-fp8": "same 6 tests plus rendered-prompt hash check, after a separate GPU-deployment authorisation",
+    "P35-xiaomi": "4 tests, only if P35-deepinfra fails stage-1/2 verification"
+  },
+  "spend": {"expected_usd": "< 1", "worst_case_usd": "about 12 (every 131,072-token request running to the cap)", "hard_cap_usd": 15},
+  "pass_criteria": "every route passes T1, T2 and T3a; the GLM T2 result decides whether a common generated-token ceiling is enforceable on Z.ai; any failure blocks development calibration for that route"
+}

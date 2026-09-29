@@ -1,0 +1,6 @@
+Answer the following multiple choice question. The last line of your response should be of the following format: 'ANSWER: $LETTER' (without quotes) where LETTER is one of {letters}. Think step by step before answering.
+
+Question:
+{question}
+Options:
+{choices}

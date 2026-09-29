@@ -1,0 +1,126 @@
+{
+  "schema": "morgan-capability-evaluation/1",
+  "created": "2026-09-29",
+  "status": "PROPOSED protocol, frozen as a procedure before any outcome; NOT executable until every 'pending' item is resolved and calibrated=true",
+  "calibrated": false,
+  "benchmarks": {
+    "primary_capability_panel": [
+      {
+        "id": "mmlu_pro",
+        "source": {"dataset": "TIGER-Lab/MMLU-Pro", "revision": "b189ec765aa7ed75c8acfea42df31fdae71f97be", "file": "data/test-00000-of-00001.parquet"},
+        "protocol": "zero-shot generative multiple choice, prompt = pinned Inspect mmlu_pro task template (inspect_evals b49df6bc...), NOT a reproduction of publisher five-shot numbers",
+        "final_sample": {"n": 420, "rule": "30 per subject x 14 subjects, drawn without replacement with seed 20260929 over items sorted by question_id"},
+        "scorer": "extract the single option letter (A-J) from the FINAL channel with the pinned Inspect answer pattern; no extraction -> EXTRACTION_FAILURE (scored 0); NO random guessing",
+        "prompt_template": {"file": "manifest/prompts/mmlu_pro_user_template.txt", "status": "verified", "note": "byte-identical to the pinned Inspect USER_PROMPT_TEMPLATE (checked by AST extraction); sha256 in prompts-lock.json"}
+      },
+      {
+        "id": "math500",
+        "source": {"dataset": "HuggingFaceH4/MATH-500", "revision": "6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be", "file": "test.jsonl"},
+        "protocol": "exact H4 items and unique_id; NOT the generic Inspect MATH task (different dataset, temperature 0.5 override, model-judge scorer)",
+        "final_sample": {"n": 400, "rule": "all 500 items stratified by (subject, level); 100 items reserved for development by proportional largest-remainder allocation (ties broken by stratum name), seed 20260929; the remaining 400 are final"},
+        "scorer": "Math-Verify (huggingface/Math-Verify ba3d3aaf...) parse+verify of the FINAL channel against the H4 'answer' field; deterministic, no judge model; runs in a subprocess with a hard timeout (no SIGALRM dependency); parse failure -> EXTRACTION_FAILURE",
+        "scorer_status": "pending: source fetched (math_verify parser.py/grader.py, sha256 in evaluation-files-lock.json) but the package is not installed/tested; synthetic fixture suite must pass before execution",
+        "prompt_template": {"file": "manifest/prompts/math500_user_template.txt", "status": "verified", "note": "byte-identical to the pinned Inspect MATH USER_PROMPT_TEMPLATE; answer is read from the 'ANSWER:' line of the FINAL channel, then verified by Math-Verify"},
+        "ceiling_note": "strong models may saturate; MATH-500 is reported as mathematical reliability, not used for small-gap winner claims"
+      },
+      {
+        "id": "bbeh_sampled",
+        "source": {"repo": "google-deepmind/bbeh", "revision": "80d12ca916b7158f22293fcf3144f4d3d854d4be"},
+        "protocol": "task-balanced SAMPLE of BBEH, reported as 'BBEH-sampled micro accuracy' with per-task breakdown; never labelled the official full BBEH score and no harmonic-mean full-benchmark claim",
+        "final_sample": {"n": 460, "rule": "20 items per task x 23 tasks (task count VERIFIED from the pinned tree: 22 tasks x 200 items + disambiguation_qa 120 = 4,520), seed 20260929; 2 items per task (46) reserved for development, disjoint"},
+        "scorer": "official bbeh/evaluate.py evaluate_correctness at the pinned revision (functions vendored; the module prints example results at import time, so it is not imported as-is), applied to the FINAL channel",
+        "scorer_behaviour_note": "the official extractor has no failure state: if none of its answer prefixes is present the whole response is used and its first line compared. EXTRACTION_FAILURE is therefore not produced for BBEH; instead the flag no_answer_prefix is recorded and the official verdict stands.",
+        "prompt_template": {"file": "manifest/prompts/bbeh_user_template.txt", "status": "proposed", "note": "task inputs carry no answer-format instruction and the pinned repo provides no suffix; the study-authored suffix requests the extractor's 'The answer is:' prefix. Not verified as the BBEH paper's verbatim prompt."}
+      }
+    ],
+    "separate_diagnostic": [
+      {
+        "id": "ifeval",
+        "source": {"repo": "google-research/google-research", "revision": "d36068b845da4c2b24927fee2cea1e6ef98dadda", "path": "instruction_following_eval/"},
+        "protocol": "all 541 original prompts UNCHANGED: no FINAL wrapper, no appended reasoning instruction; score the final-response channel only",
+        "metrics": ["strict prompt-level accuracy", "strict instruction-level accuracy", "loose variants reported separately and labelled supplemental"],
+        "role": "instruction-following diagnostic; never merged with reasoning accuracy"
+      }
+    ],
+    "excluded_before_outcomes": [
+      {"id": "gpqa_diamond", "reason": "gated dataset access and exact evaluator not confirmed at freeze time; excluded from this protocol version rather than added after seeing separation"}
+    ]
+  },
+  "prompt_construction": {
+    "structure": "single user message = verbatim task prompt; for the three capability benchmarks the task template itself carries the answer-format instruction; nothing else is appended",
+    "system_message": "none added by the study; native templates may inject their own effort/system prefix (recorded in the rendered-prompt log)",
+    "rendered_prompt_log": "every request stores the exact rendered string/token ids and their sha256",
+    "few_shot": 0
+  },
+  "reasoning_channel_policy": {
+    "answer_source": "FINAL channel only (content after the native reasoning delimiter or the parser's 'content' field)",
+    "reasoning_text": "stored in full; never scored; a correct-looking answer inside reasoning with no final answer is NOT credited",
+    "no_final": "NO_FINAL_ANSWER (scored 0) when generation ends naturally without a final channel"
+  },
+  "attempt_status": {
+    "primary_status_precedence": [
+      "INFRASTRUCTURE_FAILURE (transport/backend crash/stall; attempt missing, rerun policy applies)",
+      "MALFORMED_NATIVE_OUTPUT (native parser rejects a naturally-stopped output, e.g. missing EOS/</think>, unexpected special tokens, tool call in a no-tools study)",
+      "BUDGET_TRUNCATED (output ceiling reached before a complete final channel)",
+      "NO_FINAL_ANSWER (natural stop, empty or absent final channel)",
+      "EXTRACTION_FAILURE (final channel present, scorer cannot extract an answer)",
+      "INCORRECT",
+      "CORRECT"
+    ],
+    "overlapping_flags": ["loop_suspected (most frequent 12-gram repeats >= 10)", "final_channel_after_cap_partial", "stop_token_reinserted", "seed_unsupported_by_backend"],
+    "scoring": "every status except INFRASTRUCTURE_FAILURE scores 0 for accuracy and counts in the denominator",
+    "reported_separately": ["accuracy", "completion rate (natural stop with final)", "budget-truncation rate", "no-final rate", "extraction-failure rate", "malformed rate", "missing (infrastructure) count"]
+  },
+  "retries": {
+    "semantic_retries": "none - a wrong, truncated, looping or unparseable answer is final",
+    "infrastructure_reruns": "up to 2 reruns of the same item with identical rendered prompt, settings and seed; if still failing the attempt is MISSING",
+    "operational_watchdog": "abort a request with no new token for 30 minutes or 48 hours total -> INFRASTRUCTURE_FAILURE (stall); these limits are operational, not capability budgets, and wall-clock speed never affects scores"
+  },
+  "budget_policy": {
+    "design": "one common output ceiling C (reasoning + final tokens) for all six configurations; matched-token sensitivity analyses derived post hoc from the same generations",
+    "terminal_ceiling_rule": "T = min over models of (native_context - max_rendered_prompt_tokens_in_final_and_dev_sets - 1024 protocol overhead), rounded down to a multiple of 8192. P34's native 262,144-token context is binding; no context extension is enabled.",
+    "terminal_ceiling_value": {"value": null, "status": "pending: requires each model's tokenizer to count rendered prompt lengths (tokenizer vocabularies not downloaded)",
+      "planning_estimate_only": "the longest selected BBEH input is ~32,000 characters (~8-11K tokens depending on tokenizer), so T is expected near 245,760 (30 x 8192); this estimate must NOT be used as the frozen value"},
+    "primary_ceiling": "C = T (the largest ceiling valid for every configuration). Calibration cannot lower C to rescue cost or raise it for a favourite.",
+    "development_calibration": {
+      "purpose": "measure censoring at C on disjoint development items before any final generation; verify plumbing and stop semantics",
+      "items": "manifest/dev-calibration-spec.json",
+      "repeats": 1,
+      "adequacy_criterion": "for each configuration, BUDGET_TRUNCATED rate on development items <= 5% with the upper 95% Wilson bound reported",
+      "if_criterion_fails": "proceed at C anyway (no model-specific ceiling); flag the configuration 'budget-censored at the maximum valid common ceiling' in every table. Non-completion is a capability/configuration outcome, not an infrastructure error.",
+      "no_answer_tuning": "development accuracy is recorded but may not change prompts, settings, models or C"
+    },
+    "post_hoc_matched_token_sensitivity": {
+      "ceilings": [8192, 32768, 65536],
+      "method": "an attempt counts as completed at ceiling c only if its total generated tokens <= c; otherwise BUDGET_TRUNCATED at c. Valid because a lower cap does not change earlier tokens of the same generation; requires per-attempt token counts. Labelled sensitivity analysis, never the primary result.",
+      "caveat": "equal token caps are not equal compute across architectures/tokenizers"
+    },
+    "optional_secondary_condition": {
+      "name": "publisher-recommended output length",
+      "applies_to": "configurations whose native context supports it without extension (not P34)",
+      "status": "not part of this protocol's required work; may be added only by a pre-result amendment"
+    }
+  },
+  "generations_and_seeds": {
+    "generations_per_item": 1,
+    "rationale": "more distinct items beats repeated generations for estimating item-population accuracy; repeats would be clustered by item",
+    "seed_rule": "see manifest/models.json common_study_settings.seed_rule",
+    "no_best_of": "no pass@k, no majority vote, no selection among samples"
+  },
+  "statistical_plan": {
+    "per_benchmark_estimate": "accuracy with 95% Wilson interval, per configuration",
+    "pairwise": "15 model pairs x 3 capability benchmarks = 45 paired comparisons; exact McNemar test on item-level correct/incorrect (missing items dropped pairwise, count reported); Holm correction across the 45; paired difference with 95% paired-bootstrap interval (10,000 resamples of items, seed 20260929)",
+    "no_composite": "no single intelligence score; an unweighted mean across the three benchmarks may be shown only as a labelled descriptive summary",
+    "missing_data": "primary analysis complete-case; sensitivity analysis scores MISSING as incorrect",
+    "precision_statement": "with n=400-460 per benchmark, a single accuracy has a 95% interval of roughly +/-4.5 percentage points near 50%; differences smaller than this are not claimed",
+    "contamination": "public benchmarks may be in training data; disjoint dev/final splits do not remove this; no decontamination claim"
+  },
+  "item_manifests": {
+    "status": "generated 2026-09-29 by manifest/generate_item_manifests.py (deterministic: identical output hashes on repeated runs)",
+    "lock": "manifest/items/item_manifest_lock.json",
+    "counts": {"final": 1280, "dev": 216, "final_by_benchmark": {"mmlu_pro": 420, "math500": 400, "bbeh_sampled": 460}, "dev_by_benchmark": {"mmlu_pro": 70, "math500": 100, "bbeh_sampled": 46}},
+    "isolation": "item files hold ids/strata/content hashes only; gold answers only in answer_key_*.json; no id or content overlap between dev and final (asserted)",
+    "ifeval": "all 541 prompts from ifeval__data__input_data.jsonl (not re-listed)"
+  },
+  "preflight_refusal": "the runner must refuse final generation while calibrated=false or any model/evaluation field has status 'pending'"
+}
