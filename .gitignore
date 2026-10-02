@@ -30,3 +30,7 @@ scoring/vendor/*
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# ---- local evaluation (regenerable; contains benchmark question text) ----
+local/items/rendered_prompts.json
+local/official/*.tmp

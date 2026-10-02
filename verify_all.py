@@ -32,7 +32,14 @@ def run(name, cmd, cwd=ROOT, env_extra=None, expect_tail=None, allow_codes=(0,))
 # hashes
 lock = json.loads((ROOT / "manifest/source-lock.json").read_text(encoding="utf-8-sig"))
 files = [f for e in lock for f in e["files"] if f.get("status") == "fetched"]
-bad = [f["path"] for f in files if not Path(f["local_file"]).exists() or sha(f["local_file"]) != f["sha256"]]
+
+
+def local(f):  # the lock records absolute paths from the original checkout folder; resolve inside this clone
+    p = Path(f["local_file"])
+    return p if p.exists() else ROOT.joinpath(*p.parts[p.parts.index("manifest"):])
+
+
+bad = [f["path"] for f in files if not local(f).exists() or sha(local(f)) != f["sha256"]]
 check("model source files vs source-lock.json", not bad, f"{len(files) - len(bad)}/{len(files)} match")
 ev = [r for r in json.loads((ROOT / "manifest/evaluation-files-lock.json").read_text(encoding="utf-8")) if r.get("sha256")]
 bad = [r["file"] for r in ev if sha(ROOT / "manifest/evaluation-sources" / r["file"]) != r["sha256"]]

@@ -1,0 +1,394 @@
+[
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3259",
+  "stratum": "biology",
+  "content_sha256": "ce61fc3abe6c9670a158a549e8ff62a9b9850e239a45060c5217ff6aaa73d6a7"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/96",
+  "stratum": "business",
+  "content_sha256": "f33e8f24f4a91891de9f3bbc629a02df731bac1e7c6dd218f8d63241793afcbe"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3685",
+  "stratum": "chemistry",
+  "content_sha256": "977f3ff0efb23ef0edfbd226c637a3fe320558a42133f959808b9cd49476b34f"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10574",
+  "stratum": "computer science",
+  "content_sha256": "b6dfc5809dedab4b12bb8916438f7b7128ae6ea626a81c12899de39f6bac1dcc"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6875",
+  "stratum": "economics",
+  "content_sha256": "d6a3a6d7fbb6c1c7f7da76c7fcb07c09e0384d07a8bbdd698f078b494fd0a6f7"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/12050",
+  "stratum": "engineering",
+  "content_sha256": "3d0add818eb1d644f20b5b2d15c00a267ca1bc7ec8047a56f5431ffe2d8362a4"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6143",
+  "stratum": "health",
+  "content_sha256": "b35de93b60150e86a1bdba009710ec8a44c3ec1f5de7d2035270d1b86e62f284"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4925",
+  "stratum": "history",
+  "content_sha256": "ea273a4422c10d949b37e148ba063df288a948517432f77c930c3a20df18c356"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1481",
+  "stratum": "law",
+  "content_sha256": "103a4f911b46dbbf147529710b9ae79b5276e67399033cd92834afa232145e43"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/7818",
+  "stratum": "math",
+  "content_sha256": "cc76224b2d6791b0fd857fcaad64711bd6ac4cdf09109f07c2f6584dbdc0ad18"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5708",
+  "stratum": "other",
+  "content_sha256": "5669623b60b283b5df9bdb57957858b1826876b45731bb45d25e619a5284f3f5"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10897",
+  "stratum": "philosophy",
+  "content_sha256": "bc5713cca7b4e99bfacf4774d4a16488492baffb667fec33cc464326887d7e9c"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9323",
+  "stratum": "physics",
+  "content_sha256": "8854746afa04f04dc4bf8a28cb7ce8d0093c7f1a93b7e60638602ee385431d85"
+ },
+ {
+  "block": "core",
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/2729",
+  "stratum": "psychology",
+  "content_sha256": "7a6ae01a785ef4c0968ecc52d2cc09bd515c12ee6bc4a14226d8086fb46b5157"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1102.json",
+  "stratum": "Intermediate Algebra|L1",
+  "content_sha256": "4e655a0dca0837bc7bea7bf866c77c1e4b92edfa420fd579faafd04a7e2ce79e"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/1303.json",
+  "stratum": "Precalculus|L1",
+  "content_sha256": "749e32e330be86cd9012734dbfd98280aa37c89d9b44dd4922ff18d8c4f27245"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1255.json",
+  "stratum": "Algebra|L2",
+  "content_sha256": "4e199d07c47d41052ab004d9d8d8d914913d9322256079da9373aec1f4104199"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/248.json",
+  "stratum": "Geometry|L2",
+  "content_sha256": "e8d37102b0a6adbee46bab5bc9459e73491fdc93185ccb2af72f605245d1adfa"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/425.json",
+  "stratum": "Algebra|L3",
+  "content_sha256": "9546fca3a130ae853006a70506b78843900f13aa03c9cea0869c641b8494a821"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/101.json",
+  "stratum": "Intermediate Algebra|L3",
+  "content_sha256": "fee18d5e23afe870cacd0d4b6f8955013b25109a7ab42a1b4dbc04ddf39350bc"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/283.json",
+  "stratum": "Geometry|L4",
+  "content_sha256": "daead83d8f230f7f1b9518962e1ca941ee6128c80cc51e574d48bafa6ea3ed10"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/1287.json",
+  "stratum": "Number Theory|L4",
+  "content_sha256": "7402b093e77ab835f3b04b716db0c7f7278821bfe49c39a3fd138d563e45f328"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/90.json",
+  "stratum": "Intermediate Algebra|L4",
+  "content_sha256": "db31d840f82d7f2e48b99f87a515138983fa0f1a327959d11b7f131d9509cde6"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1930.json",
+  "stratum": "Prealgebra|L5",
+  "content_sha256": "d93ff30be172f1de29c5ad50b94deddc97673a0b7748a4296374714e2f1311b2"
+ },
+ {
+  "block": "core",
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1961.json",
+  "stratum": "Prealgebra|L5",
+  "content_sha256": "6c70163ce817add42314f8a39903df8d283d17ac1338a110cc2b3af5b5708e08"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1203.json",
+  "stratum": "Prealgebra|L5",
+  "content_sha256": "f6faf09783c45a37b543783d5683099f51e0cd2ccae38643642296da03d0549d"
+ },
+ {
+  "block": "core",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_multistep_arithmetic/19",
+  "stratum": "bbeh_multistep_arithmetic",
+  "content_sha256": "11cc6979d94d24174d35f822788634c906d72a60646cbc45b8486d3562e6ea19"
+ },
+ {
+  "block": "core",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_nycc/19",
+  "stratum": "bbeh_nycc",
+  "content_sha256": "9575d64ab8c1e47af0dae0e66a0529f0168c2ed0ebdea42b6e79b7c772fc2210"
+ },
+ {
+  "block": "core",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_hyperbaton/89",
+  "stratum": "bbeh_hyperbaton",
+  "content_sha256": "3c17e4aa4c6f5bb80432ea6d8c3306f758e7a23aa308669e21344264d336d0d5"
+ },
+ {
+  "block": "core",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boardgame_qa/129",
+  "stratum": "bbeh_boardgame_qa",
+  "content_sha256": "8f0ea156ce036285675066b85bb314a964de71cfd63cacae94bbf162aa78cd07"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_buggy_tables/89",
+  "stratum": "bbeh_buggy_tables",
+  "content_sha256": "145fc7183ceb08571bbd0c827360732ee858b77faf6e4818b83f8cf32ad40b51"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_spatial_reasoning/129",
+  "stratum": "bbeh_spatial_reasoning",
+  "content_sha256": "a60038b3b737fc262902d4704c33c5543ec1b44820c851ad34d31d6a0fbe0cd8"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3280",
+  "stratum": "ifeval",
+  "content_sha256": "78390d033261ea4187b51edfffd5ae4456c25141ff6c88db0d6bb58bae182873"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3335",
+  "stratum": "ifeval",
+  "content_sha256": "9314be60706775b78642b6969816f2f097dd70b1890155afc7c3f8d26858ffd2"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3326",
+  "stratum": "ifeval",
+  "content_sha256": "dbfc659b870fadd08d9d40caf273f747c63713a418f3c8bbb2e2fb4f41e6fc23"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1906",
+  "stratum": "ifeval",
+  "content_sha256": "e5b560f3280cbba1a81ca1a878973bd8688aee6560528d34536b910e5f20b15f"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3362",
+  "stratum": "ifeval",
+  "content_sha256": "6a26cdd80280ea050bdd1a8a2d33ab093a493b6752f67beec52f6be63e51235a"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3281",
+  "stratum": "ifeval",
+  "content_sha256": "6819285cb3b661a2ad006b99e2ac6d2bd1c3e83eaa184f389fa286861edcc64c"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/343",
+  "stratum": "ifeval",
+  "content_sha256": "b32044fc92599e320f6066facb1f3c7d7de0760b5971eb5e869324ec64309606"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2790",
+  "stratum": "ifeval",
+  "content_sha256": "4efaf940ed9da5c7db6122e27c72d8f52da79fbfe0a8c649933d83000607eab5"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1082",
+  "stratum": "ifeval",
+  "content_sha256": "abdb9d60b901f8696b97aebb27ae7abd7e4a124acd3fe5b3217f7634ffd83916"
+ },
+ {
+  "block": "core",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3073",
+  "stratum": "ifeval",
+  "content_sha256": "2332a0b74f1d3d1f29828d41c87fe5e612e6a511edc27ff4a261308e64a8def3"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1367",
+  "stratum": "ifeval",
+  "content_sha256": "5979ad1c2dc3bce478332795a91cda7ee14eb2ac533a332ccc12493efb21d53a"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1481",
+  "stratum": "ifeval",
+  "content_sha256": "815bbe09f05b4d1be79842b91439ca0e808664ddb98b8ef854ecdf42a7e84940"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/prog_word_count",
+  "stratum": "programming",
+  "content_sha256": "ec40a003f7aed6377bd50f9a739db28355f580d98e94b02da35f7e9a93401a2b"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/prog_second_largest",
+  "stratum": "programming",
+  "content_sha256": "8fdccab1243adefd8cc0cb92dae33d5605260646a4a4d191ec2e3582d3e9407f"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/algo_bfs_structure",
+  "stratum": "algorithms",
+  "content_sha256": "4e01fc699f15ee6bc77e44f2aa5766f62938fb1175de84238923c7335467e566"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/algo_hash_lookup",
+  "stratum": "algorithms",
+  "content_sha256": "89f681aa72a29992035888bd0be4e9d2280c74f4a156d41c450f898d8167fa36"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/debug_infinite_loop",
+  "stratum": "debugging",
+  "content_sha256": "bd17d695e3ff19a4cead0ae615a40f75f8e9d0942c497360b9e3924942ebf9bc"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/debug_mutable_default",
+  "stratum": "debugging",
+  "content_sha256": "b18c42e14de6bfe6c62981b175b7049c504fc6f8a1ed6c8db82ec654f46702a1"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/concept_hash_collision",
+  "stratum": "conceptual",
+  "content_sha256": "1f3242e5d5fb8e3fcace308981e48876c74e741faca8fea174f7e2766a03699e"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/concept_immutability",
+  "stratum": "conceptual",
+  "content_sha256": "acbde7a2a109774ab3f42f7ec25b4b7aab64db5733fcc3c04e5369da03ca24dd"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/reason_bits_needed",
+  "stratum": "reasoning",
+  "content_sha256": "13d566249ddf6bc6433811297038d49cc05926b5ac3c88861ab084bbb1033c9f"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/reason_exam_average",
+  "stratum": "reasoning",
+  "content_sha256": "2978064ec49cdf102dc6e089286fb5df12a0c4d9767b280ad2a34cc39abd3e2d"
+ },
+ {
+  "block": "core",
+  "benchmark": "student",
+  "item_id": "student/instr_three_sentences",
+  "stratum": "instruction_following",
+  "content_sha256": "ee94c7b1c14450b439d0fdd2d13389c7059e8170e7b8675b2e189fd28102761c"
+ },
+ {
+  "block": "reserve",
+  "benchmark": "student",
+  "item_id": "student/instr_one_word",
+  "stratum": "instruction_following",
+  "content_sha256": "8f76e3039fa5c82943dedf3b9305dfa15f3f40f73797c1ff66757d546e3e5fb1"
+ }
+]

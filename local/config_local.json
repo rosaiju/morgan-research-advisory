@@ -1,0 +1,206 @@
+{
+ "schema": "morgan-local-eval/1",
+ "created": "2026-10-02",
+ "status": "CALIBRATION CONFIG; calibrated=false until C1 is chosen by the pre-registered rule. Stage 1 is refused until the user's explicit approval file exists (local/STAGE1_APPROVED.json).",
+ "calibrated": false,
+ "C1": null,
+ "plan_reference": "two-stage local plan approved 2026-10-02 (pooled capability screening, loop early-stop, Compact Stage 2, harness in local/, Ministral temperature verified from publisher card)",
+ "backend": {
+  "name": "llama.cpp llama-server",
+  "build": "b11349",
+  "commit": "fb4b2737a",
+  "binary_zip": "llama-b11349-bin-win-cuda-12.4-x64.zip",
+  "binary_zip_sha256": "1084a0a4c6567511c7f67d8c4db71979f837170ed22b2fcb72c0d8637a4eaf14",
+  "cudart_zip": "cudart-llama-bin-win-cuda-12.4-x64.zip",
+  "cudart_zip_sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6",
+  "install_dir": "C:\\llm\\llama.cpp\\b11349",
+  "common_server_args": [
+   "--jinja",
+   "-np",
+   "1",
+   "-fa",
+   "on",
+   "-ctk",
+   "q8_0",
+   "-ctv",
+   "q8_0",
+   "--fit",
+   "on",
+   "-fitt",
+   "1024",
+   "--load-mode",
+   "none",
+   "-cram",
+   "0",
+   "--reasoning-format",
+   "deepseek",
+   "--reasoning-budget",
+   "-1",
+   "--no-context-shift",
+   "--metrics",
+   "--host",
+   "127.0.0.1",
+   "-lv",
+   "4"
+  ],
+  "threads": 8,
+  "threads_note": "fixed at 8 (= P-core count) from llama-bench on R1-8B, ngl 18, tg: 6t 17.3/14.3, 8t 15.4/15.5, 12t 15.0, 16t 14.9, 20t 14.2, 28t 13.5 tok/s (runs/threads_r1-0528-qwen3-8b.json); 6 vs 8 within noise, >8 consistently slower",
+  "notes": {
+   "chat_template": "every model uses its OFFICIAL publisher template (local/official/*), passed with --chat-template-file; fidelity vs Python jinja2 is checked in integration",
+   "no_speculative_decoding": "no draft model, no MTP/DFlash, no n-gram speculation",
+   "no_vision": "no --mmproj; text-only study",
+   "kv_cache": "q8_0 for K and V, all models",
+   "load_mode": "none (no mmap): weights resident in private memory so RAM is measured unambiguously and no page-outs during long runs",
+   "prompt_cache": "disabled (-cram 0, cache_prompt=false) so every item is processed from scratch",
+   "fit": "--fit on with 1024 MiB VRAM margin chooses GPU layers / MoE expert placement automatically; n_ctx is always set explicitly so --fit never reduces context",
+   "log_verbosity": "-lv 4 so the load log records fit decisions, per-device model buffers, offloaded layers and KV size (offload is measured from these)"
+  }
+ },
+ "common_request": {
+  "messages": "single user message containing the rendered task prompt; no study system message",
+  "stream": true,
+  "cache_prompt": false,
+  "presence_penalty": 0.0,
+  "frequency_penalty": 0.0,
+  "repeat_penalty": 1.0,
+  "typical_p": 1.0,
+  "dry_multiplier": 0.0,
+  "xtc_probability": 0.0,
+  "mirostat": 0,
+  "seed_rule": "int(sha256('Morgan-2026-09-29|'+item_id)[:8],16) & 0x7fffffff (morgan 16 section 6), identical across models",
+  "explicit_sampler_rule": "every sampler parameter is set explicitly per request; llama.cpp defaults (top_k 40, top_p 0.95, min_p 0.05) must never apply"
+ },
+ "models": {
+  "r1-0528-qwen3-8b": {
+   "checkpoint": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B@6e8885a6ff5c1dc5201574c8fd700323f23c25fa",
+   "template_file": "official/r1-0528-qwen3-8b__chat_template.jinja",
+   "chat_template_kwargs": {},
+   "sampling": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 0,
+    "min_p": 0.0
+   },
+   "reasoning": "always on (template)",
+   "source": "model card: 'temperature of 0.6, top-p value of 0.95' (deepseek-ai/DeepSeek-R1-0528-Qwen3-8B README)"
+  },
+  "gpt-oss-20b": {
+   "checkpoint": "openai/gpt-oss-20b@6cee5e81ee83917806bbde320786a8fb61efebee (native MXFP4)",
+   "template_file": "official/gpt-oss-20b__chat_template.jinja",
+   "chat_template_kwargs": {
+    "reasoning_effort": "high"
+   },
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0
+   },
+   "reasoning": "Harmony analysis channel; effort high (template default is medium)",
+   "source": "openai/gpt-oss README @7b583341: 'We recommend sampling with temperature=1.0 and top_p=1.0'"
+  },
+  "glm-4.7-flash": {
+   "checkpoint": "zai-org/GLM-4.7-Flash@7dd20894a642a0aa287e9827cb1a1f7f91386b67",
+   "template_file": "official/glm-4.7-flash__chat_template.jinja",
+   "chat_template_kwargs": {
+    "enable_thinking": true
+   },
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 0,
+    "min_p": 0.0
+   },
+   "reasoning": "thinking on (binary); fresh single turn",
+   "source": "model card 'Default Settings (Most Tasks)': temperature 1.0, top-p 0.95"
+  },
+  "ministral-3-14b-reasoning": {
+   "checkpoint": "mistralai/Ministral-3-14B-Reasoning-2512@51f9210f3cd20f3452a80d5819d15dc61cc50630",
+   "template_file": "official/ministral-3-14b-reasoning__chat_template.jinja",
+   "chat_template_kwargs": {},
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0
+   },
+   "reasoning": "always on; official template injects the publisher default system prompt ([THINK] format) when no system message is given",
+   "source": "publisher model card @51f9210f, section 'Recommended Settings': 'Use a temperature of 1 for most environments'. No top_p is recommended there, so the neutral 1.0 (vLLM default, the publisher's recommended server) is used. The TEMP=0.7/TOP_P=0.95 values appear only in vLLM usage code examples copied from the 8B card and are NOT adopted. Verified 2026-10-02; docs.mistral.ai model page gives no reasoning-specific sampling value."
+  },
+  "muse-glimmer-30b": {
+   "checkpoint": "meta-models/Muse-Glimmer-30B@a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+   "template_file": "official/muse-glimmer-30b__chat_template.jinja",
+   "chat_template_kwargs": {
+    "reasoning_strength": "xhigh"
+   },
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 64,
+    "min_p": 0.0
+   },
+   "reasoning": "reasoning strength xhigh (levels low/medium/high/xhigh; template default high)",
+   "source": "model card 'Best Practices': temperature 1.0, top_p 0.95, top_k 64"
+  },
+  "qwen3.8-27b": {
+   "checkpoint": "Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+   "template_file": "official/qwen3.8-27b__chat_template.jinja",
+   "chat_template_kwargs": {
+    "enable_thinking": true,
+    "reasoning_effort": "xhigh"
+   },
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0
+   },
+   "reasoning": "thinking on, effort xhigh (levels xhigh/medium/low)",
+   "source": "model card 'Thinking Mode': temperature 1.0, top_p 0.95, top_k 20, min_p 0, presence_penalty 0, repetition_penalty 1.0"
+  },
+  "gemma-4-31b": {
+   "checkpoint": "google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475",
+   "template_file": "official/gemma-4-31b__chat_template.jinja",
+   "chat_template_kwargs": {
+    "enable_thinking": true
+   },
+   "sampling": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 64,
+    "min_p": 0.0
+   },
+   "reasoning": "thinking on (template default is OFF, so it is set explicitly)",
+   "source": "model card: temperature 1.0, top_p 0.95, top_k 64"
+  }
+ },
+ "loop_early_stop": {
+  "rule": "abort generation when any 12-token n-gram occurs >= 20 times within the last 2048 generated tokens (checked every 64 tokens)",
+  "status": "BUDGET_TRUNCATED with flag loop_terminated; scores 0; text retained for audit",
+  "approved": "2026-10-02"
+ },
+ "watchdog": {
+  "first_token_s": 1800,
+  "stall_s": 600,
+  "total_s_rule": "1.5 * max_tokens / p10_tok_per_s(model, from calibration) + 1800; calibration uses 1.5 * max_tokens / 2.0 + 1800",
+  "on_trigger": "INFRASTRUCTURE_FAILURE; up to 2 identical reruns, then MISSING"
+ },
+ "calibration": {
+  "C_dev": 24576,
+  "ladder": [
+   8192,
+   12288,
+   16384,
+   24576
+  ],
+  "items": "local/items/calibration_items.json (6 per model, development/non-panel only)",
+  "rule": "C1 = smallest ladder value L such that (a) no model has more than 1 of its 6 development attempts that ended naturally (finish_reason=stop) with completion_tokens > L, and (b) at most 2 of all 42 do. Loop-terminated and C_dev-truncated attempts are censored at every L and are not counted. Accuracy, runtime and model preference cannot influence C1.",
+  "n_ctx_rule": "n_ctx = max_tokens + longest rendered prompt (this model's tokenizer, over calibration + Stage 1 items) + 1024, rounded up to a multiple of 256"
+ },
+ "stage1": {
+  "panel": "local/items/stage1_panel.json (core 44 + reserve 12)",
+  "max_tokens": "C1",
+  "time_box": "reserve runs only if elapsed + projected <= 46 h; if core alone projects > 40 h, stop and report",
+  "requires": "local/STAGE1_APPROVED.json written by the user"
+ }
+}

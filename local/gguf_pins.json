@@ -1,0 +1,51 @@
+{
+ "qwen3.8-27b": {
+  "repo": "bartowski/Qwen3.8-27B-GGUF",
+  "revision": "0c92138c51f112d2f0dc84d5f6d1ebe4b9912b9a",
+  "file": "Qwen3.8-27B-Q4_K_M.gguf",
+  "size": 17442399968,
+  "sha256": "880a52af8317974f7b4b064a6bc29ff49e188b91aa218e08eea3078b6b1cc673"
+ },
+ "gemma-4-31b": {
+  "repo": "bartowski/google_gemma-4-31B-it-GGUF",
+  "revision": "619aca7589c72be65dd968de8602ad23d68b5c14",
+  "file": "google_gemma-4-31B-it-Q4_K_M.gguf",
+  "size": 19598489952,
+  "sha256": "2959c1b0a4f792493bb0092846ea06aec54547e47be979c282634d938d501b75"
+ },
+ "muse-glimmer-30b": {
+  "repo": "bartowski/Muse-Glimmer-30B-GGUF",
+  "revision": "01e1b7c30e19e1823ee9a73dec51d12f59ec4857",
+  "file": "Muse-Glimmer-30B-Q4_K_M.gguf",
+  "size": 17306324000,
+  "sha256": "0d3fc85f61d10fdc84072f0bba6005d61c1ac5605a2627b0fd5ea4ff8194c384"
+ },
+ "glm-4.7-flash": {
+  "repo": "bartowski/zai-org_GLM-4.7-Flash-GGUF",
+  "revision": "464d07505b441959737cd04d900f047469614c8d",
+  "file": "zai-org_GLM-4.7-Flash-Q4_K_M.gguf",
+  "size": 18474983296,
+  "sha256": "42c0c1a30fe2f30097ffedd554a94c2d6abc5f95b8a35ce99cd523f78ef6711b"
+ },
+ "gpt-oss-20b": {
+  "repo": "bartowski/openai_gpt-oss-20b-GGUF",
+  "revision": "e39ba3aa000c47c83dacdc9e1ca2c9dd0808c205",
+  "file": "openai_gpt-oss-20b-MXFP4.gguf",
+  "size": 12109565760,
+  "sha256": "75acd89545d50126692df2116bc3fdf700408b4be1d74d58e8eed13bca028f17"
+ },
+ "r1-0528-qwen3-8b": {
+  "repo": "bartowski/deepseek-ai_DeepSeek-R1-0528-Qwen3-8B-GGUF",
+  "revision": "75b8e3d4ecafa21b1f9a06209712f726d0ed77bc",
+  "file": "deepseek-ai_DeepSeek-R1-0528-Qwen3-8B-Q4_K_M.gguf",
+  "size": 5027783040,
+  "sha256": "e0c2f118fd59f3a16f20d18b0e7f79e960c84bc8c66d94fd71a691e05151d54f"
+ },
+ "ministral-3-14b-reasoning": {
+  "repo": "bartowski/mistralai_Ministral-3-14B-Reasoning-2512-GGUF",
+  "revision": "32bfb9dd2531f94153b7d65f05c956381f1b64e3",
+  "file": "mistralai_Ministral-3-14B-Reasoning-2512-Q4_K_M.gguf",
+  "size": 8239067008,
+  "sha256": "61130e92a6ee3c2a7e8e85431d9218ff69998f513f1ea8f21637dd3e2bc3a159"
+ }
+}

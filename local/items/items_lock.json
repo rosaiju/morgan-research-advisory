@@ -1,0 +1,30 @@
+{
+ "stage1_panel.json": "f4ec07329b960f5fd2d460d692adc56e1aec2456adff9499a5cc971a17254904",
+ "calibration_items.json": "b570059ef7355a4b946a4914ae766d72bd01bf8585ba2f8835e512f258120177",
+ "inputs": {
+  "items_final.json": "20ebfb59cdd35ca4ebd80dd338582250477af9732c977a56cf9946474ca4b43f",
+  "items_dev.json": "3e8fd68be5576b9bbcdb77a95043b2aefaf7325693d37281ed563fdeba83145e",
+  "ifeval__data__input_data.jsonl": "67ffeee0fcb87c317c5b08a2de85557b4a7e96ada6178aa645b4954fe4b53d49",
+  "student_suite.py": "2eae54fd5cbab53e4caf9fd04f2d35795ae0efa755e1319d5d23006a15f5b1bb",
+  "student_suite_version": "1.3"
+ },
+ "seed": "morgan-local-stage1-2026-10-02",
+ "counts": {
+  "stage1": {
+   "core": {
+    "mmlu_pro": 14,
+    "math500": 10,
+    "bbeh_mini": 4,
+    "ifeval": 10,
+    "student": 6
+   },
+   "reserve": {
+    "math500": 2,
+    "bbeh_mini": 2,
+    "ifeval": 2,
+    "student": 6
+   }
+  },
+  "calibration": 6
+ }
+}

@@ -1,0 +1,38 @@
+[
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/50",
+  "stratum": "other",
+  "content_sha256": "bb13b87a81b046e7cdb7350e15fd14b21780949fab839d01c382c87456dde057"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/31",
+  "stratum": "computer science",
+  "content_sha256": "181d5e37b41c0f8f05a68ca6f2f67e61e518322f01d878aabbac30036a4e253a"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/880.json",
+  "stratum": "Geometry|L5",
+  "content_sha256": "88bd1d429ff4da88607a105612c2de0c8e98bd61cfdfa852a96a537fea183c3b"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/counting_and_probability/731.json",
+  "stratum": "Counting & Probability|L5",
+  "content_sha256": "00b6972ed54573b5eba6f57c78bbf587bc78e51c163fb90c331035f8128610e8"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_zebra_puzzles/92",
+  "stratum": "bbeh_zebra_puzzles",
+  "content_sha256": "198ebab4fbc0975b5d102311417dadf4fda0a19026bd344b27ab168d4cf947cc"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1012",
+  "stratum": "ifeval",
+  "content_sha256": "d099a8e8a3675373f870c69412c5b788c2e1e3e744793236b9e773358ad38657"
+ }
+]

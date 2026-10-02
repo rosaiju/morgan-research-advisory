@@ -1,0 +1,71 @@
+{
+ "qwen3.8-27b": {
+  "repo": "Qwen/Qwen3.8-27B",
+  "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "files": {
+   "chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+   "tokenizer_config.json": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+   "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+   "README.md": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+  }
+ },
+ "gemma-4-31b": {
+  "repo": "google/gemma-4-31B-it",
+  "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "files": {
+   "chat_template.jinja": "ae53464bf3be25802b3a5b37def7fd89667067d7577049b3b2d74c4d8de4c6d4",
+   "tokenizer_config.json": "9f4fec4b1dc6ecddf8f4a92e9caea5971c0e67d81309f3f9066a2bee8c362633",
+   "generation_config.json": "d4226bbe3117d2d253ba4609720ba82c6c4ce4627a9a6ae05387c78983ac03de",
+   "README.md": "e209f5c435b1e66055bd6d7c29185103ae8d2027a03a96b359335154f206b82b"
+  }
+ },
+ "muse-glimmer-30b": {
+  "repo": "meta-models/Muse-Glimmer-30B",
+  "revision": "a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
+  "files": {
+   "chat_template.jinja": "cfc67e5f349f37690dfd31ed1f18bc4442a9dd32fe39a648f993cb4eb3cae678",
+   "tokenizer_config.json": "781e6c74f571642c71202167b67d9255b28cc439bdda1582ff31346182f5a9c5",
+   "generation_config.json": "1fa51889b1f8d3659802dedaa27e005b81e5c58483f13ecf13f2d97306bc6e35",
+   "README.md": "5894e358c58f4f8425645a5b0b890468ecb3e6b049c2e941648db077c4b7df58"
+  }
+ },
+ "glm-4.7-flash": {
+  "repo": "zai-org/GLM-4.7-Flash",
+  "revision": "7dd20894a642a0aa287e9827cb1a1f7f91386b67",
+  "files": {
+   "chat_template.jinja": "d63ad536c3c81880043e22ec7fd08db42b4d8fb7c89c7138bc562bfa25281375",
+   "tokenizer_config.json": "31a173e2797ddc8b72ac996803513e627fc28d7aad02cfcce321a431d865c86d",
+   "generation_config.json": "e19f4eb8be12cdb62a3737b52a332c7c142cbf5ee24a5de7d806f6132b782425",
+   "README.md": "7bfcbced42741ceb3fff8809f8d6c84ada9696850e257c4e53e6c2fe9ef4f9bf"
+  }
+ },
+ "gpt-oss-20b": {
+  "repo": "openai/gpt-oss-20b",
+  "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "files": {
+   "chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+   "tokenizer_config.json": "9279e942392b742d633c7adbb89ebe002c98399db8926a7af5125c726f404070",
+   "generation_config.json": "f9970ada892d2d1f72e3ed0a6535ccebadd11897318794ca671d8c7014c957da",
+   "README.md": "03c2fcf292549176757b85c911e7dcf527aef3e4241d64b6caec94af3ecf3ac2"
+  }
+ },
+ "r1-0528-qwen3-8b": {
+  "repo": "deepseek-ai/DeepSeek-R1-0528-Qwen3-8B",
+  "revision": "6e8885a6ff5c1dc5201574c8fd700323f23c25fa",
+  "files": {
+   "tokenizer_config.json": "78872f2c1f0a5fb79d5872dbacb4c83991ef416315a25f34659e6a7c34108027",
+   "README.md": "ee003a09ddabff67a5b0d2394bea65c6ce523e4994f3208d6a58613e27834d8a"
+  }
+ },
+ "ministral-3-14b-reasoning": {
+  "repo": "mistralai/Ministral-3-14B-Reasoning-2512",
+  "revision": "51f9210f3cd20f3452a80d5819d15dc61cc50630",
+  "files": {
+   "chat_template.jinja": "6b5044075f09f4daa57beebe2d989d9fbe67dea351f220e1a84e19ddc893f2c2",
+   "tokenizer_config.json": "f3a437d1214f6b61c8eae19d1256b0ebbf567793f6dcc1f63f4a30b829f85235",
+   "generation_config.json": "e0923390059f84a9180b00e5501778acc45ea9856cd7f2fd68208b360927c677",
+   "SYSTEM_PROMPT.txt": "aba1efaff0bdc73f4a864139e2c07dce8fc1e3df7b5d5c2b2623df6816697156",
+   "README.md": "0abaf444981d9f3ee4a13d63e88a9d53b56a1cb38bd93c80cc6b763267ded673"
+  }
+ }
+}
