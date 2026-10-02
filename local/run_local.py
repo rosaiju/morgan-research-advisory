@@ -253,6 +253,9 @@ def cmd_calibrate(models: list[str], run_id: str) -> None:
         loads = []
         baseline = gpu_snapshot()["gpu_mem_used_mib"]
         summary["gpu_baseline_mib"] = baseline
+        import psutil
+        vm = psutil.virtual_memory()
+        summary["sys_ram_baseline_mib"] = round((vm.total - vm.available) / 2**20, 1)
         for i in range(3):
             srv = Server(model, n_ctx, run_dir / f"server_{model}_load{i + 1}.log")
             li = srv.start()

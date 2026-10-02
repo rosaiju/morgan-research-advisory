@@ -20,6 +20,7 @@ Projection (per model, from that model's own calibration measurements):
 from __future__ import annotations
 
 import json
+import re
 import statistics
 import sys
 from collections import defaultdict
@@ -52,7 +53,54 @@ def choose_c1(attempts: dict[str, list[dict]]) -> tuple[int, dict]:
         table[L] = {"per_model": per_model, "total": sum(per_model.values()),
                     "passes": max(per_model.values()) <= 1 and sum(per_model.values()) <= 2}
     chosen = next((L for L in ladder if table[L]["passes"]), ladder[-1])
+    # descriptive only (NOT part of the pre-registered rule): share of development attempts that would end
+    # without a natural finish at L, counting censored (C_dev-truncated or loop-terminated) attempts too
+    for L in ladder:
+        table[L]["would_truncate_incl_censored"] = {
+            m: sum(1 for r in rs if r["abort"] == "loop_terminated" or r["finish_reason"] != "stop"
+                   or (r["completion_tokens"] or 0) > L) for m, rs in attempts.items()}
+        n = sum(len(rs) for rs in attempts.values())
+        table[L]["would_truncate_share"] = round(sum(table[L]["would_truncate_incl_censored"].values()) / n, 3) if n else None
     return chosen, table
+
+
+BUCKET = 512
+
+
+def speed_curve(run_dir: Path, model: str) -> list[float]:
+    """Median decode tok/s per 512-token generation-depth bucket, from llama-server's 3-second
+    'n_gen = N, ..., tg_3s = S' log lines during calibration. Missing buckets are interpolated; beyond the
+    deepest observation the last value is held (conservative, since speed only falls with depth)."""
+    pts = defaultdict(list)
+    for log in sorted(run_dir.glob(f"server_{model}_load3.log")) + sorted(run_dir.glob(f"server_{model}_restart*.log")):
+        for line in log.read_text(encoding="utf-8", errors="replace").splitlines():
+            m = re.search(r"n_gen =\s*(\d+), tg =\s*[\d.]+ t/s, tg_3s =\s*([\d.]+) t/s", line)
+            if m and float(m.group(2)) > 0:
+                pts[int(m.group(1)) // BUCKET].append(float(m.group(2)))
+    if not pts:
+        return []
+    top = max(pts)
+    curve = [statistics.median(pts[b]) if b in pts else None for b in range(top + 1)]
+    known = [i for i, v in enumerate(curve) if v is not None]
+    for i in range(len(curve)):
+        if curve[i] is None:
+            lo = max((k for k in known if k < i), default=None)
+            hi = min((k for k in known if k > i), default=None)
+            curve[i] = curve[lo] if hi is None else curve[hi] if lo is None else \
+                curve[lo] + (curve[hi] - curve[lo]) * (i - lo) / (hi - lo)
+    return curve
+
+
+def gen_seconds(tokens: float, curve: list[float], fallback: float) -> float:
+    if not curve:
+        return tokens / fallback
+    t, left, b = 0.0, tokens, 0
+    while left > 0:
+        n = min(BUCKET, left)
+        t += n / curve[min(b, len(curve) - 1)]
+        left -= n
+        b += 1
+    return t
 
 
 def project(run_dir: Path, model: str, rs: list[dict], c1: int, summary: dict) -> dict:
@@ -62,19 +110,27 @@ def project(run_dir: Path, model: str, rs: list[dict], c1: int, summary: dict) -
     decode = gen_tok / gen_s if gen_s else None
     prompt_rates = [r["server_prompt_tok_s"] for r in natural if r.get("server_prompt_tok_s")]
     prefill = statistics.median(prompt_rates) if prompt_rates else summary["speed_probe"]["pp512_tok_s_median"]
-    per_bench = defaultdict(list)
+    curve = speed_curve(run_dir, model)
+    per_bench_tok, per_bench_s = defaultdict(list), defaultdict(list)
     for r in natural:
-        per_bench[r["benchmark"]].append(min(r["completion_tokens"] or 0, c1))
-    mean = {b: statistics.mean(v) for b, v in per_bench.items()}
-    mean["student"] = mean.get("mmlu_pro")
+        capped = min(r["completion_tokens"] or 0, c1)
+        per_bench_tok[r["benchmark"]].append(capped)
+        per_bench_s[r["benchmark"]].append(gen_seconds(capped, curve, decode))
+    mean_tok = {b: statistics.mean(v) for b, v in per_bench_tok.items()}
+    mean_s = {b: statistics.mean(v) for b, v in per_bench_s.items()}
+    mean_tok["student"], mean_s["student"] = mean_tok.get("mmlu_pro"), mean_s.get("mmlu_pro")
+    mean = mean_tok
     plen = summary["prompt_tokens"]["per_item"]
     out = {}
     for block in ("core", "reserve"):
         items = [p for p in PANEL if p["block"] == block]
-        toks = sum(mean[p["benchmark"]] for p in items)
+        toks = sum(mean_tok[p["benchmark"]] for p in items)
+        gsec = sum(mean_s[p["benchmark"]] for p in items)
         ptoks = sum(plen[p["item_id"]] for p in items)
-        hours = (toks / decode + ptoks / prefill + 3 * len(items)) / 3600
-        out[block] = {"items": len(items), "gen_tokens": round(toks), "prompt_tokens": ptoks, "hours": round(hours, 2)}
+        hours = (gsec + ptoks / prefill + 3 * len(items)) / 3600
+        out[block] = {"items": len(items), "gen_tokens": round(toks), "gen_hours": round(gsec / 3600, 2),
+                      "prompt_tokens": ptoks, "hours": round(hours, 2)}
+    out["speed_curve_tok_s"] = {f"{b * BUCKET}": round(v, 2) for b, v in enumerate(curve) if b % 4 == 0}
     load_h = statistics.median(l["load_seconds"] for l in summary["loads"]) / 3600
     out["load_hours"] = round(load_h, 3)
     out["decode_tok_s_at_depth"] = round(decode, 2) if decode else None

@@ -70,9 +70,15 @@ def main(run_dir: Path) -> None:
         recheck[m] = {"n_ctx_calibration": n_cal, "n_ctx_stage1": n_s1}
         for tag, n in (("calibration_ctx", n_cal), ("stage1_ctx", n_s1)):
             try:
+                import psutil
                 base = gpu_snapshot()["gpu_mem_used_mib"]
+                vm0 = psutil.virtual_memory()
+                ram0 = (vm0.total - vm0.available) / 2**20
                 srv = Server(m, n, run_dir / f"server_{m}_recheck_{tag}.log")
                 li = srv.start()
+                vm1 = psutil.virtual_memory()
+                ram_delta = round((vm1.total - vm1.available) / 2**20 - ram0, 1)
+                proc_ws = round(psutil.Process(srv.pid()).memory_info().rss / 2**20, 1)
                 try:
                     probe = R.speed_probe(srv)
                     peak = gpu_snapshot()["gpu_mem_used_mib"]
@@ -81,7 +87,9 @@ def main(run_dir: Path) -> None:
                 recheck[m][tag] = {"load_seconds": li.load_seconds, "layers_offloaded": li.layers_offloaded,
                                    "gpu_weight_fraction": li.gpu_weight_fraction, "gpu_model_mib": li.gpu_model_mib,
                                    "cpu_model_mib": li.cpu_model_mib, "kv_mib": li.kv_mib,
-                                   "gpu_mem_baseline_mib": base, "gpu_mem_after_probe_mib": peak, **probe}
+                                   "gpu_mem_baseline_mib": base, "gpu_mem_after_probe_mib": peak,
+                                   "gpu_mem_model_mib": round(peak - base, 1), "sys_ram_baseline_mib": round(ram0, 1),
+                                   "sys_ram_delta_after_load_mib": ram_delta, "proc_working_set_mib": proc_ws, **probe}
                 say(f"recheck {m} {tag} n_ctx={n}: tg256={probe['tg256_tok_s_median']} pp512={probe['pp512_tok_s_median']} "
                     f"offload={li.layers_offloaded} frac={li.gpu_weight_fraction}")
             except Exception as e:
@@ -129,22 +137,30 @@ def write_markdown(run_dir: Path, rep: dict) -> None:
          f"## C1 candidate: {rep['C1']} tokens", "",
          "Rule: smallest ladder value with <=1 natural completion above it per model and <=2 in total "
          "(loop-terminated / C_dev-truncated attempts censored).", "",
-         "| L | per-model natural completions above L | total | passes |", "|---|---|---|---|"]
+         "| L | per-model natural completions above L | total | passes | would truncate incl. censored (descriptive) | share |",
+         "|---|---|---|---|---|---|"]
     for L_, t in rep["c1_table"].items():
-        L.append(f"| {L_} | {t['per_model']} | {t['total']} | {t['passes']} |")
+        L.append(f"| {L_} | {t['per_model']} | {t['total']} | {t['passes']} | {t.get('would_truncate_incl_censored')} | "
+                 f"{t.get('would_truncate_share')} |")
+    L += ["", "The pre-registered rule ignores attempts censored at C_dev (24,576) or loop-terminated. The last two columns are "
+          "descriptive only: they show how many development attempts would not finish naturally at each L."]
     L += ["", "## Per model", "",
           "| Model | Integration | Decode tok/s at depth (cal.) | tg256 cal ctx / Stage 1 ctx (quiet) | GPU weights (layers) cal ctx | "
-          "Peak VRAM MiB (device) | Peak proc RAM MiB | Peak sys RAM MiB | Load s | Throttle |",
-          "|---|---|---|---|---|---|---|---|---|---|"]
+          "GPU weights Stage 1 ctx | Model VRAM MiB (S1 ctx) | Peak device VRAM MiB (cal.) | RAM added by load MiB (S1 ctx) | "
+          "Peak sys RAM MiB (cal.) | Load s | Max GPU temp | Throttle flags |",
+          "|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for m in rep["models"]:
         p = rep["per_model"][m]
         rc = rep.get("speed_recheck", {}).get(m, {})
         tg_c = rc.get("calibration_ctx", {}).get("tg256_tok_s_median")
         tg_s = rc.get("stage1_ctx", {}).get("tg256_tok_s_median")
         t = p["telemetry"]
+        s1 = rc.get("stage1_ctx", {})
         L.append(f"| {m} | {p['integration_passed']} ({p['template_fidelity']}) | {p['projection']['decode_tok_s_at_depth']} | "
-                 f"{tg_c} / {tg_s} | {p['gpu_weight_fraction']} ({p['layers_offloaded']}) | {t['peaks']['gpu_mem_used_mib']} | "
-                 f"{t['peaks']['proc_private_mib']} | {t['peaks']['sys_used_mib']} | {p['load_seconds']} | {t['throttle_reasons_seen'] or 'none'} |")
+                 f"{tg_c} / {tg_s} | {p['gpu_weight_fraction']} ({p['layers_offloaded']}) | "
+                 f"{s1.get('gpu_weight_fraction')} ({s1.get('layers_offloaded')}) | {s1.get('gpu_mem_model_mib')} | "
+                 f"{t['peaks']['gpu_mem_used_mib']} | {s1.get('sys_ram_delta_after_load_mib')} | {t['peaks']['sys_used_mib']} | "
+                 f"{p['load_seconds']} | {t['peaks']['gpu_temp_c']} | {t['throttle_reasons_seen'] or 'none'} |")
     L += ["", "## Development attempts", "", "| Model | Item | Finish | Abort | Tokens | Status |", "|---|---|---|---|---|---|"]
     for m in rep["models"]:
         st = {r["item_id"]: r["status"] for r in scored.get(m, [])}
