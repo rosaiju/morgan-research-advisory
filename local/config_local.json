@@ -182,8 +182,10 @@
  "watchdog": {
   "first_token_s": 1800,
   "stall_s": 600,
-  "total_s_rule": "1.5 * max_tokens / p10_tok_per_s(model, from calibration) + 1800; calibration uses 1.5 * max_tokens / 2.0 + 1800",
-  "on_trigger": "INFRASTRUCTURE_FAILURE; up to 2 identical reruns, then MISSING"
+  "total_s_rule": "1.5 * max_tokens / p10_tok_per_s(model, from calibration) + 1800 for Stage 1; calibration uses 1.5 * max_tokens / 0.75 + 1800 (= 50,952 s at 24,576)",
+  "on_trigger": "INFRASTRUCTURE_FAILURE; up to 2 identical reruns, then MISSING",
+  "calibration_floor_tok_s": 0.75,
+  "change_log": "2026-10-02 19:55: calibration floor lowered from 2.0 to 0.75 tok/s before the dense models ran. Measured decode at 18K depth fell to 3.1 tok/s (Ministral) and 8 tok/s (R1); the old 5.6 h cap would have mislabelled genuine long dense-model attempts as INFRASTRUCTURE_FAILURE and rerun them. Hangs remain caught by the 600 s no-token stall rule."
  },
  "calibration": {
   "C_dev": 24576,

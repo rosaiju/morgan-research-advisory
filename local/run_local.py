@@ -284,7 +284,7 @@ def cmd_calibrate(models: list[str], run_id: str) -> None:
                         srv = Server(model, n_ctx, run_dir / f"server_{model}_restart.log")
                         srv.start()
                         sampler.pid = srv.pid()
-                    total_s = 1.5 * cal["C_dev"] / 2.0 + 1800
+                    total_s = 1.5 * cal["C_dev"] / CONFIG["watchdog"]["calibration_floor_tok_s"] + 1800
                     r = run_attempt(srv, model, iid, RENDERED[iid]["text"], cal["C_dev"], total_s, "calibration")
                     r["attempt"] = attempt + 1
                     log_attempt(r)
