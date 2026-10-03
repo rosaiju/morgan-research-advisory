@@ -99,7 +99,7 @@ class Scorer:
         return out
 
 
-def main(run_dir: Path) -> None:
+def main(run_dir: Path, out_name: str = "scored.jsonl") -> None:
     sc = Scorer()
     rows = []
     for p in sorted(run_dir.glob("attempts_*.jsonl")):
@@ -112,9 +112,9 @@ def main(run_dir: Path) -> None:
                             | {"completion_tokens": rec.get("completion_tokens"), "finish_reason": rec.get("finish_reason"),
                                "abort": rec.get("abort")} | sc.score(rec))
     sc.verifier.close()
-    (run_dir / "scored.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
-    print(f"scored {len(rows)} attempts -> {run_dir / 'scored.jsonl'}")
+    (run_dir / out_name).write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+    print(f"scored {len(rows)} attempts -> {run_dir / out_name}")
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]))
+    main(Path(sys.argv[1]), *(sys.argv[2:3]))

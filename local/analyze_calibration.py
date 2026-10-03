@@ -139,7 +139,7 @@ def project(run_dir: Path, model: str, rs: list[dict], c1: int, summary: dict) -
     return out
 
 
-def main(run_dir: Path) -> None:
+def main(run_dir: Path, out_name: str = "calibration_report.json") -> None:
     models = [m for m in ORDER if (run_dir / f"model_{m}.json").exists()]
     attempts = {m: final_attempts(run_dir, m) for m in models}
     summaries = {m: json.loads((run_dir / f"model_{m}.json").read_text(encoding="utf-8")) for m in models}
@@ -168,7 +168,7 @@ def main(run_dir: Path) -> None:
         total_core += proj["core"]["hours"] + proj["load_hours"]
         total_full += proj["core"]["hours"] + proj["reserve"]["hours"] + 2 * proj["load_hours"]
     report["projection_total_hours"] = {"core": round(total_core, 1), "core_plus_reserve": round(total_full, 1)}
-    (run_dir / "calibration_report.json").write_text(json.dumps(report, indent=1), encoding="utf-8")
+    (run_dir / out_name).write_text(json.dumps(report, indent=1), encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k != "per_model"}, indent=1))
     for m in models:
         p = report["per_model"][m]
@@ -178,4 +178,4 @@ def main(run_dir: Path) -> None:
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]))
+    main(Path(sys.argv[1]), *(sys.argv[2:3]))

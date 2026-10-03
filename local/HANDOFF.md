@@ -92,3 +92,11 @@ To stop the remaining calibration (e.g. if the user decides not to measure the d
   PowerShell: Get-CimInstance Win32_Process | ? { $_.CommandLine -match 'calibrate_all|post_calibration' } |
               % { Stop-Process -Id $_.ProcessId -Force }; Stop-Process -Name llama-server -Force
 (completed results in local/runs/calibration-20261002 are kept; rerunning calibrate_all.sh skips finished models)
+
+### Queue stopped at the user's request (2026-10-02 23:15 EDT)
+
+calibrate_all.sh and post_calibration.sh were stopped; Ministral was allowed to finish (done 23:19). Muse Glimmer,
+Qwen3.8-27B and Gemma 4 31B were NOT calibrated. No jobs are running. Four-model analysis:
+`calibration_report_4models.json`, `scored_4models.jsonl`, `budget_scenarios.json` (earlier files untouched).
+Revised methodology awaiting approval: `local/REVISED_PROPOSAL_2026-10-02.md`. Stage 1 remains blocked.
+Do NOT restart calibrate_all.sh unless the user asks (it would start Muse).
