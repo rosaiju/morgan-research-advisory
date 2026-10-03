@@ -219,3 +219,47 @@ Interim status (written ~12:00 UTC / 08:00 EDT; the final summary below supersed
   Resume (skips passed steps): "/c/Program Files/Git/bin/bash.exe" local/endurance_all.sh &
   Stop: Get-CimInstance Win32_Process | ? { $_.CommandLine -match 'endurance' } | % { Stop-Process -Id $_.ProcessId -Force };
         Stop-Process -Name llama-server -Force
+
+## FINAL HANDOFF — session 2026-10-03 (written ~14:15 UTC / 10:15 EDT)
+
+**Nothing is running. Stage 1 has NOT been started.** No STAGE1_APPROVED.json, no stage1 run directory, no runner
+lock, no llama-server, no sandbox containers. Working tree clean.
+
+Results:
+- Docker grader: `scoring/docker_code.py`; 37/37 sandbox tests (correct, wrong, syntax error, runtime exception,
+  infinite loop, SIGTERM-ignoring loop, 2 GB allocation, 256 MiB cap, fork bomb < 32, exec from /tmp blocked,
+  network/DNS blocked, writes outside tmpfs blocked, no host paths / Docker socket, uid 65534 with no capabilities,
+  tmpfs full, output flood capped, spoofed sandbox-failure exit, malformed answers, forged report lines, identical
+  results to the app grader on trusted fixtures, determinism, missing image -> SandboxError, end-to-end through
+  score_local for student/prog_word_count). Limits: see REPRODUCIBILITY.md section 8.
+- Tests: scorer 45/45, sandbox 37/37, harness 38/38 (0 skipped), verify_all 14/14, preflight 42/43 (only the
+  approval file), dry run 0 blocking failures, gate REFUSED (exit 1).
+- Freeze: `items/stage1_v2_freeze.json` frozen_at 2026-10-03T11:45:18Z, record SHA-256
+  eecb95d32e5dde9e2351f900befb27a190c6b5c769b007fc268df82e91321895, config SHA-256 d691dc7a…04c6.
+  Previous: 07:54:50Z (record cb69cb4b…5afe, config e7004809…cdf5b) and an intermediate 11:41:01Z, both in
+  items/history/. Changed files: client.py, llm_server.py, run_local.py, score_local.py, preflight.py,
+  config_local.json (frozen_at only); added to the freeze: scoring/docker_code.py, scoring/test_docker_code.py,
+  scoring/scorers.py (unchanged), app grader files + commit, Docker sandbox record. UNCHANGED: models, GGUF hashes,
+  panel (22 items), rendered prompts, answer keys, templates, budget 6,144 + 1,536, placements, probe records.
+- Endurance (local/runs/endurance-20261003/ENDURANCE_REPORT.md, state.json): smoke, rotation (all 7 models, forced
+  conclusion on all 4 fast models), kill_server (server killed mid-generation -> infra record -> restart -> rerun),
+  kill_runner (runner hard-killed -> orphan reaped, torn line tolerated, no regeneration, no duplicates),
+  docker_repeat (300 grades, 0.25 s median, no leaks), score_twice (byte-identical), soak (5 cycles x 7 models,
+  35 loads) — ALL PASS. Idle VRAM back to 854 MiB after every model; RAM, handles (170-171) flat; max GPU 68 C;
+  throttle flags idle/SW power cap only.
+- Known issues: (1) RAM headroom: Gemma peaks at 25.4 of 31.7 GB system RAM with Docker's WSL VM running
+  (commit limit ~33.7 GB, pagefile auto-managed 2 GB). It loaded 6/6 times, but keep other applications closed
+  during Stage 1; if a load fails the harness retries 3x, records it and continues with other models (resumable).
+  (2) GLM/gpt-oss expert placement is chosen by --fit at load time; GLM's split differed by ~100 MiB from its
+  probe (speed unaffected). (3) config watchdog.total_s_rule text is stale (documented; code is authoritative).
+  (4) No automatic restart after a reboot: rerun the launch command.
+- Runtime estimate unchanged: central 23.5 h, conservative 31.4 h (generation speed unaffected by any change).
+
+Commands (Git Bash, repo root):
+  status:  tail -5 local/runs/stage1_v2.log
+  launch (ONLY after the user writes local/STAGE1_APPROVED.json; Docker Desktop running for the preflight):
+    "/c/Program Files/Git/bin/bash.exe" -c "local/.venv/Scripts/python.exe local/run_local.py stage1 >> local/runs/stage1_v2.log 2>&1" &
+  resume:  the same launch command
+  score:   .venv-scoring/Scripts/python.exe local/score_local.py local/runs/stage1-v2
+
+**Single next decision for the user:** approve (or not) the official Stage 1 run with this frozen configuration.
