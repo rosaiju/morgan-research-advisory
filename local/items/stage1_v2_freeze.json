@@ -1,0 +1,46 @@
+{
+ "frozen_at": "2026-10-03T07:54:50+00:00",
+ "config_sha256": "e7004809440450c93eb78c29dac241989121584bffcd5a4b823505e61b3cdf5b",
+ "files": {
+  "config_local.json": "e7004809440450c93eb78c29dac241989121584bffcd5a4b823505e61b3cdf5b",
+  "gguf_pins.json": "65ace5d7af2be586d4d75c3f6627e1c5e94e11dba00cc1769740931fb63ba8eb",
+  "items/stage1_panel_v2.json": "3e400e0c16d49f515948d3b56591dd2611f3cc8970f265f0ce4fdf4722c5f18b",
+  "items/stage1_v2_lock.json": "e1e0675904f5ff30719f3b1f7fd8338a875091081699dc85f39fe7255904cfda",
+  "items/rendered_prompts.json": "1b65708c818f0999c22648600e22ed12b648167e413b2eaffd7658206c29e3b0",
+  "items/rendered_lock.json": "145b397dce296ec72e1ea3943767902f8866f069279bb1c75178acad30c9f97b",
+  "official/official-lock.json": "34aae30a2f61363c8524d6624ac5796dc6a35aacabf493a0e2c9dff4e014dee2",
+  "client.py": "7a4d3615620c671cfbed0a245c7cdcc378713a18a3f687b5844ebc49e31f9041",
+  "llm_server.py": "65f19031289e8eb3e2f1a88d39ed5d2c2f3da61adc2ebe0a4aa4f5c140aaf3f3",
+  "placement.py": "274fbf7e3ef801b3142db505081a2aef9a3ace7195556aaa743088d89b487ae2",
+  "run_local.py": "026e052c65f6b2450f4abffe89a750e28ed78fdaab5fdd91b806e7508ab20ce4",
+  "score_local.py": "e289a70458643ab377a71391e7b06e36d6709ab02e58998272cfe50f8a141d55",
+  "preflight.py": "70f11548ed584b7674b7e2d05abbaec88fd2c9f87fcbba190ee8178e442e6e2f",
+  "official/gemma-4-31b__chat_template.jinja": "ae53464bf3be25802b3a5b37def7fd89667067d7577049b3b2d74c4d8de4c6d4",
+  "official/glm-4.7-flash__chat_template.jinja": "d63ad536c3c81880043e22ec7fd08db42b4d8fb7c89c7138bc562bfa25281375",
+  "official/gpt-oss-20b__chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
+  "official/ministral-3-14b-reasoning__chat_template.jinja": "6b5044075f09f4daa57beebe2d989d9fbe67dea351f220e1a84e19ddc893f2c2",
+  "official/muse-glimmer-30b__chat_template.jinja": "cfc67e5f349f37690dfd31ed1f18bc4442a9dd32fe39a648f993cb4eb3cae678",
+  "official/qwen3.8-27b__chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+  "official/r1-0528-qwen3-8b__chat_template.jinja": "53671bac29bcb3e1f95f51b8c77d85a6011b66dc38bd23dce64eef04384a976b"
+ },
+ "probe_results": {
+  "runs/probe-20261003/probe_gemma-4-31b.json": "82c0f923a353e39beb2078a985436995b37e517c8afe4f613a4130ec01808776",
+  "runs/probe-20261003/probe_glm-4.7-flash.json": "dfb119edebdf4aafcc8d94a6c2d8cc8e82ee9d160336a2281d5c646cdccd1760",
+  "runs/probe-20261003/probe_gpt-oss-20b.json": "31ab0015a700015c3e29e348bf5f6148089bba8cf3bc9bb313733ff774cb4afd",
+  "runs/probe-20261003/probe_ministral-3-14b-reasoning.json": "c97c0e9d868cc7d5d1794747ac4e5e690a764e31e7c5660a6604b3633ad92a49",
+  "runs/probe-20261003/probe_muse-glimmer-30b.json": "8cb2eb581713a6cb107ebca7f292a804bc6776bd1827a8443a8d8d36b5523cf4",
+  "runs/probe-20261003/probe_muse-glimmer-30b_forced_harness.json": "d290747e4edcdf9cb47ea30a0aa2db7d2809329a718c43c24e5ffaeb4c46d879",
+  "runs/probe-20261003/probe_qwen3.8-27b.json": "3536b85c64ec2a4bd605579c44de439c65b3a2a3ef8cf7a43f6825425454265e",
+  "runs/probe-20261003/probe_r1-0528-qwen3-8b.json": "16407638ac214ab85a8b534a3a1a1c7d7c9497266dea9537a3dd73ab25976b17"
+ },
+ "gguf_sha256": {
+  "qwen3.8-27b": "880a52af8317974f7b4b064a6bc29ff49e188b91aa218e08eea3078b6b1cc673",
+  "gemma-4-31b": "2959c1b0a4f792493bb0092846ea06aec54547e47be979c282634d938d501b75",
+  "muse-glimmer-30b": "0d3fc85f61d10fdc84072f0bba6005d61c1ac5605a2627b0fd5ea4ff8194c384",
+  "glm-4.7-flash": "42c0c1a30fe2f30097ffedd554a94c2d6abc5f95b8a35ce99cd523f78ef6711b",
+  "gpt-oss-20b": "75acd89545d50126692df2116bc3fdf700408b4be1d74d58e8eed13bca028f17",
+  "r1-0528-qwen3-8b": "e0c2f118fd59f3a16f20d18b0e7f79e960c84bc8c66d94fd71a691e05151d54f",
+  "ministral-3-14b-reasoning": "61130e92a6ee3c2a7e8e85431d9218ff69998f513f1ea8f21637dd3e2bc3a159"
+ },
+ "note": "Stage 1 execution still requires local/STAGE1_APPROVED.json written by the user."
+}

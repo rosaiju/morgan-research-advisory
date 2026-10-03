@@ -39,7 +39,22 @@ official BBEH / IFEval); status precedence from 16 plus `forced_conclusion` and 
 no semantic retries; up to 2 infrastructure reruns; equal budget for every model; explicit sampler parameters (no
 llama.cpp defaults); no speculative decoding; text only.
 
-## Measured results
+## Measured results (probes, 2026-10-03)
 
-See the "Overnight session" section of `local/HANDOFF.md` and `local/runs/probe-20261003/` (per-model probe
-results and `stage1_projection.json`).
+All seven: integration passed, maximum reasoning mode confirmed, forced conclusion validated end-to-end (six via
+llama-server `--reasoning-budget`, Muse via the harness two-phase mechanism), full SHA-256 re-hash matched.
+
+| Model | tok/s fresh / after 8K | GPU weight share | VRAM / RAM added | forced answer tokens |
+|---|---|---|---|---|
+| R1-0528-Qwen3-8B | 47.3 / 39.6 | 93% | 5.5 / 0.8 GB | 180 |
+| gpt-oss-20b | 42.2 / 40.5 | 49% | 6.2 / 6.4 GB | 771 |
+| GLM-4.7-Flash | 34.4 / 30.4 | 32% | 6.2 / 12.6 GB | 1,302 |
+| Ministral 3 14B Reasoning | 13.4 / 12.9 | 62% | 6.0 / 3.4 GB | 540 |
+| Muse Glimmer 30B | 3.63 / 3.61 | 34% | 6.0 / 11.6 GB | 347 (harness) |
+| Qwen3.8-27B | 3.40 / 3.29 | 30% | 5.8 / 12.3 GB | 530 |
+| Gemma 4 31B | 2.61 / 2.50 | 24% | 5.9 / 15.9 GB | 926 |
+
+Projected Stage 1 v2 runtime from measured speeds: central 23.5 h, conservative 31.4 h. Dense vs MoE on this
+hardware: MoE models keep all attention on the GPU and run 34-42 tok/s with little depth loss; dense ~30B models are
+bound by streaming ~11-14 GB of CPU-resident weights per token (2.6-3.6 tok/s) and take 86% of Stage 1 time. Details:
+`local/runs/probe-20261003/PROBE_REPORT.md`, `local/HANDOFF.md`.

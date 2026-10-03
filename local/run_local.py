@@ -376,6 +376,21 @@ def stage1_plan() -> list[tuple[str, list[str]]]:
     return plan
 
 
+def completed_items(attempts_path: Path) -> set[str]:
+    """Items with a recorded FINAL attempt (resume skips them; an infrastructure failure with reruns left is not final).
+    A truncated last line from a crash mid-write is ignored."""
+    done = set()
+    if attempts_path.exists():
+        for line in attempts_path.read_text(encoding="utf-8").splitlines():
+            try:
+                r = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if r.get("kind") == "item" and r.get("final_attempt"):
+                done.add(r["item_id"])
+    return done
+
+
 def cmd_stage1(*args):
     """Stage 1 v2. Gate order: (1) the user's approval file, (2) frozen config, (3) full preflight. Resumable:
     items with a recorded final attempt are skipped. Never invoked by any unattended script."""
@@ -404,12 +419,7 @@ def cmd_stage1(*args):
     run_dir.mkdir(parents=True, exist_ok=True)
     for model, items in plan:
         attempts_path = run_dir / f"attempts_{model}.jsonl"
-        done = set()
-        if attempts_path.exists():
-            for line in attempts_path.read_text(encoding="utf-8").splitlines():
-                r = json.loads(line)
-                if r.get("kind") == "item" and r.get("final_attempt"):
-                    done.add(r["item_id"])
+        done = completed_items(attempts_path)
         todo = [i for i in items if i not in done]
         if not todo:
             continue

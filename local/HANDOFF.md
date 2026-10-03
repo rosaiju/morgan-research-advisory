@@ -154,3 +154,52 @@ Stage 1 v2 projection from measured speeds: **central 23.5 h** (student items co
 31.4 h** (student items at MMLU-Pro length; MATH at level-5 token use; dense models use pooled token use).
 Per model (central / conservative h): R1 0.4/0.6, gpt-oss 0.6/0.7, GLM 0.8/1.1, Ministral 1.5/1.9, Muse 5.8/7.8,
 Qwen3.8 6.3/8.4, Gemma 8.2/11.0. Files: runs/probe-20261003/stage1_projection*.json.
+
+## FINAL OVERNIGHT HANDOFF (2026-10-03 ~04:00 EDT)
+
+**Nothing is running. Stage 1 has NOT been started.** Gate verified: `run_local.py stage1` -> "REFUSED: Stage 1 requires
+the user's explicit approval file local/STAGE1_APPROVED.json" (exit 1); no stage1 run directory exists.
+
+1. **All seven models**: downloaded, full SHA-256 re-hash MATCH (1.5 min, 2026-10-03), integration passed, maximum
+   reasoning mode confirmed in the rendered prompt (Qwen "Reasoning effort is set to xhigh", Muse "Reasoning strength:
+   xhigh", gpt-oss "Reasoning: high", Gemma `<|think|>`, GLM/Qwen `<think>`, R1/Ministral always on).
+2. **Forced conclusion (6,144 + 1,536) validated end-to-end for all seven** on a development item that exceeds the
+   budget: reasoning stops at the budget, the fixed message is injected, the model writes a real answer
+   (180-1,302 tokens), the ANSWER line is extracted and scored, items are flagged `forced_conclusion`. Natural-length
+   item unaffected for all seven. Six use llama-server's `--reasoning-budget`; **Muse needs the harness two-phase
+   mechanism** (server forcing did not act on its ATEM channel; harness: reasoning exactly 6,144 + 347-token answer,
+   EOS stop). No hard truncation without an answer occurred.
+3. **Placement rule**: removes the depth penalty where attention can stay on the GPU (Ministral 8K-deep 9.1 -> 12.9
+   tok/s; Muse 3.50 -> 3.61) at a 4-7% fresh-speed cost. Qwen3.8 and Gemma cannot keep all attention on the GPU
+   (step 2: all FFN plus 10 / 20 whole layers on CPU); for Gemma the rule is roughly neutral (fresh 2.90 -> 2.61,
+   deep 2.37 -> 2.50). Stage 1 uses the exact placement recorded in each probe (free VRAM varies by ~1 layer).
+4. **Projected Stage 1 v2 runtime (measured speeds): central 23.5 h, conservative 31.4 h.** The ~24 h target is
+   realistic (dense ~30B models = 86% of the time). Projection for dense models uses pooled token use from the four
+   calibrated models (assumption).
+5. **Stage 1 prepared**: panel v2 locked (22 items/model, no overlap with calibration or probe items), rendered
+   prompts locked, scorers 45/45, harness tests 29/29, verify_all 14/14, config frozen
+   (`items/stage1_v2_freeze.json`), preflight 36/37 (only the user's approval file missing), dry run clean,
+   resumable (completed items skipped; tested).
+
+Bugs found and fixed tonight: llama-fit-params summary line sometimes missing (fallback + retry, tested); llama.cpp
+`--fit` refuses when tensor overrides are set (own step-2 search); Muse server-side forcing unsupported (harness
+mechanism); post-attempt token counts silently None (retry + recorded error, tested); placement recomputation
+non-deterministic by ~1 layer (Stage 1 uses frozen probe placement); a shell escape corrupted one handoff line (fixed).
+Known non-issues: IFEval probe item carries the descriptive `loop_suspected` flag because the prompt requires
+repeating the request verbatim; one Qwen load took 72 s (others 12-16 s); Docker is not running, so the one
+student programming item in panel v2 (prog_word_count) will be graded "skipped" unless Docker Desktop is started.
+
+Status / inspection commands (Git Bash):
+  bash /c/Users/rohan/morgan-research-advisory/local/status.sh
+  cat /c/Users/rohan/morgan-research-advisory/local/runs/probe-20261003/PROBE_REPORT.md
+  /c/Users/rohan/morgan-research-advisory/local/.venv/Scripts/python.exe local/preflight.py
+  /c/Users/rohan/morgan-research-advisory/local/.venv/Scripts/python.exe local/run_local.py stage1 --dry-run
+
+**Exact Stage 1 command (only after the user writes local/STAGE1_APPROVED.json):**
+  cd /c/Users/rohan/morgan-research-advisory
+  "/c/Program Files/Git/bin/bash.exe" -c "local/.venv/Scripts/python.exe local/run_local.py stage1 > local/runs/stage1_v2.log 2>&1" &
+  (resumable: rerun the same command after any interruption; then score with
+   .venv-scoring\Scripts\python.exe local\score_local.py local\runs\stage1-v2)
+
+**Single next decision for the user:** approve (or not) the official Stage 1 run with the frozen v2 configuration
+(~24 h central, ~31 h conservative), including whether to start Docker Desktop first so the programming item is graded.

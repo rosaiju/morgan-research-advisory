@@ -190,6 +190,28 @@ class BudgetStatus(unittest.TestCase):
         self.assertIn("answer_allowance_exceeded", inspect.getsource(client.stream_chat))
 
 
+class Resume(unittest.TestCase):
+    def test_completed_items_skips_only_final_attempts_and_tolerates_partial_line(self):
+        import tempfile
+        import run_local
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "attempts_x.jsonl"
+            rows = [{"kind": "server_start"},
+                    {"kind": "item", "item_id": "a", "final_attempt": True},
+                    {"kind": "item", "item_id": "b", "final_attempt": False},   # infra failure, rerun pending
+                    {"kind": "integration", "item_id": "c", "final_attempt": True}]
+            p.write_text("".join(json.dumps(r) + chr(10) for r in rows) + '{"kind": "item", "item_id": "d", "fin', encoding="utf-8")
+            self.assertEqual(run_local.completed_items(p), {"a"})
+
+    def test_stage1_plan_is_paired_and_deterministic(self):
+        import run_local
+        p1, p2 = run_local.stage1_plan(), run_local.stage1_plan()
+        self.assertEqual(p1, p2)
+        sets = {frozenset(items) for _, items in p1}
+        self.assertEqual(len(sets), 1)            # same 22 items for every model
+        self.assertEqual(len(next(iter(sets))), 22)
+
+
 class Manifests(unittest.TestCase):
     def test_every_model_fully_specified(self):
         for key, m in CFG["models"].items():

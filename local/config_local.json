@@ -225,6 +225,8 @@
   "placement_rule": "attention + KV on GPU; FFN (dense) / experts (MoE) to CPU first, 1 GiB free-VRAM margin (local/placement.py). If all FFN on CPU still does not fit, whole layers are moved to CPU (recorded per model).",
   "n_ctx_rule": "max_tokens + longest v2 prompt (this model's tokenizer) + 1024, rounded up to 256",
   "replaces": "the C1 censoring-rule ceiling for Stage 1 (C1 = 24,576 kept as a calibration finding, see runs/calibration-20261002)",
-  "forcing_mechanisms": "server (--reasoning-budget) for models where it validated in the probe; harness two-phase for others (config models.<m>.forcing)"
+  "forcing_mechanisms": "server (--reasoning-budget) for models where it validated in the probe; harness two-phase for others (config models.<m>.forcing)",
+  "frozen": true,
+  "frozen_at": "2026-10-03T07:54:50+00:00"
  }
 }
