@@ -100,3 +100,17 @@ Qwen3.8-27B and Gemma 4 31B were NOT calibrated. No jobs are running. Four-model
 `calibration_report_4models.json`, `scored_4models.jsonl`, `budget_scenarios.json` (earlier files untouched).
 Revised methodology awaiting approval: `local/REVISED_PROPOSAL_2026-10-02.md`. Stage 1 remains blocked.
 Do NOT restart calibrate_all.sh unless the user asks (it would start Muse).
+
+---
+## Overnight session 2026-10-03 (approved: placement rule, 6,144 + 1,536 budget, ~24 h panel, dense probes)
+
+**Stage 1 still NOT approved and NOT started.** No STAGE1_APPROVED.json exists; `run_local.py stage1` refuses.
+
+Running (detached, resumable): `local/probe_all.sh` -> log `local/runs/probe_all.log`, results
+`local/runs/probe-20261003/probe_<model>.json` (order: Muse, Qwen3.8, Gemma, gpt-oss, GLM, Ministral; R1 done).
+Check: `tail -20 /c/Users/rohan/morgan-research-advisory/local/runs/probe_all.log`
+Resume (skips models already probed):
+  "/c/Program Files/Git/bin/bash.exe" local/probe_all.sh >> local/runs/probe_all.log 2>&1 &
+After probes: `local\.venv\Scripts\python.exe local\project_stage1.py` (writes runs/probe-20261003/stage1_projection.json)
+Stage 1 readiness (read-only): `local\.venv\Scripts\python.exe local\preflight.py`
+Stage 1 dry run (no generation): `local\.venv\Scripts\python.exe local\run_local.py stage1 --dry-run`

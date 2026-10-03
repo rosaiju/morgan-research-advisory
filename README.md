@@ -1,5 +1,10 @@
 # Morgan open-weight model research package
 
+> **Current (2026-10-03): local execution.** The project moved from hosted APIs to local llama.cpp evaluation of
+> seven open-weight models on an RTX 4060. Read [22: local evaluation plan](22-local-evaluation-plan.md) and
+> [local/HANDOFF.md](local/HANDOFF.md). The API-era documents below (18-21, `runner/`) are kept as history; no paid
+> request was ever sent. Calibration and probe evidence live in `local/runs/` (git-ignored).
+
 Updated September 29, 2026. Proposed research documents and offline preparation only. **No inference, benchmark, model loading or weight download has been performed.** No results exist.
 
 ## What this repository deliberately does not contain

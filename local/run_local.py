@@ -82,12 +82,13 @@ def reference_render(model: str, messages: list[dict], kwargs: dict) -> str:
 # ------------------------------------------------------------------ one attempt
 
 def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: int, total_s: float,
-                stage: str, kind: str = "item", loop_stop: bool = True, answer_cap: int | None = None) -> dict:
+                stage: str, kind: str = "item", loop_stop: bool = True, answer_cap: int | None = None,
+                reasoning_cap: int | None = None) -> dict:
     mcfg = CONFIG["models"][model]
     body = client.build_body(mcfg, CONFIG["common_request"], text, max_tokens, item_seed(item_id))
     wd = CONFIG["watchdog"]
     rec = client.stream_chat(PORT, body, first_token_s=wd["first_token_s"], stall_s=wd["stall_s"],
-                             total_s=total_s, loop_stop=loop_stop, answer_cap=answer_cap)
+                             total_s=total_s, loop_stop=loop_stop, answer_cap=answer_cap, reasoning_cap=reasoning_cap)
     usage, timings = rec.get("usage") or {}, rec.get("timings") or {}
     completion = usage.get("completion_tokens") or timings.get("predicted_n")
     if completion is None and rec["abort"]:
@@ -114,6 +115,57 @@ def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: in
             "n_pieces": rec["n_pieces"], "n_final_pieces": rec.get("n_final_pieces"), "answer_cap": answer_cap,
             "reasoning_budget": srv.reasoning_budget, "usage": usage, "timings": timings,
             "reasoning_text": rec["reasoning_text"], "final_text": rec["final_text"]}
+
+
+SENTINEL = "⁣ANSWER_SLOT⁣"
+
+
+def continuation_prompt(model: str, user_text: str, reasoning: str) -> str:
+    """Official-template rendering of [user, assistant(reasoning_content=reasoning, content=<slot>)] cut at the slot:
+    exactly the text the model would see after closing its reasoning, in its own trained format."""
+    kw = CONFIG["models"][model]["chat_template_kwargs"]
+    import jinja2  # noqa: F401
+    full = reference_render(model, [{"role": "user", "content": user_text},
+                                    {"role": "assistant", "reasoning_content": reasoning, "content": SENTINEL}], kw)
+    if SENTINEL not in full:
+        raise RuntimeError(f"{model}: template does not place assistant content; harness forcing unavailable")
+    return full.split(SENTINEL)[0]
+
+
+def run_attempt_harness_forced(srv: Server, model: str, item_id: str, text: str, total_s: float, stage: str) -> dict:
+    """Two-phase forced conclusion for models whose reasoning format llama-server's --reasoning-budget does not
+    handle (same budget, same message): phase 1 streams until reasoning reaches the budget; phase 2 continues from the
+    official-template rendering of that reasoning + the forcing message, with the answer allowance as n_predict."""
+    s1 = CONFIG["stage1_v2"]
+    r1 = run_attempt(srv, model, item_id, text, s1["thinking_budget"] + s1["answer_allowance"] + 128, total_s, stage,
+                     answer_cap=s1["answer_allowance"], reasoning_cap=s1["thinking_budget"])
+    r1["forcing_mechanism"] = "harness_two_phase"
+    if r1["abort"] != "reasoning_budget_reached":
+        return r1
+    wait_idle(srv)
+    forced_reasoning = r1["reasoning_text"] + s1["budget_message"]
+    prompt = continuation_prompt(model, text, forced_reasoning)
+    toks = srv.tokenize(prompt)
+    m = CONFIG["models"][model]["sampling"]
+    t0 = time.perf_counter()
+    out = srv.post("/completion", {"prompt": toks, "n_predict": s1["answer_allowance"], "cache_prompt": False,
+                                   "seed": item_seed(item_id), "temperature": m["temperature"], "top_p": m["top_p"],
+                                   "top_k": m["top_k"], "min_p": m["min_p"], "repeat_penalty": 1.0,
+                                   "presence_penalty": 0.0, "frequency_penalty": 0.0}, timeout=total_s)
+    t = out.get("timings") or {}
+    final = out.get("content") or ""
+    stop_type = out.get("stop_type") or ("eos" if out.get("stopped_eos") else "limit" if out.get("stopped_limit") else None)
+    r1.update(reasoning_text=forced_reasoning, final_text=final, abort=None,
+              finish_reason="length" if stop_type == "limit" else "stop",
+              phase2={"prompt_tokens": len(toks), "predicted_n": t.get("predicted_n"), "stop_type": stop_type,
+                      "wall_s": round(time.perf_counter() - t0, 3), "gen_tok_s": t.get("predicted_per_second"),
+                      "prompt_tok_s": t.get("prompt_per_second")})
+    r1["completion_tokens"] = (r1["completion_tokens"] or 0) + (t.get("predicted_n") or 0)
+    r1["final_tokens"] = t.get("predicted_n")
+    if stop_type == "limit":
+        r1["abort"] = "answer_allowance_exceeded"
+    r1["wall_s"] = round(r1["wall_s"] + r1["phase2"]["wall_s"], 3)
+    return r1
 
 
 def wait_idle(srv: Server, timeout_s: float = 120) -> None:
@@ -376,8 +428,11 @@ def cmd_stage1(*args):
                     if srv.proc is None or srv.proc.poll() is not None:
                         srv = start()
                         sampler.pid = srv.pid()
-                    r = run_attempt(srv, model, iid, RENDERED[iid]["text"], s1["max_tokens"], total_s, "stage1",
-                                    answer_cap=s1["answer_allowance"])
+                    if CONFIG["models"][model].get("forcing") == "harness":
+                        r = run_attempt_harness_forced(srv, model, iid, RENDERED[iid]["text"], total_s, "stage1")
+                    else:
+                        r = run_attempt(srv, model, iid, RENDERED[iid]["text"], s1["max_tokens"], total_s, "stage1",
+                                        answer_cap=s1["answer_allowance"])
                     infra = bool(r["error"]) or r["abort"] in ("first_token_timeout", "stall_timeout", "total_timeout")
                     r["attempt"], r["final_attempt"] = attempt + 1, (not infra) or attempt == 2
                     with attempts_path.open("a", encoding="utf-8") as f:

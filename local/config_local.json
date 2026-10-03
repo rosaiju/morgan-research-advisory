@@ -82,7 +82,8 @@
     "min_p": 0.0
    },
    "reasoning": "always on (template)",
-   "source": "model card: 'temperature of 0.6, top-p value of 0.95' (deepseek-ai/DeepSeek-R1-0528-Qwen3-8B README)"
+   "source": "model card: 'temperature of 0.6, top-p value of 0.95' (deepseek-ai/DeepSeek-R1-0528-Qwen3-8B README)",
+   "forcing": "server"
   },
   "gpt-oss-20b": {
    "checkpoint": "openai/gpt-oss-20b@6cee5e81ee83917806bbde320786a8fb61efebee (native MXFP4)",
@@ -97,7 +98,8 @@
     "min_p": 0.0
    },
    "reasoning": "Harmony analysis channel; effort high (template default is medium)",
-   "source": "openai/gpt-oss README @7b583341: 'We recommend sampling with temperature=1.0 and top_p=1.0'"
+   "source": "openai/gpt-oss README @7b583341: 'We recommend sampling with temperature=1.0 and top_p=1.0'",
+   "forcing": "server"
   },
   "glm-4.7-flash": {
    "checkpoint": "zai-org/GLM-4.7-Flash@7dd20894a642a0aa287e9827cb1a1f7f91386b67",
@@ -112,7 +114,8 @@
     "min_p": 0.0
    },
    "reasoning": "thinking on (binary); fresh single turn",
-   "source": "model card 'Default Settings (Most Tasks)': temperature 1.0, top-p 0.95"
+   "source": "model card 'Default Settings (Most Tasks)': temperature 1.0, top-p 0.95",
+   "forcing": "server"
   },
   "ministral-3-14b-reasoning": {
    "checkpoint": "mistralai/Ministral-3-14B-Reasoning-2512@51f9210f3cd20f3452a80d5819d15dc61cc50630",
@@ -125,7 +128,8 @@
     "min_p": 0.0
    },
    "reasoning": "always on; official template injects the publisher default system prompt ([THINK] format) when no system message is given",
-   "source": "publisher model card @51f9210f, section 'Recommended Settings': 'Use a temperature of 1 for most environments'. No top_p is recommended there, so the neutral 1.0 (vLLM default, the publisher's recommended server) is used. The TEMP=0.7/TOP_P=0.95 values appear only in vLLM usage code examples copied from the 8B card and are NOT adopted. Verified 2026-10-02; docs.mistral.ai model page gives no reasoning-specific sampling value."
+   "source": "publisher model card @51f9210f, section 'Recommended Settings': 'Use a temperature of 1 for most environments'. No top_p is recommended there, so the neutral 1.0 (vLLM default, the publisher's recommended server) is used. The TEMP=0.7/TOP_P=0.95 values appear only in vLLM usage code examples copied from the 8B card and are NOT adopted. Verified 2026-10-02; docs.mistral.ai model page gives no reasoning-specific sampling value.",
+   "forcing": "server"
   },
   "muse-glimmer-30b": {
    "checkpoint": "meta-models/Muse-Glimmer-30B@a4e59da52a7bc87ae7251dd5545c0dd437c44b68",
@@ -140,7 +144,9 @@
     "min_p": 0.0
    },
    "reasoning": "reasoning strength xhigh (levels low/medium/high/xhigh; template default high)",
-   "source": "model card 'Best Practices': temperature 1.0, top_p 0.95, top_k 64"
+   "source": "model card 'Best Practices': temperature 1.0, top_p 0.95, top_k 64",
+   "forcing": "harness",
+   "forcing_note": "2026-10-03 probe: llama-server --reasoning-budget did not act on Muse's ATEM reasoning channel (reasoning ran to 7,805 tokens with no injected message). Harness two-phase forcing with the same budget and message: phase 2 continues from the official-template rendering of the reasoning + message (run_local.run_attempt_harness_forced)."
   },
   "qwen3.8-27b": {
    "checkpoint": "Qwen/Qwen3.8-27B@1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
@@ -156,7 +162,8 @@
     "min_p": 0.0
    },
    "reasoning": "thinking on, effort xhigh (levels xhigh/medium/low)",
-   "source": "model card 'Thinking Mode': temperature 1.0, top_p 0.95, top_k 20, min_p 0, presence_penalty 0, repetition_penalty 1.0"
+   "source": "model card 'Thinking Mode': temperature 1.0, top_p 0.95, top_k 20, min_p 0, presence_penalty 0, repetition_penalty 1.0",
+   "forcing": "server"
   },
   "gemma-4-31b": {
    "checkpoint": "google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475",
@@ -171,7 +178,8 @@
     "min_p": 0.0
    },
    "reasoning": "thinking on (template default is OFF, so it is set explicitly)",
-   "source": "model card: temperature 1.0, top_p 0.95, top_k 64"
+   "source": "model card: temperature 1.0, top_p 0.95, top_k 64",
+   "forcing": "server"
   }
  },
  "loop_early_stop": {
@@ -216,6 +224,7 @@
   "mechanism": "llama-server --reasoning-budget 6144 --reasoning-budget-message <message>: when reasoning reaches the budget the server injects the message and the model's own end-of-thinking delimiter, then the model writes its answer. The harness stops an answer that exceeds 1,536 tokens (abort answer_allowance_exceeded -> BUDGET_TRUNCATED). Forced items are flagged forced_conclusion.",
   "placement_rule": "attention + KV on GPU; FFN (dense) / experts (MoE) to CPU first, 1 GiB free-VRAM margin (local/placement.py). If all FFN on CPU still does not fit, whole layers are moved to CPU (recorded per model).",
   "n_ctx_rule": "max_tokens + longest v2 prompt (this model's tokenizer) + 1024, rounded up to 256",
-  "replaces": "the C1 censoring-rule ceiling for Stage 1 (C1 = 24,576 kept as a calibration finding, see runs/calibration-20261002)"
+  "replaces": "the C1 censoring-rule ceiling for Stage 1 (C1 = 24,576 kept as a calibration finding, see runs/calibration-20261002)",
+  "forcing_mechanisms": "server (--reasoning-budget) for models where it validated in the probe; harness two-phase for others (config models.<m>.forcing)"
  }
 }

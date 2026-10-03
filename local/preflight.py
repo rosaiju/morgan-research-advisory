@@ -84,8 +84,13 @@ def run(full_hash: bool = False) -> list[tuple[str, bool, str]]:
         pr = HERE / "runs" / PROBE_ID / f"probe_{k}.json"
         if pr.exists():
             d = json.loads(pr.read_text(encoding="utf-8"))
-            check(f"probe passed: {k}", d.get("integration", {}).get("passed") and d.get("forced_conclusion_ok")
-                  and not d.get("error"), f"integration={d.get('integration', {}).get('passed')} forced={d.get('forced_conclusion_ok')}")
+            mech = cfg["models"][k].get("forcing", "server")
+            forced_ok = d.get("forced_conclusion_ok")
+            if mech == "harness":  # validated separately with the harness mechanism
+                hf = HERE / "runs" / PROBE_ID / f"probe_{k}_forced_harness.json"
+                forced_ok = hf.exists() and json.loads(hf.read_text(encoding="utf-8")).get("forced_conclusion_ok")
+            check(f"probe passed: {k}", d.get("integration", {}).get("passed") and forced_ok and not d.get("error"),
+                  f"integration={d.get('integration', {}).get('passed')} forced[{mech}]={forced_ok}")
         else:
             check(f"probe passed: {k}", False, "no probe result")
     for t in {m["template_file"] for m in cfg["models"].values()}:

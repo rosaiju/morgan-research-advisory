@@ -69,6 +69,48 @@ def fresh_probe(srv: Server, reps: int = 2, n_predict: int = 128) -> dict:
             "pp_all": [round(x, 2) for x in pp], "tg_all": [round(x, 2) for x in tg]}
 
 
+def forced_only(model: str, run_dir: Path) -> None:
+    """Re-validate only the forced conclusion at the real budget with the model's configured mechanism.
+    Writes probe_<model>_forced_<mechanism>.json; the original probe result is kept."""
+    mech = CONFIG["models"][model].get("forcing", "server")
+    out_path = run_dir / f"probe_{model}_forced_{mech}.json"
+    if out_path.exists():
+        print(f"[{model}] forced-only already done", flush=True)
+        return
+    base = json.loads((run_dir / f"probe_{model}.json").read_text(encoding="utf-8"))
+    pargs = base["placement"]["args"]
+    srv = Server(model, base["n_ctx"], run_dir / f"server_{model}_forced_{mech}.log", extra_args=pargs,
+                 reasoning_budget=S1["thinking_budget"], budget_message=S1["budget_message"])
+    srv.start()
+    res = {"model": model, "mechanism": mech, "started": now()}
+    sampler = Sampler(run_dir / f"telemetry_{model}_forced.jsonl", srv.pid()).start()
+    try:
+        for iid in (FORCE_ITEM, NATURAL_ITEM):
+            if mech == "harness":
+                r = R.run_attempt_harness_forced(srv, model, iid, R.RENDERED[iid]["text"], 6 * 3600, "probe-forced")
+            else:
+                r = R.run_attempt(srv, model, iid, R.RENDERED[iid]["text"], S1["max_tokens"], 6 * 3600, "probe-forced",
+                                  answer_cap=S1["answer_allowance"])
+            r["attempt"] = 1
+            with (run_dir / f"attempts_{model}.jsonl").open("a", encoding="utf-8") as f:
+                f.write(json.dumps(r, ensure_ascii=False) + chr(10))
+            forced = "Time is up. I must stop thinking now" in r["reasoning_text"]
+            res[iid] = {"finish_reason": r["finish_reason"], "abort": r["abort"], "completion_tokens": r["completion_tokens"],
+                        "reasoning_tokens": r["reasoning_tokens"], "final_tokens": r["final_tokens"], "forced_message_seen": forced,
+                        "final_nonempty": bool(r["final_text"].strip()), "wall_s": r["wall_s"], "phase2": r.get("phase2"),
+                        "final_tail": r["final_text"][-300:]}
+            print(f"[{model}] forced-only {iid} finish={r['finish_reason']} abort={r['abort']} tokens={r['completion_tokens']} "
+                  f"forced={forced} final_nonempty={bool(r['final_text'].strip())} wall={r['wall_s']}s", flush=True)
+            R.wait_idle(srv)
+        f = res[FORCE_ITEM]
+        res["forced_conclusion_ok"] = bool(f["forced_message_seen"] and f["final_nonempty"])
+    finally:
+        res["telemetry"] = sampler.stop()
+        srv.stop()
+    res["finished"] = now()
+    out_path.write_text(json.dumps(res, indent=1, ensure_ascii=False), encoding="utf-8")
+
+
 def probe(model: str, run_dir: Path) -> None:
     out_path = run_dir / f"probe_{model}.json"
     if out_path.exists():
@@ -184,9 +226,10 @@ def probe(model: str, run_dir: Path) -> None:
 if __name__ == "__main__":
     run_dir = HERE / "runs" / os.environ.get("MORGAN_PROBE_ID", "probe-20261003")
     run_dir.mkdir(parents=True, exist_ok=True)
-    for m in sys.argv[1:]:
+    forced = "--forced-only" in sys.argv
+    for m in [a for a in sys.argv[1:] if not a.startswith("--")]:
         try:
-            probe(m, run_dir)
+            forced_only(m, run_dir) if forced else probe(m, run_dir)
         except Exception as e:  # one model failing must not stop the others
             print(f"[{m}] PROBE FAILED {e!r}", flush=True)
             (run_dir / f"probe_{m}.FAILED.txt").write_text(f"{now()} {e!r}\n", encoding="utf-8")
