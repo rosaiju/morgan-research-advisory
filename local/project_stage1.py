@@ -49,7 +49,7 @@ def capped_tokens(att: dict, forced_answer: float) -> float:
     return r + min(f, S1["answer_allowance"])
 
 
-def main(probe_dir: Path, cal_dir: Path) -> None:
+def main(probe_dir: Path, cal_dir: Path, student_as: str = "mmlu_pro") -> None:
     per_bench_all = {}
     cal = {}
     for m in ORDER:
@@ -94,7 +94,7 @@ def main(probe_dir: Path, cal_dir: Path) -> None:
         if "pr" not in o:
             continue
         pb = dict(o["per_bench"] or pooled)
-        pb["student"] = pb.get("mmlu_pro")
+        pb["student"] = pb.get(student_as)
         lens = o["pr"]["prompt_tokens_v2"]
         gen = sum(gen_seconds(pb[p["benchmark"]], o["fresh"], o["deep"]) for p in PANEL)
         pre = sum(lens[p["item_id"]] / o["prefill"] for p in PANEL)
@@ -105,8 +105,10 @@ def main(probe_dir: Path, cal_dir: Path) -> None:
         del o["pr"], o["per_bench"]
         total += hours
     res = {"panel": "stage1_panel_v2 (22 items)", "budget": f"{S1['thinking_budget']} + {S1['answer_allowance']}",
+           "student_items_costed_as": student_as,
            "per_model": out, "total_hours": round(total, 1)}
-    (probe_dir / "stage1_projection.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
+    name = "stage1_projection.json" if student_as == "mmlu_pro" else f"stage1_projection_student_as_{student_as}.json"
+    (probe_dir / name).write_text(json.dumps(res, indent=1), encoding="utf-8")
     for m in ORDER:
         o = out[m]
         print(f"{m:28s} " + (f"fresh {o['fresh']:6.2f} deep {o['deep']:6.2f} tok/s | {o['gen_tokens']:6d} tok | {o['hours']:5.2f} h"
@@ -115,5 +117,7 @@ def main(probe_dir: Path, cal_dir: Path) -> None:
 
 
 if __name__ == "__main__":
-    a = sys.argv[1:]
-    main(Path(a[0]) if a else HERE / "runs/probe-20261003", Path(a[1]) if len(a) > 1 else HERE / "runs/calibration-20261002")
+    flags = [x for x in sys.argv[1:] if x.startswith("--student-as=")]
+    a = [x for x in sys.argv[1:] if not x.startswith("--")]
+    main(Path(a[0]) if a else HERE / "runs/probe-20261003", Path(a[1]) if len(a) > 1 else HERE / "runs/calibration-20261002",
+         flags[0].split("=", 1)[1] if flags else "mmlu_pro")

@@ -94,12 +94,18 @@ def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: in
     if completion is None and rec["abort"]:
         completion = rec["n_pieces"]
     rtoks = ftoks = None
-    try:
-        if srv.proc and srv.proc.poll() is None:
-            rtoks = len(srv.tokenize(rec["reasoning_text"])) if rec["reasoning_text"] else 0
-            ftoks = len(srv.tokenize(rec["final_text"])) if rec["final_text"] else 0
-    except Exception:
-        pass
+    count_error = None
+    for _ in range(3):  # transient failure seen live (Ministral probe, 2026-10-03): wait for idle, retry, record
+        try:
+            if srv.proc and srv.proc.poll() is None:
+                wait_idle(srv, 60)
+                rtoks = len(srv.tokenize(rec["reasoning_text"])) if rec["reasoning_text"] else 0
+                ftoks = len(srv.tokenize(rec["final_text"])) if rec["final_text"] else 0
+                count_error = None
+            break
+        except Exception as e:
+            count_error = repr(e)[:300]
+            time.sleep(2)
     gen_s = (rec["wall_s"] - rec["t_first_token_s"]) if rec["t_first_token_s"] is not None else None
     return {"kind": kind, "stage": stage, "model": model, "item_id": item_id,
             "benchmark": RENDERED.get(item_id, {}).get("benchmark"), "timestamp": now(),
@@ -107,6 +113,7 @@ def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: in
             "prompt_sha256": hashlib.sha256(text.encode("utf-8")).hexdigest(),
             "prompt_tokens": usage.get("prompt_tokens") or timings.get("prompt_n"),
             "completion_tokens": completion, "reasoning_tokens": rtoks, "final_tokens": ftoks,
+            "token_count_error": count_error,
             "finish_reason": rec["finish_reason"], "abort": rec["abort"], "error": rec["error"],
             "wall_s": rec["wall_s"], "ttft_s": rec["t_first_token_s"], "t_first_final_s": rec["t_first_final_s"],
             "client_gen_tok_s": round(completion / gen_s, 3) if completion and gen_s else None,

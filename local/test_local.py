@@ -177,6 +177,14 @@ class BudgetStatus(unittest.TestCase):
         self.assertEqual(st, "BUDGET_TRUNCATED")
         self.assertIn("answer_allowance_exceeded", fl)
 
+    def test_token_count_failure_is_retried_and_recorded(self):  # live bug: Ministral probe counts were silently None
+        import inspect
+        import run_local
+        src = inspect.getsource(run_local.run_attempt)
+        self.assertIn("token_count_error", src)
+        self.assertIn("for _ in range(3)", src)
+        self.assertNotIn("except Exception:\n        pass", src)
+
     def test_answer_cap_stops_stream_logic_present(self):
         import inspect
         self.assertIn("answer_allowance_exceeded", inspect.getsource(client.stream_chat))
