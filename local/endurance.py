@@ -269,7 +269,7 @@ for i in range({n}):
     r = D.check_code(spec, reply, timeout=3 if reply is loop else 15)
     times.append(time.perf_counter() - t)
     res.append((i % 2 == 0 and reply is not loop, reply is loop, r.score, r.detail))
-expected_ok = all((s == 1.0) if g else (s == 0.0 if lp else s == 1/3) for g, lp, s, _ in res)
+expected_ok = all((s == 1.0) if g else s == 0.0 for g, lp, s, _ in res)   # bad add3 fails all 3 cases
 print(json.dumps({{"n": len(res), "all_expected": expected_ok, "distinct_results": len({{(s, d) for _, _, s, d in res}}),
                   "median_s": sorted(times)[len(times)//2], "max_s": max(times), "leaked": D.leaked_containers()}}))
 """
@@ -319,7 +319,9 @@ def step_soak() -> dict:
             return inc
         inc = with_lock(f"endurance soak cycle {c + 1}", go)
         cyc.append({"cycle": c + 1, "minutes": round((time.time() - t0) / 60, 1), "incomplete": inc, "snapshots": snaps})
-        save_state(st)
+        fresh = load_state()          # merge: never overwrite results other steps wrote meanwhile
+        fresh["soak_cycles"] = cyc
+        save_state(fresh)
         log(f"soak cycle {c + 1}/{SOAK_CYCLES} done in {cyc[-1]['minutes']} min; incomplete={inc}")
     s = summarize_items(d, ALL)
     first, last = cyc[0]["snapshots"][0], cyc[-1]["snapshots"][-1]

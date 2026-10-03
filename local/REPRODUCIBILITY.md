@@ -76,7 +76,7 @@ identical across models. One user message, no study system prompt.
 |---|---|---|
 | R1-8B | `-ngl 999` | everything on GPU |
 | gpt-oss-20b | *(none: `--fit on` places experts)* | MoE: `--fit` chooses the CPU/GPU expert split at load time from free VRAM (1 GiB margin). The split actually used is logged per load (`server_ready` records + server logs). |
-| GLM-4.7-Flash | *(none: `--fit on`)* | as gpt-oss |
+| GLM-4.7-Flash | *(none: `--fit on`)* | as gpt-oss. Observed 2026-10-03: probe 5,674 MiB of weights on GPU, endurance rotation 5,571 MiB (free VRAM differed); gpt-oss matched its probe exactly (5,691 MiB). Speed was unaffected (33.8 vs 34.4 tok/s fresh). Placement changes only *where* experts run, not the model, but CPU and GPU kernels can differ in the last bits, so a token-identical rerun of GLM is not guaranteed. |
 | Ministral 14B | `-ngl 999 -ot blk.(0–17).ffn_(up\|down\|gate).*=CPU` | FFN of 18/40 layers on CPU |
 | Muse 30B | `-ngl 999 -ot blk.(0–44).ffn_…=CPU` | FFN of 45/52 layers on CPU |
 | Qwen3.8-27B | `-ngl 55 -ot blk.(0–63).ffn_…=CPU` | all FFN on CPU; 55 of 65 offloadable layers on GPU (10 whole layers on CPU) |
