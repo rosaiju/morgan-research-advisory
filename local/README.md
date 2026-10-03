@@ -18,9 +18,13 @@ No paid APIs; the only network traffic during runs is to `127.0.0.1`.
 | `score_local.py` | the only local reader of answer keys; morgan status precedence + locked scorers (run with `.venv-scoring`) |
 | `analyze_calibration.py` | applies the pre-registered C1 rule and projects Stage 1 runtime |
 | `calibrate_all.sh` | calibrates all seven in fixed order once each model's weights are verified |
-| `test_local.py` | offline tests (loop rule, statuses, log parsing, C1 rule, manifests, reproducibility, Stage 1 refusal) |
+| `test_local.py` | offline tests (loop rule, statuses, log parsing, C1 rule, manifests, reproducibility, Stage 1 refusal, Stage 1 loop failure modes with a fake server: exceptions, load failures, resume, torn lines, disk guard, port/lock) |
+| `preflight.py` / `freeze_stage1.py` | Stage 1 v2 readiness checks (read-only) / freeze record of every Stage 1 input (`items/stage1_v2_freeze.json`; history in `items/history/`) |
+| `../scoring/docker_code.py` | Docker sandbox for the student programming item (no network, read-only, unprivileged, pinned image); tests `../scoring/test_docker_code.py` |
+| `endurance.py`, `endurance_all.sh` | non-Stage-1 endurance/recovery suite (development + synthetic items only) |
+| `REPRODUCIBILITY.md` | everything needed to reproduce Stage 1 v2 (versions, hashes, settings, sandbox, procedures) |
 
-Environments: `local/.venv` (system Python 3.13 + psutil 7.1.0 + jinja2 3.1.6) runs the harness;
+Environments: `local/.venv` (system Python 3.13 + psutil 7.1.0 + jinja2 3.1.6; `requirements-local-lock.txt`) runs the harness;
 `.venv-scoring` (Python 3.14.4, exact `scoring/requirements-lock.txt`) renders prompts and scores.
 Outputs: `local/runs/<run_id>/` (git-ignored).
 

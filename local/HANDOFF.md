@@ -203,3 +203,19 @@ Status / inspection commands (Git Bash):
 
 **Single next decision for the user:** approve (or not) the official Stage 1 run with the frozen v2 configuration
 (~24 h central, ~31 h conservative), including whether to start Docker Desktop first so the programming item is graded.
+
+---
+## Session 2026-10-03 (15 h unattended; Stage 1 still NOT approved, NOT started)
+
+Interim status (written ~12:00 UTC / 08:00 EDT; the final summary below supersedes this when present).
+
+- Docker programming grader implemented: `scoring/docker_code.py` (tests `scoring/test_docker_code.py`, 37 pass).
+  `student/prog_word_count` is now graded in a pinned, network-less, read-only, unprivileged container (was SKIPPED).
+- Harness hardening (run_local / llm_server / client), 38 offline tests pass. Re-frozen; old freezes in
+  `local/items/history/`. Commit 9fa8d17. Reproducibility record: `local/REPRODUCIBILITY.md`.
+- RUNNING (detached, resumable): endurance/recovery suite, NOT Stage 1, development + synthetic items only.
+  Status:  tail -20 /c/Users/rohan/morgan-research-advisory/local/runs/endurance-20261003/endurance.log
+           local\.venv\Scripts\python.exe local\endurance.py status
+  Resume (skips passed steps): "/c/Program Files/Git/bin/bash.exe" local/endurance_all.sh &
+  Stop: Get-CimInstance Win32_Process | ? { $_.CommandLine -match 'endurance' } | % { Stop-Process -Id $_.ProcessId -Force };
+        Stop-Process -Name llama-server -Force
