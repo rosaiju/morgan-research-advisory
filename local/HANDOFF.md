@@ -114,3 +114,20 @@ Resume (skips models already probed):
 After probes: `local\.venv\Scripts\python.exe local\project_stage1.py` (writes runs/probe-20261003/stage1_projection.json)
 Stage 1 readiness (read-only): `local\.venv\Scripts\python.exe local\preflight.py`
 Stage 1 dry run (no generation): `local\.venv\Scripts\python.exe local\run_local.py stage1 --dry-run`
+
+### Overnight progress at ~02:30 EDT (detached jobs keep running without Claude)
+
+Probe results so far (approved placement, Stage 1 context ~10.5K, budget 6,144 + 1,536):
+
+| Model | Integration | tok/s fresh / 8K | old --fit split fresh / 8K | GPU weight share | VRAM / RAM added | Forced conclusion |
+|---|---|---|---|---|---|---|
+| R1-8B | pass (exact) | 47.3 / 39.6 | 47.0 / 39.6 (fits fully) | 93% | 5.5 GB / 0.8 GB | server OK (6,164 + 180) |
+| Muse Glimmer 30B | pass (BOS-only) | 3.63 / 3.61 | 3.78 / 3.50 | 34% (FFN of 45/52 layers on CPU) | 6.0 / 11.6 GB | server FAILED (7,805 reasoning, no message) -> harness mechanism; re-validation runs after probes |
+| Qwen3.8-27B | pass (exact) | 3.40 / 3.29 | 3.54 / 3.15 | 30% (all FFN on CPU + 55/65 layers; step 2) | 5.7 / 12.1 GB | server OK (6,164 + 530) |
+| Gemma 4 31B | pass (BOS-only) | 2.61 / 2.50 | 2.90 / 2.37 | 24% (all FFN on CPU + 40/61 layers; step 2) | 5.9 / 15.9 GB | running |
+
+Still to run automatically: Gemma forced/natural items, then gpt-oss, GLM, Ministral probes (probe_all.sh), then Muse
+harness forced re-validation + projection (probe_followup.sh -> local/runs/probe_followup.log).
+After both finish: `local\.venv\Scripts\python.exe local\summarize_probes.py` (writes PROBE_REPORT.md),
+`local\.venv\Scripts\python.exe local\preflight.py`. Freezing (`local/freeze_stage1.py`) is a preparation step only;
+Stage 1 still needs the user's STAGE1_APPROVED.json.
