@@ -57,6 +57,7 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
     try:
         conn.request("POST", "/v1/chat/completions", body=json.dumps(body).encode("utf-8"),
                      headers={"Content-Type": "application/json"})
+        sock = conn.sock  # kept: http.client drops conn.sock after the response when the server sends "close"
         resp = conn.getresponse()
         if resp.status != 200:
             rec["error"] = f"HTTP {resp.status}: {resp.read()[:500]!r}"
@@ -75,7 +76,11 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
             data = line[5:].strip()
             if data == "[DONE]":
                 break
-            chunk = json.loads(data)
+            try:
+                chunk = json.loads(data)
+            except ValueError:  # malformed stream chunk: an infrastructure error, never a crash of the run
+                rec["error"] = f"malformed stream chunk: {data[:200]!r}"
+                break
             if chunk.get("timings"):
                 rec["timings"] = chunk["timings"]
             if chunk.get("usage"):
@@ -87,7 +92,7 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
                     now = time.perf_counter() - t0
                     if rec["t_first_token_s"] is None:
                         rec["t_first_token_s"] = round(now, 3)
-                        conn.sock.settimeout(stall_s)
+                        sock.settimeout(stall_s)
                     if r:
                         reasoning.append(r)
                         pieces.append(r)

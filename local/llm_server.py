@@ -70,6 +70,89 @@ def parse_log(text: str) -> LoadInfo:
     return info
 
 
+def orphan_servers() -> list:
+    """llama-server processes from this install listening on our port (left behind when a runner was killed)."""
+    import psutil
+    found = []
+    for p in psutil.process_iter(["name", "exe", "cmdline"]):
+        try:
+            cmd = p.info["cmdline"] or []
+            if (p.info["name"] or "").lower() == "llama-server.exe" and "--port" in cmd \
+                    and cmd[cmd.index("--port") + 1] == str(PORT):
+                found.append(p)
+        except (psutil.Error, IndexError, ValueError):
+            continue
+    return found
+
+
+def reap_orphans(timeout_s: float = 30) -> list[int]:
+    import psutil
+    procs = orphan_servers()
+    for p in procs:
+        try:
+            p.kill()
+        except psutil.Error:
+            pass
+    psutil.wait_procs(procs, timeout=timeout_s)
+    return [p.pid for p in procs]
+
+
+def acquire_runner_lock(purpose: str) -> Path:
+    """One harness process at a time may drive llama-server on PORT (reap_orphans would otherwise kill another live
+    runner's server). Refuses while the recorded holder is alive; a stale lock from a killed runner is taken over."""
+    import psutil
+    lock = HERE / "runs" / f".runner_port{PORT}.lock"
+    lock.parent.mkdir(parents=True, exist_ok=True)
+    if lock.exists():
+        try:
+            held = json.loads(lock.read_text(encoding="utf-8"))
+            if held["pid"] != os.getpid() and psutil.pid_exists(held["pid"]) \
+                    and psutil.Process(held["pid"]).create_time() == held["create_time"]:
+                raise SystemExit(f"REFUSED: another harness run holds {lock.name} (pid {held['pid']}, {held['purpose']})")
+        except (ValueError, KeyError, psutil.Error):
+            pass
+    me = psutil.Process(os.getpid())
+    lock.write_text(json.dumps({"pid": me.pid, "create_time": me.create_time(), "purpose": purpose,
+                                "started": time.strftime("%Y-%m-%dT%H:%M:%S")}), encoding="utf-8")
+    return lock
+
+
+def release_runner_lock(lock: Path) -> None:
+    try:
+        if json.loads(lock.read_text(encoding="utf-8")).get("pid") == os.getpid():
+            lock.unlink()
+    except (OSError, ValueError):
+        pass
+
+
+def keep_awake(on: bool = True) -> None:
+    """Ask Windows not to sleep while this process runs (no settings are changed; released on exit)."""
+    try:
+        import ctypes
+        ES_CONTINUOUS, ES_SYSTEM_REQUIRED = 0x80000000, 0x00000001
+        ctypes.windll.kernel32.SetThreadExecutionState(ES_CONTINUOUS | (ES_SYSTEM_REQUIRED if on else 0))
+    except (AttributeError, OSError):
+        pass
+
+
+def port_in_use() -> bool:
+    """Taken if anything accepts a connection OR the address cannot be bound (a listener with a full backlog does not
+    accept, so the connect test alone is not enough)."""
+    import socket
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(1)
+        if s.connect_ex(("127.0.0.1", PORT)) == 0:
+            return True
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            s.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        try:
+            s.bind(("127.0.0.1", PORT))
+        except OSError:
+            return True
+    return False
+
+
 class Server:
     def __init__(self, model_key: str, n_ctx: int, log_path: Path, threads: int | None = None,
                  extra_args: list[str] | None = None, reasoning_budget: int | None = None,
@@ -102,8 +185,13 @@ class Server:
         return a + self.extra
 
     def start(self, timeout_s: float = 900) -> LoadInfo:
+        # A llama-server left on our port by a killed run would answer /health for the WRONG model; remove it first
+        # and refuse to start while the port is still taken.
+        reap_orphans()
+        if port_in_use():
+            raise RuntimeError(f"port {PORT} is in use by another process; refusing to start {self.key}")
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
-        log = self.log_path.open("w", encoding="utf-8", errors="replace")
+        log = self._log = self.log_path.open("w", encoding="utf-8", errors="replace")
         t0 = time.perf_counter()
         self.proc = subprocess.Popen(self.args(), stdout=log, stderr=subprocess.STDOUT,
                                      creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
@@ -155,6 +243,9 @@ class Server:
                 self.proc.kill()
                 self.proc.wait(timeout=30)
         self.proc = None
+        log = getattr(self, "_log", None)
+        if log and not log.closed:
+            log.close()
 
     def __enter__(self):
         self.start()

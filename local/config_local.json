@@ -227,6 +227,6 @@
   "replaces": "the C1 censoring-rule ceiling for Stage 1 (C1 = 24,576 kept as a calibration finding, see runs/calibration-20261002)",
   "forcing_mechanisms": "server (--reasoning-budget) for models where it validated in the probe; harness two-phase for others (config models.<m>.forcing)",
   "frozen": true,
-  "frozen_at": "2026-10-03T07:54:50+00:00"
+  "frozen_at": "2026-10-03T11:45:18+00:00"
  }
 }

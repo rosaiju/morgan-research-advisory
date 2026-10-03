@@ -391,6 +391,52 @@ def completed_items(attempts_path: Path) -> set[str]:
     return done
 
 
+def attempts_used(attempts_path: Path) -> dict[str, int]:
+    """Recorded attempts per item, so a resume continues the numbering and keeps the 1 + 2 rerun cap."""
+    used: dict[str, int] = {}
+    if attempts_path.exists():
+        for line in attempts_path.read_text(encoding="utf-8").splitlines():
+            try:
+                r = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if r.get("kind") == "item":
+                used[r["item_id"]] = max(used.get(r["item_id"], 0), r.get("attempt") or 1)
+    return used
+
+
+def append_jsonl(path: Path, rec: dict) -> None:
+    """Durable append. If a crash left a partial last line, start on a fresh line so the new record stays intact."""
+    import os
+    with path.open("a+b") as f:
+        if f.tell() > 0:
+            f.seek(-1, 2)
+            if f.read(1) != b"\n":
+                f.write(b"\n")
+        f.write((json.dumps(rec, ensure_ascii=False) + "\n").encode("utf-8"))
+        f.flush()
+        os.fsync(f.fileno())
+
+
+def harness_error_record(model: str, item_id: str, stage: str, max_tokens: int, exc: BaseException) -> dict:
+    """An attempt that raised inside the harness (e.g. phase-2 request, tokenizer, server crash mid-call): recorded as
+    an infrastructure error (scored INFRASTRUCTURE_FAILURE if it is the final attempt), never a silent stop."""
+    import traceback
+    return {"kind": "item", "stage": stage, "model": model, "item_id": item_id,
+            "benchmark": RENDERED.get(item_id, {}).get("benchmark"), "timestamp": now(), "seed": item_seed(item_id),
+            "max_tokens": max_tokens, "completion_tokens": None, "finish_reason": None, "abort": None,
+            "error": f"harness_exception: {exc!r}"[:500], "traceback": traceback.format_exc()[-2000:],
+            "reasoning_text": "", "final_text": ""}
+
+
+MIN_FREE_DISK_GB = 5.0
+
+
+def free_disk_gb(path: Path) -> float:
+    import shutil
+    return shutil.disk_usage(path).free / 2**30
+
+
 def cmd_stage1(*args):
     """Stage 1 v2. Gate order: (1) the user's approval file, (2) frozen config, (3) full preflight. Resumable:
     items with a recorded final attempt are skipped. Never invoked by any unattended script."""
@@ -413,16 +459,41 @@ def cmd_stage1(*args):
     if failed:
         raise SystemExit(f"REFUSED: {len(failed)} preflight check(s) failed")
     import os
-    import placement
-    probe_dir = HERE / "runs" / os.environ.get("MORGAN_PROBE_ID", "probe-20261003")
     run_dir = HERE / "runs" / os.environ.get("MORGAN_STAGE1_ID", "stage1-v2")
+    lock = llm_server.acquire_runner_lock(f"stage1 {run_dir.name}")
+    llm_server.keep_awake(True)
+    try:
+        incomplete = run_items(plan, run_dir, "stage1")
+    finally:
+        llm_server.keep_awake(False)
+        llm_server.release_runner_lock(lock)
+    if incomplete:
+        raise SystemExit(f"STAGE 1 INCOMPLETE (resumable; rerun the same command): {incomplete}")
+    print(f"STAGE 1 GENERATION COMPLETE; score with: .venv-scoring\\Scripts\\python.exe local/score_local.py {run_dir}",
+          flush=True)
+
+
+def run_items(plan: list[tuple[str, list[str]]], run_dir: Path, stage: str, texts: dict | None = None,
+              start_retries: int = 3) -> dict[str, str]:
+    """The Stage 1 v2 generation loop (also driven by the non-Stage-1 endurance test with its own items/texts).
+    Per model: frozen probe placement and n_ctx, one server, items in plan order, 1 + up to 2 infrastructure reruns
+    per item (counted across resumes). Returns {model: reason} for models left incomplete (resume picks them up)."""
+    import os
+    s1 = CONFIG["stage1_v2"]
+    texts = texts or {k: v["text"] for k, v in RENDERED.items()}
+    probe_dir = HERE / "runs" / os.environ.get("MORGAN_PROBE_ID", "probe-20261003")
     run_dir.mkdir(parents=True, exist_ok=True)
+    incomplete: dict[str, str] = {}
     for model, items in plan:
         attempts_path = run_dir / f"attempts_{model}.jsonl"
         done = completed_items(attempts_path)
+        used = attempts_used(attempts_path)
         todo = [i for i in items if i not in done]
         if not todo:
             continue
+        if free_disk_gb(run_dir) < MIN_FREE_DISK_GB:
+            incomplete[model] = f"free disk below {MIN_FREE_DISK_GB} GB"
+            break
         probe = json.loads((probe_dir / f"probe_{model}.json").read_text(encoding="utf-8"))
         n_ctx = probe["n_ctx"]
         # reproducibility: use the placement recorded (and measured) in the frozen probe, not a fresh computation,
@@ -431,42 +502,71 @@ def cmd_stage1(*args):
         pinfo["source"] = "probe record (frozen)"
         deep = probe["speed_deep"]["tg_tok_s_at_depth"]
         total_s = 1.5 * s1["max_tokens"] / max(0.5, 0.8 * deep) + 1800
-        with attempts_path.open("a", encoding="utf-8") as f:
-            f.write(json.dumps({"kind": "server_start", "model": model, "timestamp": now(), "n_ctx": n_ctx,
-                                "placement": pinfo, "placement_args": pargs, "watchdog_total_s": round(total_s)}) + "\n")
+        append_jsonl(attempts_path, {"kind": "server_start", "model": model, "timestamp": now(), "n_ctx": n_ctx,
+                                     "placement": pinfo, "placement_args": pargs, "watchdog_total_s": round(total_s)})
 
         def start():
-            s = Server(model, n_ctx, run_dir / f"server_{model}_{int(time.time())}.log", extra_args=pargs,
-                       reasoning_budget=s1["thinking_budget"], budget_message=s1["budget_message"])
-            s.start()
-            return s
-        srv = start()
+            last = None
+            for k in range(start_retries):
+                s = Server(model, n_ctx, run_dir / f"server_{model}_{int(time.time())}.log", extra_args=pargs,
+                           reasoning_budget=s1["thinking_budget"], budget_message=s1["budget_message"])
+                try:
+                    info = s.start()
+                    append_jsonl(attempts_path, {"kind": "server_ready", "model": model, "timestamp": now(),
+                                                 "load_seconds": info.load_seconds, "layers": info.layers_offloaded,
+                                                 "gpu_model_mib": info.gpu_model_mib, "pid": s.pid()})
+                    return s
+                except Exception as e:  # model load failure / CUDA init failure / port taken
+                    s.stop()
+                    last = e
+                    append_jsonl(attempts_path, {"kind": "server_start_failed", "model": model, "timestamp": now(),
+                                                 "try": k + 1, "error": repr(e)[:500]})
+                    time.sleep(20)
+            raise RuntimeError(f"server failed to start {start_retries} times: {last!r}")
+
+        try:
+            srv = start()
+        except RuntimeError as e:
+            incomplete[model] = str(e)[:300]
+            continue  # other models can still run; this one resumes on the next invocation
         sampler = Sampler(run_dir / f"telemetry_{model}.jsonl", srv.pid()).start()
         try:
             for iid in todo:
-                for attempt in range(3):  # 1 + up to 2 infrastructure reruns
+                if free_disk_gb(run_dir) < MIN_FREE_DISK_GB:
+                    incomplete[model] = f"free disk below {MIN_FREE_DISK_GB} GB"
+                    break
+                for attempt in range(used.get(iid, 0), 3):  # 1 + up to 2 infrastructure reruns
                     if srv.proc is None or srv.proc.poll() is not None:
+                        srv.stop()
                         srv = start()
                         sampler.pid = srv.pid()
-                    if CONFIG["models"][model].get("forcing") == "harness":
-                        r = run_attempt_harness_forced(srv, model, iid, RENDERED[iid]["text"], total_s, "stage1")
-                    else:
-                        r = run_attempt(srv, model, iid, RENDERED[iid]["text"], s1["max_tokens"], total_s, "stage1",
-                                        answer_cap=s1["answer_allowance"])
+                    try:
+                        if CONFIG["models"][model].get("forcing") == "harness":
+                            r = run_attempt_harness_forced(srv, model, iid, texts[iid], total_s, stage)
+                        else:
+                            r = run_attempt(srv, model, iid, texts[iid], s1["max_tokens"], total_s, stage,
+                                            answer_cap=s1["answer_allowance"])
+                    except Exception as e:  # noqa: BLE001
+                        r = harness_error_record(model, iid, stage, s1["max_tokens"], e)
                     infra = bool(r["error"]) or r["abort"] in ("first_token_timeout", "stall_timeout", "total_timeout")
                     r["attempt"], r["final_attempt"] = attempt + 1, (not infra) or attempt == 2
-                    with attempts_path.open("a", encoding="utf-8") as f:
-                        f.write(json.dumps(r, ensure_ascii=False) + "\n")
-                    print(f"[stage1 {model}] {iid} finish={r['finish_reason']} abort={r['abort']} "
-                          f"tokens={r['completion_tokens']} wall={r['wall_s']}s", flush=True)
+                    append_jsonl(attempts_path, r)
+                    print(f"[{stage} {model}] {iid} attempt={attempt + 1} finish={r['finish_reason']} "
+                          f"abort={r['abort']} error={bool(r['error'])} tokens={r['completion_tokens']} "
+                          f"wall={r.get('wall_s')}s", flush=True)
                     wait_idle(srv)
                     if not infra:
                         break
+                if model in incomplete:
+                    break
+        except RuntimeError as e:  # a mid-model restart failed three times
+            incomplete[model] = str(e)[:300]
         finally:
             sampler.stop()
             srv.stop()
-    print(f"STAGE 1 GENERATION COMPLETE; score with: .venv-scoring\\Scripts\\python.exe local/score_local.py {run_dir}",
-          flush=True)
+        if model in incomplete and incomplete[model].startswith("free disk"):
+            break
+    return incomplete
 
 
 if __name__ == "__main__":

@@ -9,6 +9,8 @@ Status precedence follows morgan 16 section 4 via runner/status.classify, with t
   - abort in watchdog/transport errors  -> INFRASTRUCTURE_FAILURE
   - unparsed native reasoning delimiters left in the final channel -> MALFORMED_NATIVE_OUTPUT
 Only the final channel is scored; reasoning text is never passed to a scorer.
+Student programming (`code`) checks execute in the Docker sandbox of scoring/docker_code.py (Docker Desktop must be
+running with the pinned image present); model-written code never runs on the host.
 """
 from __future__ import annotations
 
@@ -60,6 +62,7 @@ class Scorer:
         self._mmlu_n = None
         self._ifeval = None
         self.verifier = scorers.MathVerifier(timeout_s=30.0)
+        self._sandbox_ready = False
 
     def mmlu_n_choices(self, iid: str) -> int:
         if self._mmlu_n is None:
@@ -97,11 +100,23 @@ class Scorer:
             fl, ex = [], None
             out["detail"] = r
         elif bench == "student":
-            from app.evaluation import graders, suite
-            g = graders.grade(suite.get(iid.split("/", 1)[1]), final, allow_code_execution=False)
+            # the app's checks, except `code` checks, which run in the Docker sandbox (scoring/docker_code.py);
+            # model-written code is never executed on the host. A sandbox failure raises (scoring stops), it is
+            # never recorded as a wrong answer.
+            from app.evaluation import suite
+            import docker_code
+            prompt = suite.get(iid.split("/", 1)[1])
+            has_code = any(c["kind"] == "code" for c in prompt.checks)
+            if has_code and not self._sandbox_ready:
+                docker_code.check_ready()
+                self._sandbox_ready = True
+            g = docker_code.grade(prompt, final)
             st = "SKIPPED" if g.skipped else ("CORRECT" if g.passed else "INCORRECT")
             fl, ex = [], None
-            out["detail"] = {"score": g.score, "passed": g.passed, "skipped": g.skipped}
+            out["detail"] = {"score": g.score, "passed": g.passed, "skipped": g.skipped,
+                             "checks": [{"kind": c.kind, "score": c.score, "detail": c.detail} for c in g.checks]}
+            if has_code:
+                out["detail"]["code_execution"] = f"docker {docker_code.IMAGE}"
         else:
             raise ValueError(bench)
         out.update(status=st, flags=sorted(set(flags + fl)), extracted=ex, correct=(st == "CORRECT"))
@@ -117,7 +132,7 @@ def main(run_dir: Path, out_name: str = "scored.jsonl") -> None:
                 rec = json.loads(line)
                 if rec.get("kind") != "item":
                     continue
-                rows.append({k: rec[k] for k in ("model", "item_id", "benchmark", "stage", "attempt") if k in rec}
+                rows.append({k: rec[k] for k in ("model", "item_id", "benchmark", "stage", "attempt", "final_attempt") if k in rec}
                             | {"completion_tokens": rec.get("completion_tokens"), "finish_reason": rec.get("finish_reason"),
                                "abort": rec.get("abort")} | sc.score(rec))
     sc.verifier.close()

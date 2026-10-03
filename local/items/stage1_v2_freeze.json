@@ -1,27 +1,30 @@
 {
- "frozen_at": "2026-10-03T07:54:50+00:00",
- "config_sha256": "e7004809440450c93eb78c29dac241989121584bffcd5a4b823505e61b3cdf5b",
+ "frozen_at": "2026-10-03T11:45:18+00:00",
+ "config_sha256": "d691dc7aa475542df7b232b22c446357846a6e1df3a4991344da36981c7004c6",
  "files": {
-  "config_local.json": "e7004809440450c93eb78c29dac241989121584bffcd5a4b823505e61b3cdf5b",
+  "config_local.json": "d691dc7aa475542df7b232b22c446357846a6e1df3a4991344da36981c7004c6",
   "gguf_pins.json": "65ace5d7af2be586d4d75c3f6627e1c5e94e11dba00cc1769740931fb63ba8eb",
   "items/stage1_panel_v2.json": "3e400e0c16d49f515948d3b56591dd2611f3cc8970f265f0ce4fdf4722c5f18b",
   "items/stage1_v2_lock.json": "e1e0675904f5ff30719f3b1f7fd8338a875091081699dc85f39fe7255904cfda",
   "items/rendered_prompts.json": "1b65708c818f0999c22648600e22ed12b648167e413b2eaffd7658206c29e3b0",
   "items/rendered_lock.json": "145b397dce296ec72e1ea3943767902f8866f069279bb1c75178acad30c9f97b",
   "official/official-lock.json": "34aae30a2f61363c8524d6624ac5796dc6a35aacabf493a0e2c9dff4e014dee2",
-  "client.py": "7a4d3615620c671cfbed0a245c7cdcc378713a18a3f687b5844ebc49e31f9041",
-  "llm_server.py": "65f19031289e8eb3e2f1a88d39ed5d2c2f3da61adc2ebe0a4aa4f5c140aaf3f3",
+  "client.py": "9dabc1d27e66b7d2b2e597567a6adee03e178e1292dc70cf4ebcd43cdc1e2a79",
+  "llm_server.py": "9d2e4603657b508f68d44c60803fef80a0f147f227616252df2bbf0105d3f337",
   "placement.py": "274fbf7e3ef801b3142db505081a2aef9a3ace7195556aaa743088d89b487ae2",
-  "run_local.py": "026e052c65f6b2450f4abffe89a750e28ed78fdaab5fdd91b806e7508ab20ce4",
-  "score_local.py": "e289a70458643ab377a71391e7b06e36d6709ab02e58998272cfe50f8a141d55",
-  "preflight.py": "70f11548ed584b7674b7e2d05abbaec88fd2c9f87fcbba190ee8178e442e6e2f",
+  "run_local.py": "561be74e4e43d0881fb60c961db28bdc167417646c078d65b8b9101e01d7a16f",
+  "score_local.py": "6bd245aac5108ef3f6840f3e57b096c75b0fb343f7035dc352c61198cf752b67",
+  "preflight.py": "28ef7155a2cdb654233042d3b55112da0399578ad797323d62ca68d83a37eb6e",
   "official/gemma-4-31b__chat_template.jinja": "ae53464bf3be25802b3a5b37def7fd89667067d7577049b3b2d74c4d8de4c6d4",
   "official/glm-4.7-flash__chat_template.jinja": "d63ad536c3c81880043e22ec7fd08db42b4d8fb7c89c7138bc562bfa25281375",
   "official/gpt-oss-20b__chat_template.jinja": "a4c9919cbbd4acdd51ccffe22da049264b1b73e59055fa58811a99efbd7c8146",
   "official/ministral-3-14b-reasoning__chat_template.jinja": "6b5044075f09f4daa57beebe2d989d9fbe67dea351f220e1a84e19ddc893f2c2",
   "official/muse-glimmer-30b__chat_template.jinja": "cfc67e5f349f37690dfd31ed1f18bc4442a9dd32fe39a648f993cb4eb3cae678",
   "official/qwen3.8-27b__chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
-  "official/r1-0528-qwen3-8b__chat_template.jinja": "53671bac29bcb3e1f95f51b8c77d85a6011b66dc38bd23dce64eef04384a976b"
+  "official/r1-0528-qwen3-8b__chat_template.jinja": "53671bac29bcb3e1f95f51b8c77d85a6011b66dc38bd23dce64eef04384a976b",
+  "../scoring/docker_code.py": "d608ecdf3799ffa8ce54a6c4a72cc50490ea25646587633103d64ab1b69456e9",
+  "../scoring/test_docker_code.py": "5696e8caeed84a6d4f72c1920d5335446c3638a060add140eb8427cef7b90d18",
+  "../scoring/scorers.py": "2b0325eb2396f743802b60908f0beb1a4aff37193a315841491c26fe6d8d73e1"
  },
  "probe_results": {
   "runs/probe-20261003/probe_gemma-4-31b.json": "82c0f923a353e39beb2078a985436995b37e517c8afe4f613a4130ec01808776",
@@ -41,6 +44,63 @@
   "gpt-oss-20b": "75acd89545d50126692df2116bc3fdf700408b4be1d74d58e8eed13bca028f17",
   "r1-0528-qwen3-8b": "e0c2f118fd59f3a16f20d18b0e7f79e960c84bc8c66d94fd71a691e05151d54f",
   "ministral-3-14b-reasoning": "61130e92a6ee3c2a7e8e85431d9218ff69998f513f1ea8f21637dd3e2bc3a159"
+ },
+ "app_grader": {
+  "repo": "C:\\Users\\rohan\\open-source-ai-model",
+  "commit": "3c415c4a3743d1ba95982cfbaa53ebe1ce247265",
+  "files": {
+   "app/evaluation/graders.py": "ac02c544ecdcec378450f95913044b75960e84b130974eeeac0c4c01612150a0",
+   "app/evaluation/suite.py": "2eae54fd5cbab53e4caf9fd04f2d35795ae0efa755e1319d5d23006a15f5b1bb"
+  }
+ },
+ "code_sandbox": {
+  "image": "python@sha256:0741d101873c12ab927e6f8653feb8862b9bd58771177acb1b885b95141f91b4",
+  "image_tag": "python:3.14-slim",
+  "image_local": "sha256:0741d101873c12ab927e6f8653feb8862b9bd58771177acb1b885b95141f91b4 linux/amd64",
+  "run_args": [
+   "--network",
+   "none",
+   "--read-only",
+   "--tmpfs",
+   "/tmp:rw,noexec,nosuid,nodev,size=16m,mode=1777",
+   "--tmpfs",
+   "/out:rw,noexec,nosuid,nodev,size=4m,mode=1777",
+   "--workdir",
+   "/tmp",
+   "--user",
+   "65534:65534",
+   "--cap-drop",
+   "ALL",
+   "--security-opt",
+   "no-new-privileges",
+   "--ipc",
+   "none",
+   "--memory",
+   "256m",
+   "--memory-swap",
+   "256m",
+   "--cpus",
+   "1",
+   "--pids-limit",
+   "32",
+   "--ulimit",
+   "nofile=64:64",
+   "--ulimit",
+   "nproc=32:32",
+   "--env",
+   "PYTHONDONTWRITEBYTECODE=1",
+   "--pull",
+   "never"
+  ],
+  "code_timeout_s": 15.0,
+  "stdout_cap": 1048576,
+  "stderr_cap": 65536
+ },
+ "previous_freeze": {
+  "record": "items/history/stage1_v2_freeze_2026-10-03T114101Z.json",
+  "record_sha256": "a02a4a899489ccb8a503d60468e29e07ad2fda68f3323a436be79001d2e0ed15",
+  "config_sha256": "f05627377b5540e219debd9b03c4c7f7313fa848975541404a317fdf6bea5847",
+  "frozen_at": "2026-10-03T11:41:01+00:00"
  },
  "note": "Stage 1 execution still requires local/STAGE1_APPROVED.json written by the user."
 }

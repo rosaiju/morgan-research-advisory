@@ -203,6 +203,17 @@ class Resume(unittest.TestCase):
             p.write_text("".join(json.dumps(r) + chr(10) for r in rows) + '{"kind": "item", "item_id": "d", "fin', encoding="utf-8")
             self.assertEqual(run_local.completed_items(p), {"a"})
 
+    def test_append_after_partial_line_keeps_new_record(self):
+        import tempfile
+        import run_local
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "attempts_x.jsonl"
+            p.write_text(json.dumps({"kind": "item", "item_id": "a", "final_attempt": True, "attempt": 1}) + "\n"
+                         + '{"kind": "item", "item_id": "b", "fin', encoding="utf-8")   # crash mid-write
+            run_local.append_jsonl(p, {"kind": "item", "item_id": "b", "final_attempt": True, "attempt": 2})
+            self.assertEqual(run_local.completed_items(p), {"a", "b"})
+            self.assertEqual(run_local.attempts_used(p), {"a": 1, "b": 2})
+
     def test_stage1_plan_is_paired_and_deterministic(self):
         import run_local
         p1, p2 = run_local.stage1_plan(), run_local.stage1_plan()
@@ -210,6 +221,207 @@ class Resume(unittest.TestCase):
         sets = {frozenset(items) for _, items in p1}
         self.assertEqual(len(sets), 1)            # same 22 items for every model
         self.assertEqual(len(next(iter(sets))), 22)
+
+
+class _FakeServer:
+    """Stands in for llm_server.Server in run_items tests: no process, no model."""
+    fail_start = 0
+    started = 0
+
+    def __init__(self, model, n_ctx, log_path, **kw):
+        self.model, self.proc, self.reasoning_budget = model, None, kw.get("reasoning_budget")
+
+    def start(self):
+        type(self).started += 1
+        if type(self).fail_start > 0:
+            type(self).fail_start -= 1
+            raise RuntimeError("CUDA error: out of memory (simulated)")
+        self.proc = type("P", (), {"poll": lambda s: None, "pid": 1})()
+        return llm_server.LoadInfo(load_seconds=0.1)
+
+    def pid(self):
+        return 1
+
+    def stop(self):
+        self.proc = None
+
+
+class _FakeSampler:
+    def __init__(self, *a, **k):
+        self.pid = None
+
+    def start(self):
+        return self
+
+    def stop(self):
+        return {}
+
+
+class RunItems(unittest.TestCase):
+    """The Stage 1 generation loop with a fake server and scripted attempt outcomes (no model, no network)."""
+
+    def setUp(self):
+        import tempfile
+        import run_local
+        self.rl = run_local
+        self.tmp = tempfile.TemporaryDirectory()
+        self.dir = Path(self.tmp.name)
+        self.saved = (run_local.Server, run_local.Sampler, run_local.run_attempt, run_local.wait_idle,
+                      run_local.time.sleep)
+        run_local.Server, run_local.Sampler = _FakeServer, _FakeSampler
+        run_local.wait_idle = lambda *a, **k: None
+        run_local.time.sleep = lambda s: None
+        _FakeServer.fail_start, _FakeServer.started = 0, 0
+        self.script = {}   # item -> list of outcomes: "ok" | "raise" | "stall"
+
+        def fake_attempt(srv, model, iid, text, max_tokens, total_s, stage, **kw):
+            outcome = self.script[iid].pop(0)
+            if outcome == "raise":
+                raise ConnectionResetError("server went away (simulated)")
+            return {"kind": "item", "stage": stage, "model": model, "item_id": iid, "benchmark": "x",
+                    "finish_reason": "stop" if outcome == "ok" else None,
+                    "abort": "stall_timeout" if outcome == "stall" else None, "error": None,
+                    "completion_tokens": 5, "wall_s": 0.1, "reasoning_text": "r", "final_text": "ANSWER: A"}
+        run_local.run_attempt = fake_attempt
+
+    def tearDown(self):
+        (self.rl.Server, self.rl.Sampler, self.rl.run_attempt, self.rl.wait_idle, self.rl.time.sleep) = self.saved
+        self.tmp.cleanup()
+
+    def rows(self, model="r1-0528-qwen3-8b"):
+        p = self.dir / f"attempts_{model}.jsonl"
+        return [json.loads(l) for l in p.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+    def test_exception_is_recorded_retried_and_capped(self):
+        self.script = {"i1": ["raise", "ok"], "i2": ["raise", "stall", "raise"]}
+        inc = self.rl.run_items([("r1-0528-qwen3-8b", ["i1", "i2"])], self.dir, "test", texts={"i1": "a", "i2": "b"})
+        self.assertEqual(inc, {})
+        items = [r for r in self.rows() if r["kind"] == "item"]
+        self.assertEqual([(r["item_id"], r["attempt"], r["final_attempt"]) for r in items],
+                         [("i1", 1, False), ("i1", 2, True), ("i2", 1, False), ("i2", 2, False), ("i2", 3, True)])
+        self.assertTrue(items[0]["error"].startswith("harness_exception: ConnectionResetError"))
+        st, _ = score_local.pre_status(items[-1])
+        self.assertEqual(st, "INFRASTRUCTURE_FAILURE")
+
+    def test_resume_skips_done_continues_numbering_no_duplicates(self):
+        self.script = {"i1": ["ok"], "i2": ["stall"]}
+        p = self.dir / "attempts_r1-0528-qwen3-8b.jsonl"
+        p.write_text(json.dumps({"kind": "item", "item_id": "i1", "attempt": 1, "final_attempt": True}) + "\n"
+                     + json.dumps({"kind": "item", "item_id": "i2", "attempt": 2, "final_attempt": False}) + "\n"
+                     + '{"kind": "item", "item_id": "i2", "att', encoding="utf-8")       # killed mid-write
+        self.rl.run_items([("r1-0528-qwen3-8b", ["i1", "i2"])], self.dir, "test", texts={"i1": "a", "i2": "b"})
+        items = [r for r in self.rows_tolerant() if r.get("kind") == "item"]
+        self.assertEqual([(r["item_id"], r["attempt"], r["final_attempt"]) for r in items],
+                         [("i1", 1, True), ("i2", 2, False), ("i2", 3, True)])
+        self.assertEqual(self.script["i1"], ["ok"])              # i1 was not generated again
+        # a second resume generates nothing
+        self.rl.run_items([("r1-0528-qwen3-8b", ["i1", "i2"])], self.dir, "test", texts={"i1": "a", "i2": "b"})
+        self.assertEqual(len([r for r in self.rows_tolerant() if r.get("kind") == "item"]), 3)
+
+    def rows_tolerant(self):
+        out = []
+        for l in (self.dir / "attempts_r1-0528-qwen3-8b.jsonl").read_text(encoding="utf-8").splitlines():
+            try:
+                out.append(json.loads(l))
+            except json.JSONDecodeError:
+                pass
+        return out
+
+    def test_load_failure_retries_then_skips_model_and_continues(self):
+        _FakeServer.fail_start = 3          # first model never loads
+        self.script = {"i1": ["ok"]}
+        inc = self.rl.run_items([("r1-0528-qwen3-8b", ["i1"]), ("gpt-oss-20b", ["i1"])], self.dir, "test",
+                                texts={"i1": "a"})
+        self.assertIn("r1-0528-qwen3-8b", inc)
+        self.assertEqual([r["kind"] for r in self.rows()].count("server_start_failed"), 3)
+        self.assertEqual(self.rl.completed_items(self.dir / "attempts_gpt-oss-20b.jsonl"), {"i1"})
+        self.assertEqual(self.rl.completed_items(self.dir / "attempts_r1-0528-qwen3-8b.jsonl"), set())
+
+    def test_transient_load_failure_recovers(self):
+        _FakeServer.fail_start = 1
+        self.script = {"i1": ["ok"]}
+        inc = self.rl.run_items([("r1-0528-qwen3-8b", ["i1"])], self.dir, "test", texts={"i1": "a"})
+        self.assertEqual(inc, {})
+        self.assertEqual(self.rl.completed_items(self.dir / "attempts_r1-0528-qwen3-8b.jsonl"), {"i1"})
+
+    def test_low_disk_stops_cleanly(self):
+        self.script = {"i1": ["ok"]}
+        saved = self.rl.free_disk_gb
+        self.rl.free_disk_gb = lambda p: 1.0
+        try:
+            inc = self.rl.run_items([("r1-0528-qwen3-8b", ["i1"]), ("gpt-oss-20b", ["i1"])], self.dir, "test",
+                                    texts={"i1": "a"})
+        finally:
+            self.rl.free_disk_gb = saved
+        self.assertEqual(list(inc), ["r1-0528-qwen3-8b"])
+        self.assertEqual(self.script["i1"], ["ok"])
+
+
+class Infrastructure(unittest.TestCase):
+    def test_malformed_stream_chunk_is_an_error_not_a_crash(self):
+        import http.server
+        import threading
+
+        class H(http.server.BaseHTTPRequestHandler):
+            def do_POST(self):
+                self.rfile.read(int(self.headers["Content-Length"]))
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b'data: {"choices":[{"delta":{"content":"hi"}}]}\n\ndata: {not json\n\n')
+
+            def log_message(self, *a):
+                pass
+        srv = http.server.HTTPServer(("127.0.0.1", 0), H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            rec = client.stream_chat(srv.server_address[1], {"x": 1}, first_token_s=5, stall_s=5, total_s=10)
+        finally:
+            srv.shutdown()
+        self.assertTrue(rec["error"].startswith("malformed stream chunk"))
+        self.assertEqual(rec["final_text"], "hi")
+
+    def test_server_refuses_to_start_when_port_taken(self):
+        import socket
+        s = socket.socket()
+        s.bind(("127.0.0.1", 0))                      # own ephemeral port: never interferes with a live run
+        s.listen(1)
+        saved = (llm_server.reap_orphans, llm_server.subprocess.Popen, llm_server.PORT)
+        llm_server.PORT = s.getsockname()[1]
+        llm_server.reap_orphans = lambda *a, **k: []   # never touch real processes from a test
+
+        def no_launch(*a, **k):
+            raise AssertionError("llama-server must not be launched while the port is taken")
+        llm_server.subprocess.Popen = no_launch
+        try:
+            for _ in range(3):                        # also with the listener's backlog already full
+                self.assertTrue(llm_server.port_in_use())
+            with self.assertRaises(RuntimeError):
+                llm_server.Server("r1-0528-qwen3-8b", 4096, HERE / "runs" / "_test_unused.log").start()
+        finally:
+            llm_server.reap_orphans, llm_server.subprocess.Popen, llm_server.PORT = saved
+            s.close()
+
+    def test_runner_lock_refuses_second_live_runner(self):
+        import psutil
+        saved_port = llm_server.PORT
+        llm_server.PORT = 1          # a lock name no real run uses (the lock file is per port)
+        lock = HERE / "runs" / f".runner_port{llm_server.PORT}.lock"
+        other = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(30)"])
+        try:
+            p = psutil.Process(other.pid)
+            lock.write_text(json.dumps({"pid": other.pid, "create_time": p.create_time(), "purpose": "test"}))
+            with self.assertRaises(SystemExit):
+                llm_server.acquire_runner_lock("test")
+            other.kill()
+            other.wait()
+            got = llm_server.acquire_runner_lock("test")   # stale lock is taken over
+            llm_server.release_runner_lock(got)
+            self.assertFalse(lock.exists())
+        finally:
+            if other.poll() is None:
+                other.kill()
+            lock.unlink(missing_ok=True)
+            llm_server.PORT = saved_port
 
 
 class Manifests(unittest.TestCase):

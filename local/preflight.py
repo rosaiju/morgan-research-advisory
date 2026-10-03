@@ -47,6 +47,16 @@ def run(full_hash: bool = False) -> list[tuple[str, bool, str]]:
     if freeze.exists():
         fz = json.loads(freeze.read_text(encoding="utf-8"))
         check("config hash matches freeze record", fz.get("config_sha256") == sha(HERE / "config_local.json"))
+        bad = [f for sec in ("files", "probe_results") for f, h in fz.get(sec, {}).items()
+               if not (HERE / f).exists() or sha(HERE / f) != h]
+        n = sum(len(fz.get(s, {})) for s in ("files", "probe_results"))
+        check("every frozen file matches the freeze record", not bad, f"{n} files" + (f"; changed: {bad}" if bad else ""))
+        app = fz.get("app_grader") or {}
+        check("app grader files match the freeze record", app and all(
+            (Path(app["repo"]) / f).exists() and sha(Path(app["repo"]) / f) == h for f, h in app["files"].items()),
+              app.get("commit", "not recorded"))
+        sb = fz.get("code_sandbox") or {}
+        check("freeze records the Docker code sandbox", bool(sb), sb.get("image", ""))
     else:
         check("freeze record exists (items/stage1_v2_freeze.json)", False)
 
@@ -108,6 +118,19 @@ def run(full_hash: bool = False) -> list[tuple[str, bool, str]]:
     check("scorer fixtures pass", p.returncode == 0, (p.stdout.strip().splitlines() or [""])[-1])
     p = subprocess.run([sys.executable, str(HERE / "test_local.py")], capture_output=True, text=True, env=env)
     check("harness offline tests pass", p.returncode == 0, ((p.stdout + p.stderr).strip().splitlines() or [""])[-1])
+    sys.path.insert(0, str(ROOT / "scoring"))
+    import docker_code
+    try:
+        check("Docker sandbox ready (daemon + pinned image)", True, docker_code.check_ready())
+    except Exception as e:  # noqa: BLE001
+        check("Docker sandbox ready (daemon + pinned image)", False, str(e)[:200])
+    p = subprocess.run([str(vpy), "-m", "pytest", "scoring/test_docker_code.py", "-q", "-p", "no:cacheprovider"],
+                       cwd=ROOT, capture_output=True, text=True, env=env)
+    check("Docker code-sandbox tests pass", p.returncode == 0, (p.stdout.strip().splitlines() or [""])[-1])
+    try:
+        check("no leftover sandbox containers", not docker_code.leaked_containers())
+    except Exception as e:  # noqa: BLE001
+        check("no leftover sandbox containers", False, str(e)[:200])
     check("Stage 1 approval file present (user-written)", (HERE / "STAGE1_APPROVED.json").exists())
     return res
 
