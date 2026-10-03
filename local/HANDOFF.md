@@ -70,3 +70,25 @@ The calibration watchdog backstop was raised (floor 0.75 tok/s, ~14 h per attemp
 that genuine long attempts are not mislabelled as infrastructure failures; hangs are still caught by the 600 s
 no-token rule. This depth effect is also why the projected Stage 1 runtime for the dense models will be far above
 the plan's estimate; the user will need to decide how to proceed (see report).
+
+### Interim status at 22:55 EDT (user's expected return)
+
+Calibration done: R1-8B, gpt-oss-20b, GLM-4.7-Flash. Ministral: 5th of 6 items running (~4 h so far).
+Not yet started: Muse Glimmer 30B, Qwen3.8-27B, Gemma 4 31B (run automatically next; likely 8-12 h each).
+
+Ministral items so far: geometry 20,104 (natural, 68 min) · counting L (24,576, 97 min) · mmlu/50 1,650 ·
+zebra 10,809 (natural). Decode 10.3 tok/s fresh -> ~3-4 tok/s at 15-18K depth.
+
+**C1 = 24,576 is already determined** (top rung; later models cannot lower it): natural completions above L
+(R1, gpt-oss, GLM, Ministral): 8K 2/1/3/2 (fail) · 12K 1/0/2/1 (fail) · 16K 1/0/1/1 = 3 > 2 (fail) · 24K 0 (pass).
+Descriptive: development attempts not finishing naturally at L: 8K 73% · 12K 55% · 16K 50% · 24K 36%.
+
+Interim Stage 1 projection at C1 = 24,576 (conservative: MATH costed at level-5 token use, student items at the
+model's MMLU-Pro mean): R1 8.3 h core + 2.4 reserve; gpt-oss 3.7 + 1.1; GLM 6.0 + 1.7. Ministral likely ~20+ h core;
+the three dense ~30B models will be several times slower than Ministral. **Stage 1 will far exceed the approved
+24-48 h budget and the pre-registered "core > 40 h -> stop and report" rule applies.** This needs the user's decision.
+
+To stop the remaining calibration (e.g. if the user decides not to measure the dense models now):
+  PowerShell: Get-CimInstance Win32_Process | ? { $_.CommandLine -match 'calibrate_all|post_calibration' } |
+              % { Stop-Process -Id $_.ProcessId -Force }; Stop-Process -Name llama-server -Force
+(completed results in local/runs/calibration-20261002 are kept; rerunning calibrate_all.sh skips finished models)
