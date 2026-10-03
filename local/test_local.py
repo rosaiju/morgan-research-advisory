@@ -15,6 +15,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 import analyze_calibration as A  # noqa: E402
+import placement  # noqa: E402
 import client  # noqa: E402
 import llm_server  # noqa: E402
 import score_local  # noqa: E402
@@ -128,6 +129,57 @@ class C1Rule(unittest.TestCase):
         a["a"] = [self.att(24576, "length"), self.att(15000, None, "loop_terminated")] + [self.att(3000)] * 4
         c1, _ = A.choose_c1(a)
         self.assertEqual(c1, 8192)
+
+
+class PlacementParse(unittest.TestCase):
+    BREAKDOWN_ONLY = ("I common_memory_breakdown_print: |   - CUDA0 (RTX 4060)   |  8187 = 7096 + ( 6729 =  6199 +     122 +     407)"
+                      " +       -5637 |" + chr(10))
+    SUMMARY = "I common_params_fit_impl: projected to use 5742 MiB of device memory vs. 7096 MiB of free device memory" + chr(10)
+
+    def _run(self, outputs):
+        import types
+        calls = iter(outputs)
+        orig = placement.subprocess.run
+        placement.subprocess.run = lambda *a, **k: types.SimpleNamespace(stdout=next(calls), stderr="")
+        try:
+            return placement.projected(Path("x.gguf"), 4096, 3)
+        finally:
+            placement.subprocess.run = orig
+
+    def test_summary_line(self):
+        self.assertEqual(self._run([self.SUMMARY]), (5742, 7096))
+
+    def test_breakdown_fallback_when_summary_missing(self):  # bug seen live on Muse 2026-10-03
+        self.assertEqual(self._run([self.BREAKDOWN_ONLY]), (6729, 7096))
+
+    def test_retry_then_fail(self):
+        with self.assertRaises(RuntimeError):
+            self._run(["garbage", "garbage", "garbage"])
+
+    def test_ffn_regex_covers_first_k_layers(self):
+        import re
+        rx = placement.ffn_override(3).split("=")[0]
+        self.assertTrue(re.fullmatch(rx + ".*", "blk.2.ffn_down.weight"))
+        self.assertFalse(re.fullmatch(rx + ".*", "blk.3.ffn_down.weight"))
+        self.assertFalse(re.fullmatch(rx + ".*", "blk.1.attn_q.weight"))
+
+
+class BudgetStatus(unittest.TestCase):
+    base = {"reasoning_text": "r", "final_text": "ANSWER: 4", "error": None, "abort": None, "finish_reason": "stop"}
+
+    def test_forced_then_answered_is_scorable_and_flagged(self):
+        st, fl = score_local.pre_status({**self.base, "reasoning_text": "x Time is up. I must stop thinking now and give"})
+        self.assertEqual(st, "SCORABLE")
+        self.assertIn("forced_conclusion", fl)
+
+    def test_answer_overflow_is_budget_truncated(self):
+        st, fl = score_local.pre_status({**self.base, "abort": "answer_allowance_exceeded"})
+        self.assertEqual(st, "BUDGET_TRUNCATED")
+        self.assertIn("answer_allowance_exceeded", fl)
+
+    def test_answer_cap_stops_stream_logic_present(self):
+        import inspect
+        self.assertIn("answer_allowance_exceeded", inspect.getsource(client.stream_chat))
 
 
 class Manifests(unittest.TestCase):

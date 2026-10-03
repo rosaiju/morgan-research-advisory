@@ -1,0 +1,16 @@
+{
+ "stage1_panel_v2.json": "3e400e0c16d49f515948d3b56591dd2611f3cc8970f265f0ce4fdf4722c5f18b",
+ "derived_from": {
+  "stage1_panel.json": "f4ec07329b960f5fd2d460d692adc56e1aec2456adff9499a5cc971a17254904",
+  "items_lock.json": "7657c4f5417dbe975d9dc03f36ca35155d44854df36d5cddb7f82c96b7c7adff"
+ },
+ "seed": "stage1-v2",
+ "counts": {
+  "mmlu_pro": 5,
+  "math500": 3,
+  "bbeh_mini": 2,
+  "ifeval": 6,
+  "student": 6
+ },
+ "calibration_overlap": "none (checked by id and content hash)"
+}

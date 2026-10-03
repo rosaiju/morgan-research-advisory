@@ -44,12 +44,13 @@ def payload_sha256(body: dict) -> str:
 
 
 def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, total_s: float,
-                loop_stop: bool = True) -> dict:
+                loop_stop: bool = True, answer_cap: int | None = None) -> dict:
     rec = {"reasoning_text": "", "final_text": "", "finish_reason": None, "usage": None, "timings": None,
            "n_pieces": 0, "abort": None, "error": None, "t_first_token_s": None, "t_first_final_s": None,
            "wall_s": None}
     reasoning, final, pieces = [], [], []
     last_check = 0
+    n_final = 0
     conn = http.client.HTTPConnection("127.0.0.1", port, timeout=first_token_s)
     t0 = time.perf_counter()
     try:
@@ -94,6 +95,7 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
                             rec["t_first_final_s"] = round(now, 3)
                         final.append(c)
                         pieces.append(c)
+                        n_final += 1
                 if ch.get("finish_reason"):
                     rec["finish_reason"] = ch["finish_reason"]
             if loop_stop and len(pieces) - last_check >= LOOP_EVERY:
@@ -101,6 +103,9 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
                 if loop_detected(pieces):
                     rec["abort"] = "loop_terminated"
                     break
+            if answer_cap is not None and n_final > answer_cap:
+                rec["abort"] = "answer_allowance_exceeded"
+                break
             if time.perf_counter() - t0 > total_s:
                 rec["abort"] = "total_timeout"
                 break
@@ -111,4 +116,5 @@ def stream_chat(port: int, body: dict, *, first_token_s: float, stall_s: float, 
         rec["wall_s"] = round(time.perf_counter() - t0, 3)
         rec["reasoning_text"], rec["final_text"] = "".join(reasoning), "".join(final)
         rec["n_pieces"] = len(pieces)
+        rec["n_final_pieces"] = n_final
     return rec

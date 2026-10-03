@@ -28,8 +28,17 @@ REASONING_MARKERS = ("<think>", "</think>", "[THINK]", "[/THINK]", "<|channel|>"
                      "<|channel>", "<channel|>")
 
 
+FORCE_MARK = "Time is up. I must stop thinking now"
+
+
 def pre_status(rec: dict) -> tuple[str, list[str]]:
     abort = rec.get("abort")
+    forced = ["forced_conclusion"] if FORCE_MARK in (rec.get("reasoning_text") or "") else []
+    if abort == "answer_allowance_exceeded":
+        return "BUDGET_TRUNCATED", sorted(set(forced + ["answer_allowance_exceeded"]))
+    if forced:
+        st, fl = pre_status({**rec, "reasoning_text": (rec.get("reasoning_text") or "").replace(FORCE_MARK, "")})
+        return st, sorted(set(fl + forced))
     if abort == "loop_terminated":
         status, flags = morgan_status.classify({**rec, "finish_reason": "length"})
         return "BUDGET_TRUNCATED", sorted(set(flags + ["loop_terminated"]))

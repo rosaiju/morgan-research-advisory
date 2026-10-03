@@ -1,7 +1,7 @@
 {
  "schema": "morgan-local-eval/1",
  "created": "2026-10-02",
- "status": "CALIBRATION CONFIG; calibrated=false until C1 is chosen by the pre-registered rule. Stage 1 is refused until the user's explicit approval file exists (local/STAGE1_APPROVED.json).",
+ "status": "Stage 1 v2 configuration (forced 6,144 + 1,536 budget, placement rule). Stage 1 execution requires local/STAGE1_APPROVED.json written by the user.",
  "calibrated": false,
  "C1": null,
  "plan_reference": "two-stage local plan approved 2026-10-02 (pooled capability screening, loop early-stop, Compact Stage 2, harness in local/, Ministral temperature verified from publisher card)",
@@ -204,5 +204,18 @@
   "max_tokens": "C1",
   "time_box": "reserve runs only if elapsed + projected <= 46 h; if core alone projects > 40 h, stop and report",
   "requires": "local/STAGE1_APPROVED.json written by the user"
+ },
+ "stage1_v2": {
+  "approved": "2026-10-02 (placement rule, 6,144 + 1,536 budget, ~24 h panel); Stage 1 EXECUTION NOT approved",
+  "panel": "local/items/stage1_panel_v2.json (22 items/model; lock local/items/stage1_v2_lock.json)",
+  "thinking_budget": 6144,
+  "answer_allowance": 1536,
+  "budget_message": "\n\nTime is up. I must stop thinking now and give my final answer in the required format.\n",
+  "max_tokens": 7808,
+  "max_tokens_note": "6,144 thinking + 1,536 answer + 128 for the injected message and end-of-thinking delimiters",
+  "mechanism": "llama-server --reasoning-budget 6144 --reasoning-budget-message <message>: when reasoning reaches the budget the server injects the message and the model's own end-of-thinking delimiter, then the model writes its answer. The harness stops an answer that exceeds 1,536 tokens (abort answer_allowance_exceeded -> BUDGET_TRUNCATED). Forced items are flagged forced_conclusion.",
+  "placement_rule": "attention + KV on GPU; FFN (dense) / experts (MoE) to CPU first, 1 GiB free-VRAM margin (local/placement.py). If all FFN on CPU still does not fit, whole layers are moved to CPU (recorded per model).",
+  "n_ctx_rule": "max_tokens + longest v2 prompt (this model's tokenizer) + 1024, rounded up to 256",
+  "replaces": "the C1 censoring-rule ceiling for Stage 1 (C1 = 24,576 kept as a calibration finding, see runs/calibration-20261002)"
  }
 }

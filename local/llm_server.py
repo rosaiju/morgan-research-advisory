@@ -72,12 +72,14 @@ def parse_log(text: str) -> LoadInfo:
 
 class Server:
     def __init__(self, model_key: str, n_ctx: int, log_path: Path, threads: int | None = None,
-                 extra_args: list[str] | None = None):
+                 extra_args: list[str] | None = None, reasoning_budget: int | None = None,
+                 budget_message: str | None = None):
         self.key = model_key
         self.n_ctx = n_ctx
         self.log_path = log_path
         self.threads = threads if threads is not None else CONFIG["backend"]["threads"]
         self.extra = extra_args or []
+        self.reasoning_budget, self.budget_message = reasoning_budget, budget_message
         self.proc: subprocess.Popen | None = None
         self.info: LoadInfo | None = None
 
@@ -92,6 +94,11 @@ class Server:
              "-c", str(self.n_ctx), "--port", str(PORT), *CONFIG["backend"]["common_server_args"]]
         if self.threads:
             a += ["-t", str(self.threads)]
+        if self.reasoning_budget is not None:
+            i = a.index("--reasoning-budget")
+            a[i + 1] = str(self.reasoning_budget)
+            if self.budget_message:
+                a += ["--reasoning-budget-message", self.budget_message]
         return a + self.extra
 
     def start(self, timeout_s: float = 900) -> LoadInfo:

@@ -82,12 +82,12 @@ def reference_render(model: str, messages: list[dict], kwargs: dict) -> str:
 # ------------------------------------------------------------------ one attempt
 
 def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: int, total_s: float,
-                stage: str, kind: str = "item", loop_stop: bool = True) -> dict:
+                stage: str, kind: str = "item", loop_stop: bool = True, answer_cap: int | None = None) -> dict:
     mcfg = CONFIG["models"][model]
     body = client.build_body(mcfg, CONFIG["common_request"], text, max_tokens, item_seed(item_id))
     wd = CONFIG["watchdog"]
     rec = client.stream_chat(PORT, body, first_token_s=wd["first_token_s"], stall_s=wd["stall_s"],
-                             total_s=total_s, loop_stop=loop_stop)
+                             total_s=total_s, loop_stop=loop_stop, answer_cap=answer_cap)
     usage, timings = rec.get("usage") or {}, rec.get("timings") or {}
     completion = usage.get("completion_tokens") or timings.get("predicted_n")
     if completion is None and rec["abort"]:
@@ -111,7 +111,8 @@ def run_attempt(srv: Server, model: str, item_id: str, text: str, max_tokens: in
             "client_gen_tok_s": round(completion / gen_s, 3) if completion and gen_s else None,
             "server_prompt_tok_s": timings.get("prompt_per_second"),
             "server_gen_tok_s": timings.get("predicted_per_second"),
-            "n_pieces": rec["n_pieces"], "usage": usage, "timings": timings,
+            "n_pieces": rec["n_pieces"], "n_final_pieces": rec.get("n_final_pieces"), "answer_cap": answer_cap,
+            "reasoning_budget": srv.reasoning_budget, "usage": usage, "timings": timings,
             "reasoning_text": rec["reasoning_text"], "final_text": rec["final_text"]}
 
 
@@ -302,12 +303,95 @@ def cmd_calibrate(models: list[str], run_id: str) -> None:
         print(f"[{model}] done", flush=True)
 
 
-def cmd_stage1(*_):
-    if not CONFIG.get("calibrated") or CONFIG.get("C1") is None:
-        raise SystemExit("REFUSED: calibration not frozen (config_local.json calibrated=false / C1 unset)")
-    if not (HERE / "STAGE1_APPROVED.json").exists():
+STAGE1_ORDER = ["r1-0528-qwen3-8b", "gpt-oss-20b", "glm-4.7-flash", "ministral-3-14b-reasoning",
+                "muse-glimmer-30b", "qwen3.8-27b", "gemma-4-31b"]
+
+
+def stage1_plan() -> list[tuple[str, list[str]]]:
+    panel = [p["item_id"] for p in json.loads((HERE / "items/stage1_panel_v2.json").read_text(encoding="utf-8"))]
+    plan = []
+    for m in STAGE1_ORDER:
+        order = panel[:]
+        random.Random(f"20260929|stage1-v2|{m}").shuffle(order)
+        plan.append((m, order))
+    return plan
+
+
+def cmd_stage1(*args):
+    """Stage 1 v2. Gate order: (1) the user's approval file, (2) frozen config, (3) full preflight. Resumable:
+    items with a recorded final attempt are skipped. Never invoked by any unattended script."""
+    dry = "--dry-run" in args
+    if not dry and not (HERE / "STAGE1_APPROVED.json").exists():
         raise SystemExit("REFUSED: Stage 1 requires the user's explicit approval file local/STAGE1_APPROVED.json")
-    raise SystemExit("Stage 1 runner not enabled in this build; awaiting approval.")
+    s1 = CONFIG.get("stage1_v2") or {}
+    if not dry and s1.get("frozen") is not True:
+        raise SystemExit("REFUSED: config_local.json stage1_v2.frozen is not true")
+    import preflight
+    checks = preflight.run()
+    failed = [c for c in checks if not c[1] and not (dry and c[0].startswith("Stage 1 approval file"))]
+    for name, ok, detail in checks:
+        print(f"[{'PASS' if ok else 'FAIL'}] {name} {detail}")
+    plan = stage1_plan()
+    print("\nStage 1 v2 plan:", ", ".join(f"{m} ({len(items)} items)" for m, items in plan))
+    if dry:
+        print(f"DRY RUN: nothing generated. {len(failed)} blocking preflight failure(s).")
+        return
+    if failed:
+        raise SystemExit(f"REFUSED: {len(failed)} preflight check(s) failed")
+    import os
+    import placement
+    probe_dir = HERE / "runs" / os.environ.get("MORGAN_PROBE_ID", "probe-20261003")
+    run_dir = HERE / "runs" / os.environ.get("MORGAN_STAGE1_ID", "stage1-v2")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    for model, items in plan:
+        attempts_path = run_dir / f"attempts_{model}.jsonl"
+        done = set()
+        if attempts_path.exists():
+            for line in attempts_path.read_text(encoding="utf-8").splitlines():
+                r = json.loads(line)
+                if r.get("kind") == "item" and r.get("final_attempt"):
+                    done.add(r["item_id"])
+        todo = [i for i in items if i not in done]
+        if not todo:
+            continue
+        probe = json.loads((probe_dir / f"probe_{model}.json").read_text(encoding="utf-8"))
+        n_ctx = probe["n_ctx"]
+        pargs, pinfo = placement.placement_args(model, MODEL_DIR / PINS[model]["file"], n_ctx)
+        deep = probe["speed_deep"]["tg_tok_s_at_depth"]
+        total_s = 1.5 * s1["max_tokens"] / max(0.5, 0.8 * deep) + 1800
+        with attempts_path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps({"kind": "server_start", "model": model, "timestamp": now(), "n_ctx": n_ctx,
+                                "placement": pinfo, "placement_args": pargs, "watchdog_total_s": round(total_s)}) + "\n")
+
+        def start():
+            s = Server(model, n_ctx, run_dir / f"server_{model}_{int(time.time())}.log", extra_args=pargs,
+                       reasoning_budget=s1["thinking_budget"], budget_message=s1["budget_message"])
+            s.start()
+            return s
+        srv = start()
+        sampler = Sampler(run_dir / f"telemetry_{model}.jsonl", srv.pid()).start()
+        try:
+            for iid in todo:
+                for attempt in range(3):  # 1 + up to 2 infrastructure reruns
+                    if srv.proc is None or srv.proc.poll() is not None:
+                        srv = start()
+                        sampler.pid = srv.pid()
+                    r = run_attempt(srv, model, iid, RENDERED[iid]["text"], s1["max_tokens"], total_s, "stage1",
+                                    answer_cap=s1["answer_allowance"])
+                    infra = bool(r["error"]) or r["abort"] in ("first_token_timeout", "stall_timeout", "total_timeout")
+                    r["attempt"], r["final_attempt"] = attempt + 1, (not infra) or attempt == 2
+                    with attempts_path.open("a", encoding="utf-8") as f:
+                        f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                    print(f"[stage1 {model}] {iid} finish={r['finish_reason']} abort={r['abort']} "
+                          f"tokens={r['completion_tokens']} wall={r['wall_s']}s", flush=True)
+                    wait_idle(srv)
+                    if not infra:
+                        break
+        finally:
+            sampler.stop()
+            srv.stop()
+    print(f"STAGE 1 GENERATION COMPLETE; score with: .venv-scoring\\Scripts\\python.exe local/score_local.py {run_dir}",
+          flush=True)
 
 
 if __name__ == "__main__":

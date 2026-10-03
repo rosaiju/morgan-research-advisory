@@ -1,0 +1,156 @@
+[
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/7818",
+  "stratum": "math",
+  "content_sha256": "cc76224b2d6791b0fd857fcaad64711bd6ac4cdf09109f07c2f6584dbdc0ad18",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9323",
+  "stratum": "physics",
+  "content_sha256": "8854746afa04f04dc4bf8a28cb7ce8d0093c7f1a93b7e60638602ee385431d85",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3259",
+  "stratum": "biology",
+  "content_sha256": "ce61fc3abe6c9670a158a549e8ff62a9b9850e239a45060c5217ff6aaa73d6a7",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/12050",
+  "stratum": "engineering",
+  "content_sha256": "3d0add818eb1d644f20b5b2d15c00a267ca1bc7ec8047a56f5431ffe2d8362a4",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6143",
+  "stratum": "health",
+  "content_sha256": "b35de93b60150e86a1bdba009710ec8a44c3ec1f5de7d2035270d1b86e62f284",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1255.json",
+  "stratum": "Algebra|L2",
+  "content_sha256": "4e199d07c47d41052ab004d9d8d8d914913d9322256079da9373aec1f4104199",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/425.json",
+  "stratum": "Algebra|L3",
+  "content_sha256": "9546fca3a130ae853006a70506b78843900f13aa03c9cea0869c641b8494a821",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/1287.json",
+  "stratum": "Number Theory|L4",
+  "content_sha256": "7402b093e77ab835f3b04b716db0c7f7278821bfe49c39a3fd138d563e45f328",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_nycc/19",
+  "stratum": "bbeh_nycc",
+  "content_sha256": "9575d64ab8c1e47af0dae0e66a0529f0168c2ed0ebdea42b6e79b7c772fc2210",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boardgame_qa/129",
+  "stratum": "bbeh_boardgame_qa",
+  "content_sha256": "8f0ea156ce036285675066b85bb314a964de71cfd63cacae94bbf162aa78cd07",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3073",
+  "stratum": "ifeval",
+  "content_sha256": "2332a0b74f1d3d1f29828d41c87fe5e612e6a511edc27ff4a261308e64a8def3",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3326",
+  "stratum": "ifeval",
+  "content_sha256": "dbfc659b870fadd08d9d40caf273f747c63713a418f3c8bbb2e2fb4f41e6fc23",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2790",
+  "stratum": "ifeval",
+  "content_sha256": "4efaf940ed9da5c7db6122e27c72d8f52da79fbfe0a8c649933d83000607eab5",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1082",
+  "stratum": "ifeval",
+  "content_sha256": "abdb9d60b901f8696b97aebb27ae7abd7e4a124acd3fe5b3217f7634ffd83916",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/343",
+  "stratum": "ifeval",
+  "content_sha256": "b32044fc92599e320f6066facb1f3c7d7de0760b5971eb5e869324ec64309606",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3362",
+  "stratum": "ifeval",
+  "content_sha256": "6a26cdd80280ea050bdd1a8a2d33ab093a493b6752f67beec52f6be63e51235a",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/prog_word_count",
+  "stratum": "programming",
+  "content_sha256": "ec40a003f7aed6377bd50f9a739db28355f580d98e94b02da35f7e9a93401a2b",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/algo_bfs_structure",
+  "stratum": "algorithms",
+  "content_sha256": "4e01fc699f15ee6bc77e44f2aa5766f62938fb1175de84238923c7335467e566",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/debug_infinite_loop",
+  "stratum": "debugging",
+  "content_sha256": "bd17d695e3ff19a4cead0ae615a40f75f8e9d0942c497360b9e3924942ebf9bc",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/concept_hash_collision",
+  "stratum": "conceptual",
+  "content_sha256": "1f3242e5d5fb8e3fcace308981e48876c74e741faca8fea174f7e2766a03699e",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/reason_bits_needed",
+  "stratum": "reasoning",
+  "content_sha256": "13d566249ddf6bc6433811297038d49cc05926b5ac3c88861ab084bbb1033c9f",
+  "v1_block": "core"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/instr_three_sentences",
+  "stratum": "instruction_following",
+  "content_sha256": "ee94c7b1c14450b439d0fdd2d13389c7059e8170e7b8675b2e189fd28102761c",
+  "v1_block": "core"
+ }
+]
