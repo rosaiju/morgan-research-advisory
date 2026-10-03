@@ -415,7 +415,10 @@ def cmd_stage1(*args):
             continue
         probe = json.loads((probe_dir / f"probe_{model}.json").read_text(encoding="utf-8"))
         n_ctx = probe["n_ctx"]
-        pargs, pinfo = placement.placement_args(model, MODEL_DIR / PINS[model]["file"], n_ctx)
+        # reproducibility: use the placement recorded (and measured) in the frozen probe, not a fresh computation,
+        # because free VRAM varies with the desktop (Gemma: 40 vs 41 GPU layers between two computations)
+        pargs, pinfo = probe["placement"]["args"], {k: v for k, v in probe["placement"].items() if k != "args"}
+        pinfo["source"] = "probe record (frozen)"
         deep = probe["speed_deep"]["tg_tok_s_at_depth"]
         total_s = 1.5 * s1["max_tokens"] / max(0.5, 0.8 * deep) + 1800
         with attempts_path.open("a", encoding="utf-8") as f:

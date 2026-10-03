@@ -131,3 +131,26 @@ harness forced re-validation + projection (probe_followup.sh -> local/runs/probe
 After both finish: `local\.venv\Scripts\python.exe local\summarize_probes.py` (writes PROBE_REPORT.md),
 `local\.venv\Scripts\python.exe local\preflight.py`. Freezing (`local/freeze_stage1.py`) is a preparation step only;
 Stage 1 still needs the user's STAGE1_APPROVED.json.
+
+### Probe results — all seven measured (03:25 EDT, 2026-10-03)
+
+Full tables: `local/runs/probe-20261003/PROBE_REPORT.md` (regenerate: `local\.venv\Scripts\python.exe local\summarize_probes.py`).
+
+| Model | tok/s fresh / 8K deep | prompt tok/s | GPU weight share | VRAM / RAM added | load s | forced 6,144+1,536 |
+|---|---|---|---|---|---|---|
+| R1-8B | 47.3 / 39.6 | 2,351 | 93% (all on GPU) | 5.5 GB / 0.8 GB | 2-6 | server OK (6,164 + 180) |
+| gpt-oss-20b | 42.2 / 40.5 | 925 | 49% | 6.2 / 6.4 GB | 7 | server OK (6,164 + 771) |
+| GLM-4.7-Flash | 34.4 / 30.4 | 542 | 32% | 6.2 / 12.6 GB | 16 | server OK (6,164 + 1,302) |
+| Ministral 14B | 13.4 / 12.9 (old split 14.5 / 9.1) | 878 | 62% (FFN 18/40 on CPU) | 6.0 / 3.4 GB | 3-6 | server OK (6,164 + 540*) |
+| Muse Glimmer 30B | 3.63 / 3.61 (old 3.78 / 3.50) | 261 | 34% (FFN 45/52 on CPU) | 6.0 / 11.6 GB | 13 | server FAILED -> harness re-validation (see below) |
+| Qwen3.8-27B | 3.40 / 3.29 (old 3.54 / 3.15) | 223 | 30% (step 2: all FFN + 10 layers on CPU) | 5.8 / 12.3 GB | 12-16 (one 72) | server OK (6,164 + 530) |
+| Gemma 4 31B | 2.61 / 2.50 (old 2.90 / 2.37) | 189 | 24% (step 2: all FFN + 20 layers on CPU) | 5.9 / 15.9 GB | 16-19 | server OK (6,164 + 926) |
+
+*Ministral counts re-derived after a transient tokenize failure (bug fixed; raw record kept). All 7 passed integration
+(templates exact or BOS-only), all 7 confirmed in maximum reasoning mode, no crashes, no loops, no malformed output in
+the probes, max GPU 69 C, no thermal throttling (flags: idle / software power cap only).
+
+Stage 1 v2 projection from measured speeds: **central 23.5 h** (student items costed at IFEval length) / **conservative
+31.4 h** (student items at MMLU-Pro length; MATH at level-5 token use; dense models use pooled token use).
+Per model (central / conservative h): R1 0.4/0.6, gpt-oss 0.6/0.7, GLM 0.8/1.1, Ministral 1.5/1.9, Muse 5.8/7.8,
+Qwen3.8 6.3/8.4, Gemma 8.2/11.0. Files: runs/probe-20261003/stage1_projection*.json.
