@@ -450,6 +450,10 @@ class Manifests(unittest.TestCase):
         self.assertEqual(before, after)
 
     def test_stage1_is_refused(self):
+        # Once the user has approved, `run_local.py stage1` is the real run (and its preflight runs these tests):
+        # launching it from here would recurse. The gate is only testable while no approval exists.
+        if (HERE / "STAGE1_APPROVED.json").exists():
+            self.skipTest("Stage 1 approved; refusal gate not applicable (and launching it here would recurse)")
         p = subprocess.run([sys.executable, str(HERE / "run_local.py"), "stage1"], capture_output=True, text=True)
         self.assertNotEqual(p.returncode, 0)
         self.assertIn("REFUSED", p.stdout + p.stderr)

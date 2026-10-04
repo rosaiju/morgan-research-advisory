@@ -1,0 +1,21 @@
+{
+ "approval": "I explicitly approve the official Stage 1 v2 benchmark run using the currently frozen configuration.",
+ "approved_by": "Rohan Sainju (rosai2@morgan.edu), explicit message in the Claude Code session",
+ "approved_at": "2026-10-04T04:40:07+00:00",
+ "freeze_record": "local/items/stage1_v2_freeze.json",
+ "freeze_sha256": "eecb95d32e5dde9e2351f900befb27a190c6b5c769b007fc268df82e91321895",
+ "scope": {
+  "models": 7,
+  "items_per_model": 22,
+  "thinking_budget": 6144,
+  "answer_allowance": 1536,
+  "placement": "frozen per-model probe placement",
+  "programming_grader": "Docker sandbox (scoring/docker_code.py)"
+ },
+ "conditions": [
+  "no changes to model list, panel, prompts, answer keys, scoring rules, budget, quantization, placement or frozen files",
+  "failed attempts handled only by the tested retry/resume logic",
+  "no final scoring or Stage 2 before Stage 1 generation completes",
+  "serious unrecoverable infrastructure failure: preserve results and stop"
+ ]
+}
