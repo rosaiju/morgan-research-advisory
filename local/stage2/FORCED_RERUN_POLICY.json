@@ -1,0 +1,31 @@
+{
+ "policy": "B (forced-rerun sensitivity analysis), pre-registered before any official Stage 2 generation",
+ "decided_by": "Rohan Sainju (rosai2@morgan.edu), explicit message in the Claude Code session",
+ "recorded_at": "2026-10-05T14:59:39+00:00",
+ "recorded_before": "any official Stage 2 generation on any host (no local/runs/stage2-<host>/ directory exists at commit time)",
+ "supersedes": "config_stage2.json -> forced_rerun_policy (candidates A/B). That field is left unchanged because config_stage2.json is hashed in the frozen records (local freeze stage2_freeze_local-rtx4060.json, SHA-256 27e3930942e9d895c19c77789625c292b0ff275728f54c2d9b3a178f06f0ccf1); this file is the binding rule for every Stage 2 model and host.",
+ "rules": [
+  "The official Stage 2 score is always the original 16,384 + 2,048 run. The rerun never replaces, merges into or changes it.",
+  "After a model's Stage 2 generation is complete, identify its forced items (definition below).",
+  "For each model, select a fixed random sample of up to 20 forced items with the documented seed (algorithm below).",
+  "If a model has 20 or fewer forced items, rerun all of them.",
+  "Rerun the selected items at a 24,576-token reasoning budget with everything else unchanged.",
+  "The rerun is sensitivity analysis only.",
+  "Selection never uses whether the original answer was right or wrong: it reads only item_id and the forced flag; no answer key, score or status is consulted."
+ ],
+ "forced_item_definition": "In local/runs/stage2-<host>/attempts_<model>.jsonl, the item's record with final_attempt == true contains the budget message marker 'Time is up. I must stop thinking now' (score_local.py FORCE_MARK) in reasoning_text, i.e. the reasoning reached the 16,384-token limit and the server forced the conclusion. This includes forced items whose answer then exceeded the 2,048-token allowance.",
+ "applies_to": ["gpt-oss-20b", "qwen3.8-27b", "gemma-4-31b"],
+ "sample_cap": 20,
+ "seed": "20261005|stage2|forced-rerun|<model>",
+ "selection_algorithm": "ids = sorted(forced item_ids)  # lexicographic\nselected = ids if len(ids) <= 20 else sorted(random.Random(f\"20261005|stage2|forced-rerun|{model}\").sample(ids, 20))  # Python 3 random module",
+ "rerun_settings": {
+  "thinking_budget": 24576,
+  "answer_allowance": 2048,
+  "max_tokens": 26752,
+  "max_tokens_note": "24,576 + 2,048 + 128, the same construction as Stage 2 (16,384 + 2,048 + 128)",
+  "unchanged": "model, GGUF, template, chat_template_kwargs, sampling, per-item seed, rendered prompt, budget message and server forcing, answer-allowance enforcement, infrastructure-rerun rule, host",
+  "necessary_consequences": "n_ctx recomputed with the same n_ctx_rule for the larger max_tokens, and placement re-measured with the same approved placement rule if the larger context requires it; both recorded with the rerun"
+ },
+ "outputs": "a separate directory per host (local/runs/stage2-forced-rerun-<host>/), never local/runs/stage2-<host>/",
+ "timing": "Reruns begin only after the user approves them; none is started automatically."
+}

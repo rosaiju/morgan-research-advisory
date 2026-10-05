@@ -16,12 +16,13 @@ gpt-oss-20b runs locally (host `local-rtx4060`); Qwen3.8-27B and Gemma 4 31B on 
 | `run_stage2.py` | generation; refuses unless `STAGE2_APPROVED_<host>.json` holds that host's freeze hash and preflight is green |
 | `make_morgan_bundle.py`, `MORGAN_HANDOFF.md`, `MODELS.sha256` | Morgan server bundle (no answer keys) and operator instructions |
 
-## Open decisions (must be recorded before any Stage 2 result is inspected)
+## Forced-item rerun policy (pre-registered 2026-10-05, before any official Stage 2 generation)
 
-**Forced-item rerun policy** (`config_stage2.json → forced_rerun_policy`, status NOT YET PRE-REGISTERED):
-- **A:** rerun every forced-conclusion item unforced at 24,576 tokens, if GPU time is practical;
-- **B:** otherwise, for the dense finalists, a fixed pre-registered random subsample of forced items (size and seed
-  recorded in advance); gpt-oss reruns all.
+**Policy B**, binding for all three finalists: `FORCED_RERUN_POLICY.json`. The official score is always the
+16,384-token run. After generation, for each model, take up to 20 forced items (all of them if 20 or fewer), chosen
+with seed `20261005|stage2|forced-rerun|<model>` and never by correctness. Rerun them at 24,576 reasoning tokens
+with everything else unchanged, as sensitivity analysis only. The candidates in
+`config_stage2.json → forced_rerun_policy` are left unchanged because that file is hashed in the freeze.
 
 ## Local gpt-oss commands (Git Bash, repo root)
 
