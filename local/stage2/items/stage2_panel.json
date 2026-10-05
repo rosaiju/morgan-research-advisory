@@ -1,0 +1,1706 @@
+[
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3229",
+  "stratum": "biology",
+  "content_sha256": "2717b5d01f274fa03cd0d7a4f3a225ca08cd5e2c946a01a947c00f97f16a8ab4"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3219",
+  "stratum": "biology",
+  "content_sha256": "25f7a34f553d324ebfeb5db12f8d478e905108512d4cf0b90d60318c6c3220ee"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3336",
+  "stratum": "biology",
+  "content_sha256": "38895c7a01744d11c5789f43fc703166b8349bea8ae5b7f00a302278c596c624"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3151",
+  "stratum": "biology",
+  "content_sha256": "da993207833a93e4597b7315480b92eb8df402ba878a7ad3143dfb3fc40379b7"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3148",
+  "stratum": "biology",
+  "content_sha256": "8243bf430b3fd7c305f08bbab05aeb0bdef48a6a8df003eb83d12feb8faec942"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/420",
+  "stratum": "business",
+  "content_sha256": "582f74e4578bcf9bf42ef41c83e2ce7548bbc006ceef5b6a64a4f5f5152b908d"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/543",
+  "stratum": "business",
+  "content_sha256": "c0aea87382a8f1c9e4b0d5d997cf13f42ef7990fba3aafc945ad86f56d3bbddf"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/257",
+  "stratum": "business",
+  "content_sha256": "5829f214ed84f5f6fc2da81c886ed2e8bcd6c341b95ddf9f73d4f2fffb6ad795"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/635",
+  "stratum": "business",
+  "content_sha256": "46cae09096d943613bb04850b4cb374efbbfdf231904a1c95be56ac9e46e0ce1"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/301",
+  "stratum": "business",
+  "content_sha256": "ace76b91c46f1694a157589035d6f0ab15e057858730c88cfab6a4a627345b29"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4290",
+  "stratum": "chemistry",
+  "content_sha256": "7b4b03ac078c441edd3e00ae5320dbb49bc33a43bcc770b6bd960f929011d7cf"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/3678",
+  "stratum": "chemistry",
+  "content_sha256": "4ebb522791b04bad632f5565ebecab9855b6ba2ebc1a47d7978642c79e82fc43"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4365",
+  "stratum": "chemistry",
+  "content_sha256": "afa2b2238ef1ff34276be75d9b702b539c5941e55c108ce3946ea2120ce60408"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4032",
+  "stratum": "chemistry",
+  "content_sha256": "0c99b64c85eda6d0c9b478fb6ec71a87e4121fd002ffe35df73647f8cd631916"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4177",
+  "stratum": "chemistry",
+  "content_sha256": "d36052ec0faca843342d1ba08fc0ad2c249044c264790aa165e923ccd9a50e23"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10630",
+  "stratum": "computer science",
+  "content_sha256": "4ca36e55373c77cc4d38344f2b4a1db4c904bd70b20613f9485e455dbc4f76fa"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10538",
+  "stratum": "computer science",
+  "content_sha256": "3d136ef019d6148e59632f937416c17c54bdb4adf3855304e6eb9b122c51c7ed"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10735",
+  "stratum": "computer science",
+  "content_sha256": "d7a17cbdb7e8cda39f629e962d1afeb86e079f9c514b633e2a7d2f06ef3bec49"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10661",
+  "stratum": "computer science",
+  "content_sha256": "9d39630e8a611eb254f638c726bcdd168e102840e86045896d7bd136b9ddcef7"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6970",
+  "stratum": "economics",
+  "content_sha256": "3b2d1c141d0466dbbc7bcf3939b8bb32a4b20f5e119ab1707a73d80a3096aa71"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/7462",
+  "stratum": "economics",
+  "content_sha256": "37ba97ef4235e27857588467a06b9cd117c3febc30a55260153f7277feafaff0"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/7644",
+  "stratum": "economics",
+  "content_sha256": "5d18191fced0c0afadde1ebb5e67f57192428d0ee0a670d8c379c5a658225bc2"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/7011",
+  "stratum": "economics",
+  "content_sha256": "95c93e0cb6b8ce65a60500ebf4c892644ace0a5615a8a2026f3868e658ce072e"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/11760",
+  "stratum": "engineering",
+  "content_sha256": "b7a2e8d8ad7b1a2e8d8d0f3959f7bf1d7d48972b04f6d6bc5e4a3028d499db93"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/11542",
+  "stratum": "engineering",
+  "content_sha256": "5c63090ff1306bb278a7310ca9a509961dc238fd3606403483c2b9954efd8771"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/12033",
+  "stratum": "engineering",
+  "content_sha256": "21c1ccaa7a848856017cb6b2064c9bc5ecf03a6f40be0a9ffc11a69c7a7a25da"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/12103",
+  "stratum": "engineering",
+  "content_sha256": "11711c5d1d38c2a38541ef4087092793473379a84d583f36e41d630877d59bdb"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6179",
+  "stratum": "health",
+  "content_sha256": "b1f7238370943866364bb40cfdc4bab0ac056f462d9689257eaf153feb679d67"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6696",
+  "stratum": "health",
+  "content_sha256": "0607b6481087358066c3567f59699effa83bf460babb0805b62f790b8fd54e89"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6173",
+  "stratum": "health",
+  "content_sha256": "8cd4340d7198bbcbb363a8247b6368d7c0013ed59b5f78a9e216010f660f85b1"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/6108",
+  "stratum": "health",
+  "content_sha256": "38966a0285aaa2483830c957ef9c59997a6f48bccda2c46489d1f27cae69329a"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4943",
+  "stratum": "history",
+  "content_sha256": "72f0ef949f8cbc3d059ac4f70b3770d57359d99864cd200ab5247cba4fa95edd"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5047",
+  "stratum": "history",
+  "content_sha256": "9acabf8849a83dd547fdd67122eac2d03cb22604ec72e0014b2ccb55b19e7c86"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4758",
+  "stratum": "history",
+  "content_sha256": "a1f3f4edf50167298e6dba61b0e848d369167ee290a0cd8b002046f8fe35bd06"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/4738",
+  "stratum": "history",
+  "content_sha256": "b0c7a0ca6bf046ad3bc7879674429b874d9a1582b702ae243501bae1bf31fb9d"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1331",
+  "stratum": "law",
+  "content_sha256": "f071f35df3355e39ff5ece64becbc1b3288ac57b547f24caac3e34af34ff1c19"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1603",
+  "stratum": "law",
+  "content_sha256": "0eadc5a72428dcd3b76df2097deb566fc1c6536fb6bce5c29313efac8052c459"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1606",
+  "stratum": "law",
+  "content_sha256": "070f150ba3ea9aef0fc06ca4f9aec72d3fedc468b3f50ebb12c5ac104769d0d2"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1579",
+  "stratum": "law",
+  "content_sha256": "d28d6a209a75ab95485a7cccd875cf20f487bae2b671032bffe37b091f701db5"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/1177",
+  "stratum": "law",
+  "content_sha256": "396cc7db84c3378f9ab77f74f4983ab844b3c84aa42c5c727ee2c711f800a790"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/8145",
+  "stratum": "math",
+  "content_sha256": "b7df1178f6c94a63b83d994926f7caa749847207983b9182c9b7dd6cf76efafe"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/8749",
+  "stratum": "math",
+  "content_sha256": "03eeeecc769e18ba0e3e388611ef7bc10eb0a38e5e757cd4af8b90e58d3d8f4a"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/8165",
+  "stratum": "math",
+  "content_sha256": "785180fdc62220cc9910801a81ebc06a09931588b27f897dfe55616210bab201"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/8190",
+  "stratum": "math",
+  "content_sha256": "a3a95491d4eed1a1b992c0ac81585b426315992e2e71cd8124a981cd4404a57e"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5179",
+  "stratum": "other",
+  "content_sha256": "f9b737ffd56fed765bdc5d81470604af1ac380f68542e5e30f10124792cb6f73"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5503",
+  "stratum": "other",
+  "content_sha256": "a6c3aba00cc5d8a9b194786f38a010a3ab100d59107a9512c02f3fdb327dcb23"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5652",
+  "stratum": "other",
+  "content_sha256": "7410dee31c34aad7bbf4fe77a35473ddefb63d4bcc67b1801b8b6666a8506ef4"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5220",
+  "stratum": "other",
+  "content_sha256": "70ae73f158a588087037d43029c55072ffadebfb0684ec3024b953917f6aea52"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/5672",
+  "stratum": "other",
+  "content_sha256": "19e944770cdcc8d4c5a4e0a199ed56c540c1edd829fed8fb1791df7f1a5f1bf5"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/11198",
+  "stratum": "philosophy",
+  "content_sha256": "617fcd26d01eca32bd9455b4e74f1de06ce57afc03a92e7505353728b1454421"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/11256",
+  "stratum": "philosophy",
+  "content_sha256": "b52812366384ea3584a11d51504723e598394e457b4112859949ad5f5a69a8e7"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/10975",
+  "stratum": "philosophy",
+  "content_sha256": "89b1ea7aad605209f7c904416c5127f15ef284870a77431167d0be2e8a42d0e0"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/11199",
+  "stratum": "philosophy",
+  "content_sha256": "78e1b53a83a67adec587bdb68c453f8d12e967a8cf4e0fa6005c454e576641ef"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9514",
+  "stratum": "physics",
+  "content_sha256": "31de9eac3f00fbebcf60cf8205d2deeaa33bf6682d8afd852d1f35e08febbec7"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9557",
+  "stratum": "physics",
+  "content_sha256": "369e571f7b68ee74a428e032e7c82a5270f463545199102bc863a071034255a9"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9571",
+  "stratum": "physics",
+  "content_sha256": "83e0f37518631c2bd16bff2720274de486843d708b9cc756f3d43d2160d171f0"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/9505",
+  "stratum": "physics",
+  "content_sha256": "7f1784d0fda85dcaf13aa70fe0d78e204526bc7c9c4a4bdb1654bbaffaba4262"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/2694",
+  "stratum": "psychology",
+  "content_sha256": "7ffd7995fb9b6dfada38ac861e41b70c3a7e14174550a4ff9af90579156a1a4c"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/2036",
+  "stratum": "psychology",
+  "content_sha256": "975532c4012b0351bc1b9bcd3385c4ebc4ad450fb109ec6c91198c22b0c1d654"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/2297",
+  "stratum": "psychology",
+  "content_sha256": "d315d9c822a89e5f15438b6d78c255e5e19d4a8c67c7e3d26bf5b19a44031bbc"
+ },
+ {
+  "benchmark": "mmlu_pro",
+  "item_id": "mmlu_pro/2233",
+  "stratum": "psychology",
+  "content_sha256": "982359fea77573cfa34d9142d0f3e460f93f60e0436451341eb07cb54b56e070"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1214.json",
+  "stratum": "Algebra|L1",
+  "content_sha256": "58aab2274e9e34cabcaa2385b7151dec68c3e9d94d3e9899b796dc82642593a8"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1937.json",
+  "stratum": "Algebra|L1",
+  "content_sha256": "a54460c3eddba3c4b31d79c6e26a39b34541ed7717db8b1fb05e515679624331"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/2680.json",
+  "stratum": "Algebra|L2",
+  "content_sha256": "1c084e439770e1d9681fd53f6dd189268b1817b37a0b7b88b48a9e036fc956c6"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1349.json",
+  "stratum": "Algebra|L2",
+  "content_sha256": "1e59b8cae8b19bb52556b1c9d01148b1ba59b0db7e8792acbbc566489e305f3b"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/864.json",
+  "stratum": "Algebra|L2",
+  "content_sha256": "a0be6631f332b996b0148cd0c5e9ec2079ddf8118861101b6a7a332ed2938c2b"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1098.json",
+  "stratum": "Algebra|L3",
+  "content_sha256": "cce9209bc28f76c1c6a4290a3a5cf857f0e0ee9874ab3b3ed44345607d4cb410"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/2046.json",
+  "stratum": "Algebra|L3",
+  "content_sha256": "fecc51e449c73f93750ec2a234801b4622d8d31d4f8ef415d93ff53e4033c7f0"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/634.json",
+  "stratum": "Algebra|L3",
+  "content_sha256": "8e94732caeed5f9b9d98ac7fbaa126963bdd0858a74c2dd7f2b34ea1ceb6155a"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/907.json",
+  "stratum": "Algebra|L4",
+  "content_sha256": "f5c172c898474116bd2b0e252e2a02362afa1e07986b2f51faa2c6f9f7a46160"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/2391.json",
+  "stratum": "Algebra|L4",
+  "content_sha256": "2c3d89ca5aca2bca673678dd4c431bc926d7f20324bd7651652a26a8744da0b0"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/2058.json",
+  "stratum": "Algebra|L4",
+  "content_sha256": "d7d47865fbb51ce6ea28fedee3cb83510ce12e96f388af7fdb303810ee2b743d"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/187.json",
+  "stratum": "Algebra|L4",
+  "content_sha256": "c6f83b0877a24b7bc56d8527f929bf4cdeac67e82acae627356f0d55542d839b"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/686.json",
+  "stratum": "Algebra|L5",
+  "content_sha256": "86429feba2dedf48c00f61e50ce8ca2b363200be9899a459f15d92a4777219ed"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/1143.json",
+  "stratum": "Algebra|L5",
+  "content_sha256": "823e4d044d4c14eb5605d266a8d2db894d35509a089c2a6e824df6e0d95dc035"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/2780.json",
+  "stratum": "Algebra|L5",
+  "content_sha256": "0f428a2fcac49937e7ea597c684b3ab36cd26465741f4b3c505c349fe0a2b370"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/algebra/291.json",
+  "stratum": "Algebra|L5",
+  "content_sha256": "e76531f9dd29367061e642cb2868e6d4e03a6ed3f6fe9490a8464ea7ac7f519c"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/counting_and_probability/1060.json",
+  "stratum": "Counting & Probability|L2",
+  "content_sha256": "9e0b1d33f87ca8ab9846e80dbeecae84ec9ed760dd827b77dec6ff1c0bc648e7"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/counting_and_probability/282.json",
+  "stratum": "Counting & Probability|L4",
+  "content_sha256": "c9e4c904d13568a77a2d7223268ad7d50388a6bda9f532629b40a75e7add49fc"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/counting_and_probability/1009.json",
+  "stratum": "Counting & Probability|L5",
+  "content_sha256": "6fe518888bc76580a2aeb6b8fd2b694d8798390d52b92aa85ae64dd43b64a4ed"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/802.json",
+  "stratum": "Geometry|L2",
+  "content_sha256": "e6c6322685f03107675d3bf6bb38558c0a58de183aa425fab15c196211e2a569"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/477.json",
+  "stratum": "Geometry|L3",
+  "content_sha256": "232c130542b07b7c2286cfa37f4cd4e8ff7665eb0f34e3b53c99bebe9cbd7e81"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/547.json",
+  "stratum": "Geometry|L4",
+  "content_sha256": "ede1df682550017957de17dbbbdaf900dbdb85127e0f48fc6454eb804d63a7ca"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/965.json",
+  "stratum": "Geometry|L5",
+  "content_sha256": "0f8a7867d1de477aed3aadc72d34fa0a6247f830111831a3d05d0456d03f87a0"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/geometry/561.json",
+  "stratum": "Geometry|L5",
+  "content_sha256": "289d8fe784375878da79526995cda91ef3c5ab390666785a565749a4e1886ff1"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1714.json",
+  "stratum": "Intermediate Algebra|L1",
+  "content_sha256": "484ccaf50a96ce740f4779d83ea0ef7997e01e275e6f8267ab4f5fd1e8e706f7"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1168.json",
+  "stratum": "Intermediate Algebra|L2",
+  "content_sha256": "7fc009d3f808cafe82a80e1a5bf838cb6b652f1852bf15aa8b4942cc04dae6b7"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1300.json",
+  "stratum": "Intermediate Algebra|L3",
+  "content_sha256": "550b1a4c6ea77399326894f15265b5fe8dfa8c23d3697caf0dc7121081946a36"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/199.json",
+  "stratum": "Intermediate Algebra|L3",
+  "content_sha256": "d32a3fa07b18122a86c8d037617dbade753b37f7034e0a975f68abb1436cb03f"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/190.json",
+  "stratum": "Intermediate Algebra|L4",
+  "content_sha256": "bbdb5370300becb7c74f85fb42a202687eb38d3387cd825494107b04378b868f"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/102.json",
+  "stratum": "Intermediate Algebra|L4",
+  "content_sha256": "c5a01fea5f4b33a5cdf2059b547cb05af5b7274ffa577b656c72556bc4ed4561"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/47.json",
+  "stratum": "Intermediate Algebra|L4",
+  "content_sha256": "015c3ca8c1297fa216bcbcaefb5f6a8be7b85db9b19b33e1d093c0f0187bfe69"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1166.json",
+  "stratum": "Intermediate Algebra|L5",
+  "content_sha256": "199e104d517ec67e4f167c49f035776c7bdaf933e41971c80716e26979d3a9a8"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1467.json",
+  "stratum": "Intermediate Algebra|L5",
+  "content_sha256": "3fa1c228d11580f03f1a60bf4a9e52d270a813e44d2524f0730d75dc3be8bf00"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/1791.json",
+  "stratum": "Intermediate Algebra|L5",
+  "content_sha256": "7d6cd3a2b3dcbaeaddfeb49d860bacf22dc1e33c79b74a23547d7fa1f21a2b36"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/intermediate_algebra/2196.json",
+  "stratum": "Intermediate Algebra|L5",
+  "content_sha256": "ea1397aa97f673873beaf692580a59f388681c7f352d0874cc603ea9bd063e90"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/466.json",
+  "stratum": "Number Theory|L1",
+  "content_sha256": "ded0ffd3643d01300751d58ce6b747aa56f9e8f460bbcf7d41a4fee1fc747961"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/627.json",
+  "stratum": "Number Theory|L2",
+  "content_sha256": "9cf00bc32f46d4ab04e4c9fde7b5b98360366e65d4e0f48754a41e68d75fc86d"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/368.json",
+  "stratum": "Number Theory|L3",
+  "content_sha256": "ab7e10c4af73c9ed6ddf5ba3ffb0e07855591c25339c369f4ff920a3771210e4"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/1032.json",
+  "stratum": "Number Theory|L3",
+  "content_sha256": "92992c0e162b3d6d436556be1efed0301d3f0786e57e18a1ab22e3d8d89413c9"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/72.json",
+  "stratum": "Number Theory|L4",
+  "content_sha256": "e670b2f65bcd4b8c080cc99ba748e180708051bfde97139641b1a1bddb605811"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/1257.json",
+  "stratum": "Number Theory|L4",
+  "content_sha256": "28551dccd09ca15d905d4763731c20f08027ccb74f368dd485ccd40b08ec7641"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/number_theory/1055.json",
+  "stratum": "Number Theory|L5",
+  "content_sha256": "4639686b328fdf3073dec61a9a86aee58ce6224c2882566d961fde9a5166577c"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/192.json",
+  "stratum": "Prealgebra|L1",
+  "content_sha256": "7f472ed5afd0fbc0f395729a07ffaf91921e6ca65abb1fca618e2724e9158e98"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1187.json",
+  "stratum": "Prealgebra|L2",
+  "content_sha256": "4524aaecc261a7144ebffcc32f83f78291b5e46c8ff8d9abf1be8cb752b6db98"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/977.json",
+  "stratum": "Prealgebra|L2",
+  "content_sha256": "fdd18857dfc203ee1b4d0dd165f59c0bda9142cbd7baed65c5be23abb3ac85fa"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1787.json",
+  "stratum": "Prealgebra|L3",
+  "content_sha256": "24cffc732716cb8fa513f4d53152b8b0974478515dfbfdaee2834aefa1e84e07"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1761.json",
+  "stratum": "Prealgebra|L3",
+  "content_sha256": "71d79388b988d5a1756d881f05055d303aa7484c74f8774b00ba80965a39a3a1"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1865.json",
+  "stratum": "Prealgebra|L4",
+  "content_sha256": "84e6ea460d0c77b63491536fa0d42114e73db869e0fb9c5710e20c0e4aae218f"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/993.json",
+  "stratum": "Prealgebra|L4",
+  "content_sha256": "20855ff8e775267f6a6f3932dce944ca3ca36a7fc6ca964df6c46df9816164b6"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1558.json",
+  "stratum": "Prealgebra|L5",
+  "content_sha256": "f4934771de625720407621bdc7b34e4fa10a1f1b0012ec2b8cf0ceff6d8591f5"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/prealgebra/1512.json",
+  "stratum": "Prealgebra|L5",
+  "content_sha256": "0d61919f0c97a497a9f31fb8e35bd6949316b4d73bc4fa9d3c79247e6e8a7be0"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/779.json",
+  "stratum": "Precalculus|L2",
+  "content_sha256": "8b3cece09f2f72b262deb3d7fc12033d4adc3767d7a5fdf096d1d2674d29672a"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/24313.json",
+  "stratum": "Precalculus|L2",
+  "content_sha256": "490c8dd47aecc496eea869fe1d18d0b4d5b23e66900c9f8508b7f9bd4b5a3fa7"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/681.json",
+  "stratum": "Precalculus|L3",
+  "content_sha256": "ec4a6e5635d208d70ba850484927bc18ac42279da40bfb39b4dee528d04617f1"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/117.json",
+  "stratum": "Precalculus|L3",
+  "content_sha256": "50a60fb156488ac69ce8984b7693ec3587886b19836e2074e8a43d7f80ef064c"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/989.json",
+  "stratum": "Precalculus|L4",
+  "content_sha256": "2ff342ecbc77117f87b1f4aff13a1cb99834d470e3368003b70bfd4f550442a0"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/659.json",
+  "stratum": "Precalculus|L4",
+  "content_sha256": "0d9f1bfdb61f201f6469cf335b15d6506953f3d9e62935047a197394ea959013"
+ },
+ {
+  "benchmark": "math500",
+  "item_id": "math500/test/precalculus/768.json",
+  "stratum": "Precalculus|L5",
+  "content_sha256": "e3263989039dc1917a933ff46eeac25e62100143111b220007ecf0af73608bc9"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boardgame_qa/69",
+  "stratum": "bbeh_boardgame_qa",
+  "content_sha256": "960e25febbbf69b1cbf9e69a649d19e7f526faf73b0bfb890bebacdcf13ed763"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boardgame_qa/19",
+  "stratum": "bbeh_boardgame_qa",
+  "content_sha256": "75d6a72979ebc61748c6d93e5b79c8f2a1921a4ddec5af270bc73951aa3dba6f"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boardgame_qa/199",
+  "stratum": "bbeh_boardgame_qa",
+  "content_sha256": "771fb5483ed10c29b68de92880feceee1ffa19ebed3c4e4cde8be2bb9a3b5ac6"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boolean_expressions/179",
+  "stratum": "bbeh_boolean_expressions",
+  "content_sha256": "ea2daff85205c5146ca8e56f044fea664566c95221119c42ee4e44a695cd3e6a"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boolean_expressions/69",
+  "stratum": "bbeh_boolean_expressions",
+  "content_sha256": "99a3112d74ef24c93166c57220d5c8d7b479e3e9b5e709aa856320a51e826644"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_boolean_expressions/89",
+  "stratum": "bbeh_boolean_expressions",
+  "content_sha256": "c3f291eed98a5fc4548d2db26374024ba4bdcebdf418eb99c69644cfd5e79553"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_buggy_tables/119",
+  "stratum": "bbeh_buggy_tables",
+  "content_sha256": "fed1dcacb4f593f5ef76fdc1a14ad926f564e6835ae361f4545489ae95cd9c54"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_buggy_tables/149",
+  "stratum": "bbeh_buggy_tables",
+  "content_sha256": "9d87713220f9aa79f81bc8d161dc852683999ffa5f5a6ff320620aedcfff466c"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_buggy_tables/79",
+  "stratum": "bbeh_buggy_tables",
+  "content_sha256": "b89752b2b95d9012153f23e9d19d13ce5b3c1ecdb68782b89747cb1406c6def8"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_causal_understanding/9",
+  "stratum": "bbeh_causal_understanding",
+  "content_sha256": "148f904801435e519bee9659c65d8b1bd4030918a4d589962b74672365bd8623"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_causal_understanding/159",
+  "stratum": "bbeh_causal_understanding",
+  "content_sha256": "1e20d871b5ab77fb335948429868ecad477152611aed63c798a2aca633978510"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_causal_understanding/119",
+  "stratum": "bbeh_causal_understanding",
+  "content_sha256": "6db4994a98b8fb5d679d884953fab2f5a65e697146eee36b9df79231c55d5c60"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_disambiguation_qa/113",
+  "stratum": "bbeh_disambiguation_qa",
+  "content_sha256": "20d33984a533c9d6a20ac9858700bdbcca529938d00e16a135016e4bcef3b462"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_disambiguation_qa/11",
+  "stratum": "bbeh_disambiguation_qa",
+  "content_sha256": "ae1626f74eb4c206180417612839cc05431c10a6e82930c441340fbd35e8869f"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_disambiguation_qa/101",
+  "stratum": "bbeh_disambiguation_qa",
+  "content_sha256": "c62ff9006709ff1dd3ae5bac803724f4b59ef0eb2fbed504b6eaa86fe610b71e"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_dyck_languages/139",
+  "stratum": "bbeh_dyck_languages",
+  "content_sha256": "72059b2fe7f9bf3ba5fc99ce8489e9ff3a679aa844cf52846506a9d7589da572"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_dyck_languages/109",
+  "stratum": "bbeh_dyck_languages",
+  "content_sha256": "4bff0ae642b957b23756d31d3c771f01a90e7f8a4b6c0c8c2ec356acc3e3885c"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_dyck_languages/99",
+  "stratum": "bbeh_dyck_languages",
+  "content_sha256": "ce2b2bf18088507531fd82abdd5863d965abaefcf63c3e06a2a02ce49e6ca3dd"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_geometric_shapes/49",
+  "stratum": "bbeh_geometric_shapes",
+  "content_sha256": "722b69b264790fb22d778ae35a330c535141d920a33487033282ede643539663"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_geometric_shapes/69",
+  "stratum": "bbeh_geometric_shapes",
+  "content_sha256": "c581a69e03371c11522cff095c8390b7d5e1d5dfdb06fc49a907e5dbce69dea5"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_geometric_shapes/139",
+  "stratum": "bbeh_geometric_shapes",
+  "content_sha256": "3627e76289e813f0ff8c5bb69c356777e342bb4913c5053e9771c550f2a9fae0"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_hyperbaton/169",
+  "stratum": "bbeh_hyperbaton",
+  "content_sha256": "683f647e00557adc44ef078965ffdf19a294105c4842f49e14b19bb5462957f1"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_hyperbaton/149",
+  "stratum": "bbeh_hyperbaton",
+  "content_sha256": "5358f0e0c3cc41edbfc81495eb1a96b1d84d54ca3ab7a6f13580b09650244949"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_hyperbaton/139",
+  "stratum": "bbeh_hyperbaton",
+  "content_sha256": "cb6edd8794b4a514118cf38b5ddfd1dcb0b94eb8fc3fcadcb0aaa5aed920f5fe"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_linguini/59",
+  "stratum": "bbeh_linguini",
+  "content_sha256": "ae84b9e1fa5e6225ac14a9d8063cc90c070589d8ab3169f1ff144d11a141ea57"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_linguini/69",
+  "stratum": "bbeh_linguini",
+  "content_sha256": "b89b34dae124ce03b3a3d404d104a103d20fd259b8894bb6a004f4e3baf01880"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_linguini/159",
+  "stratum": "bbeh_linguini",
+  "content_sha256": "541170b4582e970f57a200368009849f0cb86f370f16bfaae83b01afdfd92948"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_movie_recommendation/59",
+  "stratum": "bbeh_movie_recommendation",
+  "content_sha256": "7af1d986913742e4b689f00c87744bae1698e900a052e81fd9fc68b190a8a4aa"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_movie_recommendation/119",
+  "stratum": "bbeh_movie_recommendation",
+  "content_sha256": "05c2f3a29b9546a1c23351708342fdabba95baf105756acd662c777e1ac0118b"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_multistep_arithmetic/189",
+  "stratum": "bbeh_multistep_arithmetic",
+  "content_sha256": "0ed9c648ba039b90c9fc685bb4d4a4eb29444171a2013910f3a002af272593df"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_multistep_arithmetic/159",
+  "stratum": "bbeh_multistep_arithmetic",
+  "content_sha256": "0ee9f86440a591f3ffd1137e2c6f3ce7c601cf149ceac781039b01cd0f720725"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_nycc/39",
+  "stratum": "bbeh_nycc",
+  "content_sha256": "8b5a491770ae81a16fa25c8477d3789481dece26380a0888f6fc9242067917de"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_nycc/59",
+  "stratum": "bbeh_nycc",
+  "content_sha256": "4bc2a07ba2258addaf9352ea2f75be156515961d8f8233f0f06c31d14a922d5e"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_nycc/99",
+  "stratum": "bbeh_nycc",
+  "content_sha256": "a1f193076339ca2789f32796ba5bcbef6cf624399ce1dfabf2e963216e9594f2"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_counting/79",
+  "stratum": "bbeh_object_counting",
+  "content_sha256": "efc7b703b5b189a7cc3cf3f6d195cfdd3e25f6f5b1907f2328f135fd70ba7fab"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_counting/19",
+  "stratum": "bbeh_object_counting",
+  "content_sha256": "efe2929517cfb9616b0fa77e213671b034e8d72b2559e9d68fb84abf31fa7cd4"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_counting/29",
+  "stratum": "bbeh_object_counting",
+  "content_sha256": "7fa7552b2e7c6ff9b6984597814fc58897b5eecd27b77e61e656eb7c59978455"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_properties/149",
+  "stratum": "bbeh_object_properties",
+  "content_sha256": "1744c909ddf39397431f4d47fdba66a3751fcd7067fd7752d320c597ab632565"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_properties/79",
+  "stratum": "bbeh_object_properties",
+  "content_sha256": "79d784b7348014866760be1583d7b5b42c16f8f1a2863a7cbd72617ccb39b923"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_object_properties/139",
+  "stratum": "bbeh_object_properties",
+  "content_sha256": "432ecd5c1652f6296506a6d172a6fba03c5d40b3ba1b439917c568a0903550d0"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sarc_triples/19",
+  "stratum": "bbeh_sarc_triples",
+  "content_sha256": "eac8d83ca0edc6eaa53609921d3c753bfa57831ab5cbf4eb88a0a631b0dae814"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sarc_triples/29",
+  "stratum": "bbeh_sarc_triples",
+  "content_sha256": "e606d169af0cf3fe37f0f0a3031e73e071b72b4a1e43c279e74c95aa6eec668c"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sarc_triples/9",
+  "stratum": "bbeh_sarc_triples",
+  "content_sha256": "7443f647fc4e88b85caaf6874c5a218a16ffcb6f960ba5efe63b79207035e8b7"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_shuffled_objects/79",
+  "stratum": "bbeh_shuffled_objects",
+  "content_sha256": "17e15d2ef76a79b5d9652146d30ff11cf5e87387f57797b25c33a6b3dd0ec4ed"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_shuffled_objects/139",
+  "stratum": "bbeh_shuffled_objects",
+  "content_sha256": "813c6b761cb9120ef6fd611c8e6fb120a878fb75585b1fbeb5ac9217cea322a5"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_shuffled_objects/189",
+  "stratum": "bbeh_shuffled_objects",
+  "content_sha256": "4592bdcbb017c4379d4c6162e4f4eb70e0fb34d9b399cf821d0d73414a8cad32"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_spatial_reasoning/139",
+  "stratum": "bbeh_spatial_reasoning",
+  "content_sha256": "18a1f2a362da6995c2ada39b07bfc6633a00a36f77b3c35cd7471d226f8dd229"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_spatial_reasoning/149",
+  "stratum": "bbeh_spatial_reasoning",
+  "content_sha256": "3e8eb7c1020e5918726ae58138025c6032312629524915adb0e77c3c09a2015b"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_spatial_reasoning/109",
+  "stratum": "bbeh_spatial_reasoning",
+  "content_sha256": "45996fdd94978ed0f254547997bfae0fe121f506c6795c623120745a9ff900ca"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sportqa/119",
+  "stratum": "bbeh_sportqa",
+  "content_sha256": "01ecbd554e61221904ef0ed8de23608b05724e01ac531fa3d9a947b7588ac65f"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sportqa/89",
+  "stratum": "bbeh_sportqa",
+  "content_sha256": "eb75dfd23953a4a6dbc432f1988a4d1d121c7e246b441b1546f5544a29d13056"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_sportqa/199",
+  "stratum": "bbeh_sportqa",
+  "content_sha256": "a54c6374aad6cca98cd845131472560d48fa25a9f3e03cb1f539703974ada4ca"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_temporal_sequence/59",
+  "stratum": "bbeh_temporal_sequence",
+  "content_sha256": "6367afb4cb22adb8b1e1857a5c88a7e9f3d4a68f69227bc9f8c1ebe5919447e1"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_temporal_sequence/119",
+  "stratum": "bbeh_temporal_sequence",
+  "content_sha256": "db53296d8b9a12b89bd2fa5878d18736a37dc7be07ffd36e569f1b927f7c5fe4"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_temporal_sequence/79",
+  "stratum": "bbeh_temporal_sequence",
+  "content_sha256": "59d75ba1573417ab4106b7134273464f6168b4e9e0694f2cf7ec79b798f5e7e4"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_time_arithmetic/159",
+  "stratum": "bbeh_time_arithmetic",
+  "content_sha256": "14b828c0c5814f04ba974de8e9f9a749a65fb9facfb51f733c9facaaf516a204"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_time_arithmetic/139",
+  "stratum": "bbeh_time_arithmetic",
+  "content_sha256": "ed032a3641e97556b766c6100ac1eded05f9a0346c2c39240ef19dae4f8b68ea"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_time_arithmetic/119",
+  "stratum": "bbeh_time_arithmetic",
+  "content_sha256": "466cfeb160eb759edfb095e25602e1453a3a159c65bdc9b6f0cd4408712427d7"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_web_of_lies/109",
+  "stratum": "bbeh_web_of_lies",
+  "content_sha256": "2436dd5dfc391ed38dca6fb478b6bffaac8ba7f1f3895277523b9739b388706d"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_web_of_lies/179",
+  "stratum": "bbeh_web_of_lies",
+  "content_sha256": "a52b2b0195ddc5a89d067833659cacc18f589c5d601e4cf4d976511573abb3fd"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_web_of_lies/129",
+  "stratum": "bbeh_web_of_lies",
+  "content_sha256": "c5a843cdcb5430290524b57ce98303e91170bddb580357f541601ca193472281"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_word_sorting/119",
+  "stratum": "bbeh_word_sorting",
+  "content_sha256": "a2694992769c16573fb9c70556128fbe0c90399edd170dc627f4297dae5097ae"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_word_sorting/69",
+  "stratum": "bbeh_word_sorting",
+  "content_sha256": "1a5969347f010978e4756578651c14401c64e9e7ccbb0d1d2bdacc1b37f992f9"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_word_sorting/59",
+  "stratum": "bbeh_word_sorting",
+  "content_sha256": "e2ba5246b151ce64e93cd50f57701b9c60c0fbb9adc9e46f9ed423c12bba2dec"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_zebra_puzzles/59",
+  "stratum": "bbeh_zebra_puzzles",
+  "content_sha256": "5d404569c1ea34e85b889e418c17e9ef2b94a20910b555602c15d44e95e719e3"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_zebra_puzzles/149",
+  "stratum": "bbeh_zebra_puzzles",
+  "content_sha256": "c310587dde74a1d25f16ddac712739da0ceaee1574285a687e3e589d41967121"
+ },
+ {
+  "benchmark": "bbeh_mini",
+  "item_id": "bbeh/bbeh_zebra_puzzles/109",
+  "stratum": "bbeh_zebra_puzzles",
+  "content_sha256": "6b8526857c65b5e413a764fe315c4201498edc65cf7363e498a083d3e77e3205"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3186",
+  "stratum": "ifeval",
+  "content_sha256": "faf548bcc586d9b60d10773eea094e6e6b49771609cb28f5a49add5bf9724f15"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1332",
+  "stratum": "ifeval",
+  "content_sha256": "8e44299e82c1b6c98e27bdafc4dd6a50c0fb7ee08f7f001a3ba17723f4c2dc50"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1162",
+  "stratum": "ifeval",
+  "content_sha256": "bb0712dd75375fb304ee85b994150bed909df514e62e4a40ac8b0338327d536a"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1627",
+  "stratum": "ifeval",
+  "content_sha256": "1d0297e542c8ddf86c5635b59003fc94e46afde04220ec789bc0c4e14579af04"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2871",
+  "stratum": "ifeval",
+  "content_sha256": "96da49bb065259d1dcdf7e4c03a265647430d1af3ef3b852f28c934d728fd885"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3131",
+  "stratum": "ifeval",
+  "content_sha256": "c9e3dd2374aae39e84ec7c615ed39861cc9fd32c3609d06890540ee7be8ce1b0"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2825",
+  "stratum": "ifeval",
+  "content_sha256": "c5c9e9b7de23cd1df7ecafdef8741e71042459c05d11f156b66666760deaf574"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3456",
+  "stratum": "ifeval",
+  "content_sha256": "1d8a31b0b15d96b62eb433409e90c2ae3ad2312ec00f60afb9f5c6a470ee8f53"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1372",
+  "stratum": "ifeval",
+  "content_sha256": "b108e3f6fb4c5224df8e97454b9c946eb51dacd609beb3a8cd46ea9b52aa1f30"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1466",
+  "stratum": "ifeval",
+  "content_sha256": "b0730e261bb3148b46efe8d4e28568ddc55aa86f71dbf09f264e5a1dbdf7d9f1"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2853",
+  "stratum": "ifeval",
+  "content_sha256": "37894ff5222733daa10da0026ac43f09ea9ec2119d5fc0d70c537daf240318f3"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3311",
+  "stratum": "ifeval",
+  "content_sha256": "2946bdd7398a640aac3559d843f8edecc9f926848e25aae158a688cf285bc5cd"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1834",
+  "stratum": "ifeval",
+  "content_sha256": "0b1d4c398ded6144723d48bff938c27c49893d3a85c89f1c8088588e9a2bb09e"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2820",
+  "stratum": "ifeval",
+  "content_sha256": "af5f6e226663fcb97f368430820476eb9a8ab9905800dd548c40c873d440520c"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3287",
+  "stratum": "ifeval",
+  "content_sha256": "61b1b7085376560ecf8d5ac1b442cae273abbd94e52f0101cb5d4b1f4f9eb820"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1219",
+  "stratum": "ifeval",
+  "content_sha256": "cba9b79eda31d365a6e85bc6777a4fd05659a71032c41c44f6e721a406a454a1"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2246",
+  "stratum": "ifeval",
+  "content_sha256": "054182dd7ccfbbec58a01c95d041d5e03a6398c7447d18f2a6b0800d5dabae32"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2677",
+  "stratum": "ifeval",
+  "content_sha256": "972810a19133a20b2369ef6fd47326625d1b127fc3beb5d2b140335997bdb32b"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2230",
+  "stratum": "ifeval",
+  "content_sha256": "cde2507644b5da545f4f3bbf5dbd589ad9e072b3bd7bc46b64abc674222ce533"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3084",
+  "stratum": "ifeval",
+  "content_sha256": "8103d83d5ebc2ce9811e08b5d93933b07a6fae39312016006abfd10218e191a6"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1843",
+  "stratum": "ifeval",
+  "content_sha256": "8e65fcdc739913da4867d68c1b33a29ea47470d57ae7671bb36f084e45d6e4a4"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2849",
+  "stratum": "ifeval",
+  "content_sha256": "a3d007cb69f9442a9a54791fec17fe69bc5feab2b4311ee0290901b4a8c2737c"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2622",
+  "stratum": "ifeval",
+  "content_sha256": "99ca25b154ed2bded0e5260b6144517b13bb44afeb58773563110e75ba7d9c10"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2517",
+  "stratum": "ifeval",
+  "content_sha256": "a1718c8420eb825d728cb8fb2d7a275bc6e763a727476b74c64e77076f49f1a3"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3540",
+  "stratum": "ifeval",
+  "content_sha256": "1a05915343da5a5a1afb9908450d6a6a7f382764f823fcd6eabc2c333598af29"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1967",
+  "stratum": "ifeval",
+  "content_sha256": "6c52a1921020cb4613e55333a3c7c277ef673b5cf482907bf3471aa7d38a68b5"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3536",
+  "stratum": "ifeval",
+  "content_sha256": "ebeefb84d837af871efa910d575618a58b56877de1a527a359036a392eee1203"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2464",
+  "stratum": "ifeval",
+  "content_sha256": "cb79cf4e584efb77f343fbe8ee6ee14cd1b6e1e0d4d53ee5004956645b315fa8"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3739",
+  "stratum": "ifeval",
+  "content_sha256": "36e36afd7274af7e7659b1b18cf61f32c0c1f4c6dbf2fec826fae7cccffffc82"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1480",
+  "stratum": "ifeval",
+  "content_sha256": "acdae1dc8fab5559a0794dcd6c41972d3b753ef63cb3838fc95260e271e41a16"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2471",
+  "stratum": "ifeval",
+  "content_sha256": "7b7b78eef7ce535323209931bdc9abd10977017c486b5f366df178cc07024d53"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3606",
+  "stratum": "ifeval",
+  "content_sha256": "6b52e4b0ced0ac0684ad02617fb19d95c2eeb6a7fd3306fce80624a90ba9b9aa"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1393",
+  "stratum": "ifeval",
+  "content_sha256": "c702baa8141eebfc4cee13a218df77ae372ca4af6559fa1b9f172b4c560da5a9"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3755",
+  "stratum": "ifeval",
+  "content_sha256": "abff74c1c520ee3d467670735843945134f1d2b6658635a302034e09c7fc02a2"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3409",
+  "stratum": "ifeval",
+  "content_sha256": "04fdad2c4ec154fb0d69ec01508b69fac19767940955d1c6330fd1c9b6b251a0"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1069",
+  "stratum": "ifeval",
+  "content_sha256": "dfc3b4a55b4956edd8641d84671273afe0fce7bc51de9362559aff5bec6e406a"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3718",
+  "stratum": "ifeval",
+  "content_sha256": "fdca83b6cde66df676cecd0f2f8b5ce4b42c35d3f8fcbbc68bc3808098e7ed6a"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2616",
+  "stratum": "ifeval",
+  "content_sha256": "9a9c155316e7036ae7e5ebf2d8d5b87ac64aac5b80c1837a34a544b43a8bda15"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1813",
+  "stratum": "ifeval",
+  "content_sha256": "d5ec48ab6c1aab6392c1d004d05b54587a203acec7228ddb5366d4185c456fe2"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2266",
+  "stratum": "ifeval",
+  "content_sha256": "cbbbdddd9305bbe9e5a8b9a8a5ee2e41193c5a238dfbf846a88c812b940ca76c"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2482",
+  "stratum": "ifeval",
+  "content_sha256": "6128ac5f5223e129f2fa4c0242806ca82e089c039bb8f6728feb5c424ea6b1af"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3001",
+  "stratum": "ifeval",
+  "content_sha256": "5da9c37d70cd33813a4e479fdcf8b5afc2f472f3ba75585ea2d11b1c5fec8370"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3732",
+  "stratum": "ifeval",
+  "content_sha256": "8eee5111b7ee187817f6a44814604774a85e27ec3959bcff469f9c563c800fb5"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3315",
+  "stratum": "ifeval",
+  "content_sha256": "4ed425490417883023761c4ddca232f9580556f074bb1c2bf9b7034f455b621e"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3506",
+  "stratum": "ifeval",
+  "content_sha256": "4ad68a40a2b0996403abb39f6dc39a5d5e81ca327f92ee919c8f73c7b107ec6c"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/371",
+  "stratum": "ifeval",
+  "content_sha256": "a9dc9b6581806016da17cc15a8ce5fb9208584bd786349b9e6f432e8b76673b7"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1934",
+  "stratum": "ifeval",
+  "content_sha256": "3bf6a25ecd432d5ba6373bda2a2fb3cb2d6b5e1821b24dbffcd3637b95c70647"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1592",
+  "stratum": "ifeval",
+  "content_sha256": "95c880ec9440ec74f360ef5e4f9ab5717eae089d30335c6d6989accfbdeac279"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2449",
+  "stratum": "ifeval",
+  "content_sha256": "1543061d87723f8cd4403bb7c02281080cfe6420ca682b2afbf5c891ea619385"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2441",
+  "stratum": "ifeval",
+  "content_sha256": "745363df086ebc2bc824639547e2726985b421df29b5ec51a3a8d4df053eed6b"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2303",
+  "stratum": "ifeval",
+  "content_sha256": "f1003d957c9e93ed3453211e125ac92e571278a4d57dfc3cda2d5588bf6262f8"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/349",
+  "stratum": "ifeval",
+  "content_sha256": "43427b0ed903ae18f4b10b8cbd52e0391f070efde7c0f0277e8173c2878a673f"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2571",
+  "stratum": "ifeval",
+  "content_sha256": "5df22e20e233ac3a01a5346e45ae22418c6bd3fa35cdd5ac6c301f879316a76f"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1670",
+  "stratum": "ifeval",
+  "content_sha256": "65a0f9c9b9c5c6794c680dc2439a12d629c7d202d1c59c4b38df7cc7afda032d"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1259",
+  "stratum": "ifeval",
+  "content_sha256": "72211f6155c5dd1ec776d3e308162a0bd8ec0a985ed26fa18ecdb86aaab4088a"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1075",
+  "stratum": "ifeval",
+  "content_sha256": "eaa884fe78cfb86af89d33fdf5effd81bb0646ae6062e5208314a096600f4fe5"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1389",
+  "stratum": "ifeval",
+  "content_sha256": "47fbde0aac445dd2613ccafb8eb80f9cd989427b1d793f59a7ce5c6dca4ab080"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1147",
+  "stratum": "ifeval",
+  "content_sha256": "d6360d4939c9f77061ae078875e6a8ea99b52344c8c96c2070bb96a76d628a70"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1251",
+  "stratum": "ifeval",
+  "content_sha256": "59cb3ed0a47067d183950b242d23a5d910d72e7d3f9d9d180560258de8439125"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1305",
+  "stratum": "ifeval",
+  "content_sha256": "740fed90421b10e4e41de71bfb074f314cec5531df3db69e18674adfefeff1f6"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3429",
+  "stratum": "ifeval",
+  "content_sha256": "8e498bae39344e32ffe2668631bb5de2f63ec814d9cc0a63e0c9a50c28b6e166"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2798",
+  "stratum": "ifeval",
+  "content_sha256": "518fb402e1ab206cfa6a3c9c63389207e95e111a125e40d81f0ab50e71d5ed8f"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2909",
+  "stratum": "ifeval",
+  "content_sha256": "5c378ab73c09f938ee3c70e42f4e152c83ca34b577bddddd941ffa3d9b2db323"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2653",
+  "stratum": "ifeval",
+  "content_sha256": "b843adadf52a024b98c693b68f8eb9aecc8eae71f0bbf72762b577e4633d6560"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3710",
+  "stratum": "ifeval",
+  "content_sha256": "5d2a6c866d951b12a07e63d30d8eee24e73d5b996068bb44fdb4e1bb18303393"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1571",
+  "stratum": "ifeval",
+  "content_sha256": "0f2c8cef4f6ece0f2f4809ce26fd5688d413a6f2667166b979cd2ec833839430"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1094",
+  "stratum": "ifeval",
+  "content_sha256": "b3aecc9bd8ff70e9f749d207c1f777d5d07f42b6df644f6f7b3ed8d75bb07b7c"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2432",
+  "stratum": "ifeval",
+  "content_sha256": "477b7418b23678ed4cea4d770ab1ff67d71fe803e580b33f54c3fe2a727d55b3"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/3572",
+  "stratum": "ifeval",
+  "content_sha256": "d36293e935e55cf5ba1a27b045ffc59f34273d6fcc45a7768400fa601d72b3e1"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2785",
+  "stratum": "ifeval",
+  "content_sha256": "014b9f6e1df1d06b45166ccf877131abb341faf2dd408872370690e3d927e0e3"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1730",
+  "stratum": "ifeval",
+  "content_sha256": "f70bbad792c3a6be9c9a3a68467d5e07de580f37ac98583ce4d4d49b9769cbdf"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2674",
+  "stratum": "ifeval",
+  "content_sha256": "932ce35b365d94f2979393e699b822240e406128356985fba6e13d4984f489d0"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/209",
+  "stratum": "ifeval",
+  "content_sha256": "de66c5b12189ae730663b38e452a0fea971d15b6aedabf1e4428dd9161e5bbb8"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1646",
+  "stratum": "ifeval",
+  "content_sha256": "6aa7bf58c9d5c4021997b76c1393224e876431cf3b8cdb5862ece20feeb0a668"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/1713",
+  "stratum": "ifeval",
+  "content_sha256": "534963b09479799d142df3a83f19e11a3164d287181fcfd7f9ce7df90fdc8647"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2069",
+  "stratum": "ifeval",
+  "content_sha256": "57ba339a89486eed6554ee0ba2e14e421f0a9e437579c5dc26f7a6bfd506b964"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2034",
+  "stratum": "ifeval",
+  "content_sha256": "845adcc423d3b51288321dd9d6ee492e28ff2087bccbb239bcbc8ee9f558e5cf"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/2724",
+  "stratum": "ifeval",
+  "content_sha256": "dd329d1f5e66d444f02d67520426eb55e31b6cfbd9d3ff21999620987ebd9c40"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/179",
+  "stratum": "ifeval",
+  "content_sha256": "59d3f7eb94700aa44ed88e7eb45956b688e01c661f525f8e05a945da717c297b"
+ },
+ {
+  "benchmark": "ifeval",
+  "item_id": "ifeval/332",
+  "stratum": "ifeval",
+  "content_sha256": "96d26f5805017e7d516b752b455e63798b7f8be97a646f84ae2d856dad39a76f"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/prog_fizzbuzz",
+  "stratum": "programming",
+  "content_sha256": "f0dafa73cdf6ee5fa25c081d8dd84c18391b342e801cdbdcb0ae206569af4c4f"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/prog_reverse_words",
+  "stratum": "programming",
+  "content_sha256": "9213a82a6c996df80c607d828cf7992e34995abea05fca18778436f4047f995b"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/prog_is_palindrome",
+  "stratum": "programming",
+  "content_sha256": "997da3709086fd5e493b7fbbc7d1358aaada0fc1b9e0748718a4fd4fc6a130b8"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/algo_binary_search",
+  "stratum": "algorithms",
+  "content_sha256": "05f4ea8e8c14a9e8afbed8a69dd7ea262fe2571e22f0ff45f92f4dc4a3825c12"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/algo_quicksort_worst",
+  "stratum": "algorithms",
+  "content_sha256": "a748e4a34d8e118dc7d043786a74885312fc406fe2995a870173830c37249daf"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/algo_stack_queue",
+  "stratum": "algorithms",
+  "content_sha256": "7d64bace7d4c8dde8c0fa7c3e0b6198cc4a1527bedc9eb6bcb7bc6a8f16c1765"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/debug_off_by_one",
+  "stratum": "debugging",
+  "content_sha256": "e37d84c5d60e444ca089b265f5eb3b2ca9ccc4b32d179a122fe84857241f2b6c"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/debug_integer_division",
+  "stratum": "debugging",
+  "content_sha256": "cb8c8102032c4e96c237256c565c5f6f6ea156ed45f296830e609fb03fd2aa24"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/debug_identity_vs_equality",
+  "stratum": "debugging",
+  "content_sha256": "ed0271ec12446878f7d254a08b905c0bd7c1fd19801cc326db5ec6e2d8ff24d9"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/concept_recursion",
+  "stratum": "conceptual",
+  "content_sha256": "43d3eae6a109084431c7a3aa3ca3c6752fdac4a484219d268ff0ff16eaae7d39"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/concept_big_o",
+  "stratum": "conceptual",
+  "content_sha256": "b23df91671c28b9a6d216e2f51ba95b55dde97c821f79d5338ab8325f64be4ef"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/concept_deadlock",
+  "stratum": "conceptual",
+  "content_sha256": "6b3701a7c606abdf8909fd6894d57f354bd891495393f2b6b11153d434c6e0d9"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/reason_array_doubling",
+  "stratum": "reasoning",
+  "content_sha256": "8a1e7d0b5fcd927eaac7245c270dfec6180b2b597093529ebc13c60633cae0a5"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/reason_binary_steps",
+  "stratum": "reasoning",
+  "content_sha256": "90b34ee1f3038e3cec1abe27cef5876c6a090cbf062eac32575519060f8da471"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/reason_transfer_time",
+  "stratum": "reasoning",
+  "content_sha256": "e05acecd42d1afb9dc68b845fa62a24abe16e79e50aed80730a72930016c62ad"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/instr_json_output",
+  "stratum": "instruction_following",
+  "content_sha256": "749a38898d72a17b907ea52fc063f24cfa8ec04de4e911a57a32a4bc99b5769c"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/instr_forbidden_word",
+  "stratum": "instruction_following",
+  "content_sha256": "7768b7a4eec7b38f155cc288be10a2c919d3cb3da1fb9e4d68377c8ce5b78048"
+ },
+ {
+  "benchmark": "student",
+  "item_id": "student/instr_five_bullets",
+  "stratum": "instruction_following",
+  "content_sha256": "e36f19a86d9754d49ec22ab7c66f632c8d05d4127eec41bbfbce4a2874188ee8"
+ }
+]

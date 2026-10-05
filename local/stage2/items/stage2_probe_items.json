@@ -1,0 +1,12 @@
+[
+ {
+  "item_id": "math500/test/geometry/880.json",
+  "purpose": "forced conclusion at 16,384 (ran past 24K unforced in calibration)",
+  "source": "development set (used in Stage 1 calibration/probe)"
+ },
+ {
+  "item_id": "ifeval/1012",
+  "purpose": "natural-length item",
+  "source": "development set (used in Stage 1 calibration/probe)"
+ }
+]

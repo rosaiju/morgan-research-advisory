@@ -1,0 +1,59 @@
+{
+ "stage": "stage2",
+ "approved_plan": "2026-10-05: finalists Qwen3.8-27B, Gemma 4 31B, gpt-oss-20b (local/STAGE2_FINALISTS.md); full 284-item panel; 16,384 + 2,048; scoring rules unchanged; gpt-oss runs locally, Qwen3.8 and Gemma on the Morgan GPU server",
+ "finalists": [
+  "gpt-oss-20b",
+  "qwen3.8-27b",
+  "gemma-4-31b"
+ ],
+ "hosts": {
+  "local-rtx4060": {
+   "models": [
+    "gpt-oss-20b"
+   ],
+   "llama_dir": "C:\\llm\\llama.cpp\\b11349",
+   "model_dir": "C:\\llm\\models",
+   "threads": 8,
+   "gpu_index": 0,
+   "description": "RTX 4060 8 GB, i7-14700F, 32 GB RAM, Windows 11 (see local/REPRODUCIBILITY.md)"
+  },
+  "morgan-gpu": {
+   "models": [
+    "qwen3.8-27b",
+    "gemma-4-31b"
+   ],
+   "llama_dir": "TO BE SET ON THE SERVER (llama.cpp b11349 / fb4b2737a build dir)",
+   "model_dir": "TO BE SET ON THE SERVER",
+   "threads": null,
+   "gpu_index": 0,
+   "description": "PENDING: GPU model, VRAM, driver/CUDA, CPU, RAM, OS (see local/stage2/MORGAN_HANDOFF.md)"
+  }
+ },
+ "model_settings": "inherited unchanged from local/config_local.json -> models (checkpoint, official template, chat_template_kwargs, sampling) and local/gguf_pins.json (exact GGUF files); hashed in the Stage 2 freeze",
+ "config_local_sha256_at_creation": "d691dc7aa475542df7b232b22c446357846a6e1df3a4991344da36981c7004c6",
+ "thinking_budget": 16384,
+ "answer_allowance": 2048,
+ "max_tokens": 18560,
+ "max_tokens_note": "16,384 thinking + 2,048 answer + 128 for the injected message and end-of-thinking delimiters (same construction as Stage 1)",
+ "budget_message": "\n\nTime is up. I must stop thinking now and give my final answer in the required format.\n",
+ "forcing": "llama-server --reasoning-budget 16384 --reasoning-budget-message <message> (server forcing validated for all three finalists in Stage 1); the harness stops an answer longer than 2,048 tokens (answer_allowance_exceeded -> BUDGET_TRUNCATED)",
+ "n_ctx_rule": "max_tokens + longest Stage 2 prompt (this model's tokenizer, panel + probe items) + 1024, rounded up to 256",
+ "placement_rule": "same approved rule as Stage 1 (local/placement.py) applied on the run host at the Stage 2 context; the placement measured in that host's Stage 2 probe is used verbatim for the run",
+ "watchdog": {
+  "first_token_s": 1800,
+  "stall_s": 600,
+  "total_s_rule": "1.5 * max_tokens / max(0.5, 0.8 * probe tok/s at 16K depth) + 1800 (same form as Stage 1, measured at Stage 2 depth)"
+ },
+ "reruns": "infrastructure failures rerun identically up to 2 times (3 attempts), counted across resumes (same as Stage 1)",
+ "order": "per model: random.Random('20260929|stage2|<model>').shuffle(panel)",
+ "seed_rule": "int(sha256('Morgan-2026-09-29|'+item_id)[:8],16) & 0x7fffffff (morgan 16 section 6), identical across models",
+ "panel": "local/stage2/items/stage2_panel.json (lock stage2_items_lock.json)",
+ "rendered": "local/stage2/items/stage2_rendered.json (lock stage2_rendered_lock.json)",
+ "scoring": "local/score_local.py unchanged (pre-registered statuses, Docker sandbox for code); runs locally only; answer keys never leave the local machine",
+ "forced_rerun_policy": {
+  "status": "NOT YET PRE-REGISTERED (must be fixed before any Stage 2 result is inspected)",
+  "candidate_A": "rerun every forced-conclusion item unforced at 24,576 tokens, if GPU time is practical",
+  "candidate_B": "otherwise, for the dense finalists, a fixed pre-registered random subsample of forced items (size and seed to be recorded before Stage 2 results); gpt-oss reruns all"
+ },
+ "frozen": false
+}

@@ -33,4 +33,5 @@ __pycache__/
 
 # ---- local evaluation (regenerable; contains benchmark question text) ----
 local/items/rendered_prompts.json
+local/stage2/items/stage2_rendered.json
 local/official/*.tmp
