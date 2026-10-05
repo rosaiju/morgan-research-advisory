@@ -1,0 +1,23 @@
+{
+ "approval": "I approve proceeding with the local official Stage 2 gpt-oss-20b run.",
+ "approved_by": "Rohan Sainju (rosai2@morgan.edu), explicit message in the Claude Code session",
+ "approved_at": "2026-10-05T14:59:39+00:00",
+ "host": "local-rtx4060",
+ "freeze_record": "local/stage2/items/stage2_freeze_local-rtx4060.json",
+ "freeze_sha256": "27e3930942e9d895c19c77789625c292b0ff275728f54c2d9b3a178f06f0ccf1",
+ "forced_rerun_policy": "local/stage2/FORCED_RERUN_POLICY.json (Policy B, committed 6a0602e before generation)",
+ "scope": {
+  "models": ["gpt-oss-20b"],
+  "items": 284,
+  "thinking_budget": 16384,
+  "answer_allowance": 2048,
+  "placement": "frozen Stage 2 probe placement"
+ },
+ "conditions": [
+  "official gpt-oss-20b generation only; Qwen3.8-27B and Gemma 4 31B are not started",
+  "no changes to benchmark, prompts, model settings, token budget, scorer, frozen files or methodology",
+  "no scoring or analysis of partial results; no forced-item reruns before the user approves them",
+  "recoverable infrastructure stops: resume only with the documented deterministic resume (same command)",
+  "recovery that would change the experiment: stop, preserve outputs and leave a handoff"
+ ]
+}
