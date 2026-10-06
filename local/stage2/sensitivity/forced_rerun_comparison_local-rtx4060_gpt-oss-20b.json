@@ -1,0 +1,607 @@
+{
+ "purpose": "Policy B sensitivity analysis only; the official Stage 2 score is unchanged",
+ "host": "local-rtx4060",
+ "model": "gpt-oss-20b",
+ "selection_record": "local/stage2/sensitivity/forced_rerun_selection_local-rtx4060_gpt-oss-20b.json",
+ "selection_sha256": "b9b5e6d604d617df71e460e413a24d9d2226827d18c4fcbe02e90cd9a9f2d445",
+ "official_scored_sha256": "401982a592e4532a1d8ed5b49b22f4733a1660d612f43efbf8f6fa2980ed75ba",
+ "rerun_scored_sha256": "b2512b14f357441c67a17f32a53586d50e1d41c6c900d24fbb34904582e46b50",
+ "rerun_attempts_sha256": "e3fc8173ef26cbef17f40f3e4cc20ed6d37a3bd59e4c06f367ba301b44f5e761",
+ "all_same_seed": true,
+ "all_same_prompt": true,
+ "rerun_infrastructure_failures": 0,
+ "rerun_attempts_over_1": 0,
+ "total": {
+  "stayed_incorrect": 12,
+  "status_changed": 2,
+  "extraction_or_truncation_outcome_changed": 1,
+  "still_hit_24576_cap": 16,
+  "official_correct": 6,
+  "rerun_correct": 8,
+  "n": 20,
+  "stayed_correct": 6,
+  "incorrect_to_correct": 2
+ },
+ "by_benchmark": {
+  "bbeh_mini": {
+   "stayed_incorrect": 11,
+   "status_changed": 1,
+   "extraction_or_truncation_outcome_changed": 0,
+   "still_hit_24576_cap": 12,
+   "official_correct": 2,
+   "rerun_correct": 3,
+   "n": 14,
+   "stayed_correct": 2,
+   "incorrect_to_correct": 1
+  },
+  "ifeval": {
+   "stayed_correct": 1,
+   "status_changed": 0,
+   "extraction_or_truncation_outcome_changed": 0,
+   "still_hit_24576_cap": 0,
+   "official_correct": 1,
+   "rerun_correct": 1,
+   "n": 1
+  },
+  "math500": {
+   "incorrect_to_correct": 1,
+   "status_changed": 1,
+   "extraction_or_truncation_outcome_changed": 1,
+   "still_hit_24576_cap": 1,
+   "official_correct": 0,
+   "rerun_correct": 1,
+   "n": 1
+  },
+  "mmlu_pro": {
+   "stayed_correct": 3,
+   "status_changed": 0,
+   "extraction_or_truncation_outcome_changed": 0,
+   "still_hit_24576_cap": 3,
+   "official_correct": 3,
+   "rerun_correct": 3,
+   "n": 4,
+   "stayed_incorrect": 1
+  }
+ },
+ "items": [
+  {
+   "item_id": "bbeh/bbeh_buggy_tables/119",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24595,
+    "hit_24576_cap": true,
+    "wall_s": 659.869
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_buggy_tables/79",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24595,
+    "hit_24576_cap": true,
+    "wall_s": 658.174
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_dyck_languages/109",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 16419,
+    "reasoning_tokens": 16387,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24581,
+    "hit_24576_cap": true,
+    "wall_s": 651.423
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_geometric_shapes/139",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16421,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [],
+    "completion_tokens": 24346,
+    "reasoning_tokens": 24329,
+    "hit_24576_cap": false,
+    "wall_s": 643.925
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_geometric_shapes/69",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16421,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24613,
+    "reasoning_tokens": 24596,
+    "hit_24576_cap": true,
+    "wall_s": 652.61
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_hyperbaton/149",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24613,
+    "reasoning_tokens": 24589,
+    "hit_24576_cap": true,
+    "wall_s": 653.471
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_hyperbaton/169",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16398,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 24611,
+    "reasoning_tokens": 24591,
+    "hit_24576_cap": true,
+    "wall_s": 652.258
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_linguini/159",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16549,
+    "reasoning_tokens": 16400,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24706,
+    "reasoning_tokens": 24590,
+    "hit_24576_cap": true,
+    "wall_s": 651.357
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_object_counting/79",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16421,
+    "reasoning_tokens": 16403,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [],
+    "completion_tokens": 16984,
+    "reasoning_tokens": 16966,
+    "hit_24576_cap": false,
+    "wall_s": 445.425
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_object_properties/149",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16402,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24594,
+    "hit_24576_cap": true,
+    "wall_s": 651.631
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_temporal_sequence/119",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16423,
+    "reasoning_tokens": 16402,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24615,
+    "reasoning_tokens": 24596,
+    "hit_24576_cap": true,
+    "wall_s": 652.317
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_web_of_lies/129",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16423,
+    "reasoning_tokens": 16397,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24615,
+    "reasoning_tokens": 24584,
+    "hit_24576_cap": true,
+    "wall_s": 650.92
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_zebra_puzzles/109",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16397,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24591,
+    "hit_24576_cap": true,
+    "wall_s": 660.338
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "bbeh/bbeh_zebra_puzzles/59",
+   "benchmark": "bbeh_mini",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16420,
+    "reasoning_tokens": 16404,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24612,
+    "reasoning_tokens": 24592,
+    "hit_24576_cap": true,
+    "wall_s": 661.878
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "ifeval/2677",
+   "benchmark": "ifeval",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16472,
+    "reasoning_tokens": 16401,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [],
+    "completion_tokens": 8352,
+    "reasoning_tokens": 8296,
+    "hit_24576_cap": false,
+    "wall_s": 212.684
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "math500/test/geometry/965.json",
+   "benchmark": "math500",
+   "official": {
+    "status": "EXTRACTION_FAILURE",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 17282,
+    "reasoning_tokens": 16403,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 25331,
+    "reasoning_tokens": 24596,
+    "hit_24576_cap": true,
+    "wall_s": 668.854
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "mmlu_pro/11198",
+   "benchmark": "mmlu_pro",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 16417,
+    "reasoning_tokens": 16405,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [],
+    "completion_tokens": 4981,
+    "reasoning_tokens": 4913,
+    "hit_24576_cap": false,
+    "wall_s": 127.413
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "mmlu_pro/11760",
+   "benchmark": "mmlu_pro",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 17213,
+    "reasoning_tokens": 16399,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 25506,
+    "reasoning_tokens": 24599,
+    "hit_24576_cap": true,
+    "wall_s": 676.04
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "mmlu_pro/12033",
+   "benchmark": "mmlu_pro",
+   "official": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16417,
+    "reasoning_tokens": 16403,
+    "forced": true
+   },
+   "rerun": {
+    "status": "CORRECT",
+    "correct": true,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 24609,
+    "reasoning_tokens": 24592,
+    "hit_24576_cap": true,
+    "wall_s": 648.573
+   },
+   "same_seed": true,
+   "same_prompt": true
+  },
+  {
+   "item_id": "mmlu_pro/1606",
+   "benchmark": "mmlu_pro",
+   "official": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion"
+    ],
+    "completion_tokens": 16417,
+    "reasoning_tokens": 16403,
+    "forced": true
+   },
+   "rerun": {
+    "status": "INCORRECT",
+    "correct": false,
+    "flags": [
+     "forced_conclusion",
+     "loop_suspected"
+    ],
+    "completion_tokens": 24609,
+    "reasoning_tokens": 24592,
+    "hit_24576_cap": true,
+    "wall_s": 650.035
+   },
+   "same_seed": true,
+   "same_prompt": true
+  }
+ ]
+}
