@@ -1,0 +1,16 @@
+{
+ "approval": "I approve proceeding with the official Stage 2 Qwen3.8-27B and Gemma 4 31B runs on the Morgan GPU computer.",
+ "approved_by": "Rohan Sainju (rosai2@morgan.edu)",
+ "approved_at": "2026-10-15T16:36:04Z",
+ "host": "morgan-gpu",
+ "freeze_record": "local/stage2/items/stage2_freeze_morgan-gpu.json",
+ "freeze_sha256": "1cfe18aadb0ead2d75d631d7a5f0cb07f7ee5afe06436d9c74b112c8fd86d347",
+ "forced_rerun_policy": "local/stage2/FORCED_RERUN_POLICY.json (Policy B, committed 6a0602e before generation)",
+ "scope": {"models": ["qwen3.8-27b", "gemma-4-31b"], "items": 284, "thinking_budget": 16384, "answer_allowance": 2048,
+           "placement": "frozen Stage 2 probe placement on morgan-gpu"},
+ "conditions": [
+  "no changes to benchmark, prompts, model settings, token budget, scorer, frozen files or methodology",
+  "no scoring or analysis of partial results; no forced-item reruns before the user approves them",
+  "recoverable infrastructure stops: resume only with local/stage2/resume_stage2.py (same plan, same settings)"
+ ]
+}

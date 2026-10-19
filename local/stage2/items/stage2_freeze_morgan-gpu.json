@@ -1,0 +1,70 @@
+{
+ "frozen_at": "2026-10-15T16:34:44+00:00",
+ "host": "morgan-gpu",
+ "models": [
+  "qwen3.8-27b",
+  "gemma-4-31b"
+ ],
+ "files": {
+  "stage2/config_stage2.json": "c96d6016e50041631098d0e293e4a6eb530a6094b9022b0d7c82e79189c33674",
+  "config_local.json": "d691dc7aa475542df7b232b22c446357846a6e1df3a4991344da36981c7004c6",
+  "gguf_pins.json": "65ace5d7af2be586d4d75c3f6627e1c5e94e11dba00cc1769740931fb63ba8eb",
+  "official/official-lock.json": "34aae30a2f61363c8524d6624ac5796dc6a35aacabf493a0e2c9dff4e014dee2",
+  "stage2/items/stage2_panel.json": "bc35e691b4ec3327890258b4dec18760795e210d821ff694d1a0fd4f03cec5d5",
+  "stage2/items/stage2_items_lock.json": "03a8f6e3bbf12df96da6aec3d73f2d177ee72bcedc37534402a57c9dbb09eec1",
+  "stage2/items/stage2_probe_items.json": "2ee55d5b35d6485a28311cf7d9bbbac12f5c0f1da3f1d44d356b23dd4b8cf739",
+  "stage2/items/stage2_rendered.json": "4540c25c697ade23e39ada8fd09f593400b93948c77bb455915251e8bbbf186b",
+  "stage2/items/stage2_rendered_lock.json": "f2973725f5b0641bc188cfb0bd9c302c3d32a4943f4643999f160812a8380646",
+  "stage2/common.py": "959e3f61f25b0cb7c50d6e93cd542ae7c756c03dbf70fc4f59042683d063100a",
+  "stage2/probe_stage2.py": "35a7670cc4cce80ebd075e7367fc557a63f64b6bbed73a59b035b2c9669324ef",
+  "stage2/run_stage2.py": "1888a05ee5dde04e16bc0e95c91a599835fd4f6b38b41d5aac7837d397f5bb67",
+  "stage2/preflight_stage2.py": "509ea40943cd3db275b00cf8508bd5344972cff93b2d1a09524bfbd63c72db92",
+  "stage2/select_stage2.py": "40ae8746f527fa7d7e5ad1f03e7cbcecd29f4852ac2b16657e06b41dbd342f50",
+  "stage2/test_stage2.py": "96bedb792912da72db56da0ad967bd0e866ad025b2e5100c14d14ae37bac22bd",
+  "stage2/freeze_stage2.py": "b49265179e8e80484789c8d7f0c14c2d1835cc4d8568c84b2ee8d89c0aa7a581",
+  "run_local.py": "561be74e4e43d0881fb60c961db28bdc167417646c078d65b8b9101e01d7a16f",
+  "client.py": "9dabc1d27e66b7d2b2e597567a6adee03e178e1292dc70cf4ebcd43cdc1e2a79",
+  "llm_server.py": "9fa6f6ef87ce4b5db47b525ccfec499617edd56e977100febc56a93960f626dc",
+  "placement.py": "274fbf7e3ef801b3142db505081a2aef9a3ace7195556aaa743088d89b487ae2",
+  "telemetry.py": "446fd9d2b5bffcb7e6cdcecd4e31f4385ab786d8485c2ef63857821977f4678a",
+  "probe_local.py": "5a33849bda7b86093a8eb19ec789ca14482e40483dbeeda5793481663ac5adc0",
+  "official/gemma-4-31b__chat_template.jinja": "ae53464bf3be25802b3a5b37def7fd89667067d7577049b3b2d74c4d8de4c6d4",
+  "official/qwen3.8-27b__chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+  "runs/stage2-probe-morgan-gpu/probe_qwen3.8-27b.json": "827e3aeed39f7d9da4073d5c22cc7574182d8eff9ffb24789e2e04b31a192dc1",
+  "runs/stage2-probe-morgan-gpu/probe_gemma-4-31b.json": "a52311e37e6d1d89f1c83f3d3f7fb4c5c4e91207972a29e8d40aa8e37b0b3f90"
+ },
+ "probe_results": {
+  "runs/stage2-probe-morgan-gpu/probe_qwen3.8-27b.json": "827e3aeed39f7d9da4073d5c22cc7574182d8eff9ffb24789e2e04b31a192dc1",
+  "runs/stage2-probe-morgan-gpu/probe_gemma-4-31b.json": "a52311e37e6d1d89f1c83f3d3f7fb4c5c4e91207972a29e8d40aa8e37b0b3f90"
+ },
+ "host_info": {
+  "host": "morgan-gpu",
+  "platform": "Linux-6.8.0-147-generic-x86_64-with-glibc2.43",
+  "python": "3.13.16",
+  "cpu": "",
+  "cpu_logical": 96,
+  "cpu_physical": 48,
+  "ram_gb": 123.2,
+  "llama_dir": "/data/llama.cpp/build/bin",
+  "model_dir": "/data/models",
+  "gpu_index": 1,
+  "cuda_visible_devices": "1",
+  "gpu": "NVIDIA RTX 4500 Ada Generation, 24570 MiB, 595.99.02, 95.04.63.00.01, 3",
+  "driver_cuda": "13.2",
+  "llama_server_version": [
+   "version: 0.5.0-dev (build 11349, commit fb4b2737a)",
+   "built with GNU 15.2.0 for Linux x86_64"
+  ]
+ },
+ "gguf_sha256": {
+  "qwen3.8-27b": "880a52af8317974f7b4b064a6bc29ff49e188b91aa218e08eea3078b6b1cc673",
+  "gemma-4-31b": "2959c1b0a4f792493bb0092846ea06aec54547e47be979c282634d938d501b75"
+ },
+ "forced_rerun_policy": {
+  "status": "NOT YET PRE-REGISTERED (must be fixed before any Stage 2 result is inspected)",
+  "candidate_A": "rerun every forced-conclusion item unforced at 24,576 tokens, if GPU time is practical",
+  "candidate_B": "otherwise, for the dense finalists, a fixed pre-registered random subsample of forced items (size and seed to be recorded before Stage 2 results); gpt-oss reruns all"
+ },
+ "previous_freeze": null,
+ "note": "Stage 2 on morgan-gpu still requires local/stage2/STAGE2_APPROVED_morgan-gpu.json written by the user."
+}
