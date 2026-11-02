@@ -14,8 +14,8 @@ benchmark data and rendered prompts are git-ignored (see `.gitignore`).
 ## 1. What this project is
 
 We are testing open-weight large language models to find the strongest one to run on the Morgan lab GPU server
-for students. We only **run** the models (inference) and **score** their answers on fixed benchmarks. We do not
-train or fine-tune any model (fine-tuning is listed as out of scope in `01-study-scope.md`).
+for students. We only **run** the models (inference) and **score** their answers on fixed benchmarks. We have not
+trained or fine-tuned any model (fine-tuning is listed as out of scope in `01-study-scope.md`).
 
 ---
 
