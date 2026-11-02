@@ -81,6 +81,18 @@ Software versions, per-model memory and speed, and the full run-time breakdown:
   closed-model comparison (section 5.1) used APIs only for 2 models on 250 questions, which cost about $17.
 - **7 smaller models** were run locally in Stage 1; the **top 3** (Qwen3.8-27B, Gemma 4 31B, gpt-oss-20b) went on
   to Stage 2.
+
+**How the 7 local models were picked (step D).** When we switched to local runs, 19 of the 35 candidates were too
+large for local hardware. 11 of them have stated sizes of 117B parameters or more (for example gpt-oss-120b,
+Mistral-Medium-3.5-128B, GLM-5.3-Flash at 320B and Qwen3.8-2.4T). The other 8 (including GLM-5.3, Kimi-K3 and two
+DeepSeek-V4 models) have no size in our sources and were treated as too large. Of the 16 that would have fit
+(35B or smaller), we ran 6. The other 10 were not picked: Qwen3.5-9B, Qwen3.6-35B-A3B, Gemma 4 12B, Gemma 4
+26B-A4B, Nemotron 3 Nano 30B-A3B, Granite 4.2 8B, Phi-4-reasoning-plus, DeepSeek-R1-Distill-Qwen-32B, Olmo 3.1 32B
+and EXAONE 4.5 33B. We added a 7th model from outside the pool (Ministral 3 14B Reasoning). **The rule for
+choosing the 7 was not written down at the time.** What they have in common: 8B to 31B parameters, a reasoning
+mode, llama.cpp support, and one model per maker (Alibaba, Google, OpenAI, Zhipu, DeepSeek, Meta, Mistral). The
+later model panel (section 5.1) tested newer alternatives on the same questions, and Qwen3.8-27B stayed on top.
+But we never tested the 10 unpicked models that would have fit. This is a known gap (see section 7).
 - **October 2026 pool update:** we checked independent rankings and recent releases and added the newest models
   that fit a 24 GB GPU: **Ornith-1.5-35B-A3B, K2-Horizon-MoVA-36B-A4B and Nanbeige4.3-33B**, plus gpt-oss-20b
   as a reference (4 models in the panel). They were released after the original 35-model pool was built.
@@ -279,6 +291,8 @@ Full list of 20 changes: [DETAILS.md, section 8](docs/DETAILS.md#8-changes-from-
 - **Human spot-check** of 40 judged items: planned.
 - **Open from Stage 2:** Policy B forced-item reruns for Qwen and Gemma (need a small reviewed change and approval;
   they cannot change the official scores).
+- **Optional check:** test some of the 10 candidates that fit our hardware but were never picked or run
+  (section 4), to close that gap in the model selection.
 
 ---
 

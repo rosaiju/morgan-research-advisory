@@ -822,5 +822,8 @@ These were marked TODO in earlier versions of the README.
 - **Which reports were sent** (section 3): confirm which of the earlier reports were actually sent to Dr. Wang, and
   whether any report was sent outside this repo (for example by email) that should be listed there.
 - **Step-D selection rule** (section 4.2): the rule used to pick the 7 local models at step D, including why
-  Ministral 3 14B Reasoning was added from outside the pool.
+  Ministral 3 14B Reasoning was added from outside the pool. **Partly answered (2026-11-02):** no rule was written
+  down at the time. The README (section 4) now says what the 7 have in common, which candidates were too large and
+  which 10 would have fit but were never tested. Still open: why Ministral 3 14B Reasoning was chosen over the
+  in-pool models that fit, and the size of the 8 candidates marked "not stated in our sources" in section 4.3.
 - **Stage 2C start date** (section 2): not yet recorded in the results files.
