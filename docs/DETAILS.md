@@ -56,7 +56,7 @@ These are the report-style documents in the repo, oldest first.
 | Date | File | What it covered | Still current? |
 |---|---|---|---|
 | 2026-09-29 | `00-professor-brief.md` | First proposal: a 3-model explanatory study (Granite 4.2 8B, Qwen3.5 9B, Phi-4 Reasoning) | **Fully replaced** (the file itself says it is superseded) |
-| 2026-09-29 | `14-capability-first-shortlist.md`, `18-final-candidate-and-execution-audit.md`, `19-readiness-and-calibration-plan.md` | Narrowing the candidate pool to 6 very large models to be run through paid hosted APIs | **Fully replaced** for what we ran (no API request was ever sent). Still the record of how the candidate pool was built |
+| 2026-09-29 | `14-capability-first-shortlist.md`, `18-final-candidate-and-execution-audit.md`, `19-readiness-and-calibration-plan.md` | Narrowing the candidate pool to 6 very large models to be run through paid hosted APIs | **Fully replaced** for what we ran. Before the plan was dropped, a small API connectivity test was run (38 short requests, about $0.01 in total); no benchmark or calibration was ever run through the APIs. Still the record of how the candidate pool was built |
 | 2026-09-29 to 2026-10-03 | Old `README.md` (now replaced by this file; the old text is in git history) | Index of the API-era documents, with a banner pointing to the local plan | **Fully replaced** |
 | 2026-10-02 | `local/REVISED_PROPOSAL_2026-10-02.md` | Why long reasoning budgets were impractical on the home computer; new placement rule, forced 6,144-token budget, smaller Stage 1 panel | **Partly replaced**: the Stage 1 parts were approved and used; its Stage 2 section (section 7) was replaced by the actual Stage 2 plan |
 | 2026-10-02 to 10-03 | `22-local-evaluation-plan.md` | Local plan for 7 models and the probe speed results | **Partly replaced**: still correct for Stage 1; says nothing about Stage 2 |
@@ -819,8 +819,6 @@ The Claude and Gemini comparison is done (section 7C). Next:
 
 These were marked TODO in earlier versions of the README.
 
-- **Which reports were sent** (section 3): confirm which of the earlier reports were actually sent to Dr. Wang, and
-  whether any report was sent outside this repo (for example by email) that should be listed there.
 - **Step-D selection rule** (section 4.2): the rule used to pick the 7 local models at step D, including why
   Ministral 3 14B Reasoning was added from outside the pool. **Partly answered (2026-11-02):** no rule was written
   down at the time. The README (section 4) now says what the 7 have in common, which candidates were too large and
