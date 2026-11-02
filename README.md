@@ -1,10 +1,10 @@
 # Choosing an open-weight LLM for the Morgan lab server
 
-Last updated 2026-10-28. Author: Rohan Sainju (rosai2@morgan.edu).
+Last updated 2026-11-02. Author: Rohan Sainju (rosai2@morgan.edu).
 
 Every number below comes from a file in this repository, from the run logs and results files
-(`local/runs/`, which git does not track), or from the Stage 2B results archive (`REPORT.md` and its notes, kept
-outside git). Anything not in those files is marked **TODO**.
+(`local/runs/`, which git does not track), or from the Stage 2B and model-panel results archives (`REPORT.md` and
+its notes, kept outside git). Anything not in those files is marked **TODO**.
 
 **No benchmark questions, answer keys or model answers appear in this README or anywhere in git.** Answer keys,
 benchmark data and rendered prompts are git-ignored (see `.gitignore`).
@@ -29,6 +29,9 @@ Times from the logs are in UTC.
 | Stage 1 (home computer) | Calibration 2026-10-02; probes 2026-10-03; official run 2026-10-04 (04:54 to 15:32); finalists recorded 2026-10-05 | 7 models x 22 items, 6,144 thinking tokens + 1,536 answer tokens | Qwen3.8-27B and Gemma 4 31B 21/22, gpt-oss-20b 20/22; these 3 went to Stage 2 | Done |
 | Stage 2 (home + lab server) | gpt-oss-20b at home 2026-10-05 to 10-06; Qwen3.8-27B and Gemma 4 31B on the lab server 2026-10-15 to 10-17; analysis 2026-10-19 | 3 models x 284 new items, 16,384 thinking tokens + 2,048 answer tokens | Qwen 235/284 (82.7%), Gemma 233/284 (82.0%), gpt-oss 198/284 (69.7%). Qwen and Gemma are not significantly different; both beat gpt-oss | Done (forced-item reruns for Qwen and Gemma not yet run, see section 10) |
 | Stage 2B (expanded benchmarks) | Set-up and pilot 2026-10-23; run started 2026-10-24; generation finished and scored 2026-10-28 | Qwen3.8-27B and Gemma 4 31B x 503 new items from 6 benchmarks (Tier 1), on the lab server, same settings as Stage 2 | Qwen 65.6%, Gemma 62.4%. Qwen is slightly ahead but not significantly (p = 0.068). Tied on GPQA; Qwen leads on coding and reasoning (section 7B) | Done; re-graded 2026-10-28 by an independent judge, no score changed (6 more benchmarks ready to run, see section 10) |
+| Model panel (open models) | 2026-10-29 to 2026-11-01 | 4 more open models (Ornith-1.5-35B-A3B, K2-Horizon-MoVA-36B-A4B, Nanbeige4.3-33B, gpt-oss-20b) x 250 Stage 2B questions, on the lab server, same settings; compared with Qwen and Gemma on the same questions | Qwen still the best open model (65.6%). Ornith (64.0%) and Gemma (62.4%) are not significantly different from Qwen; Ornith is about 7 times faster (section 7C) | Done |
+| Closed-model comparison | 2026-11-01 | Claude Opus 5.5 and Gemini 4 Argon through their APIs on the same 250 questions and prompts | Closed models lead by about 18 to 21 points (excluding CRUXEval), mostly on factual knowledge (section 7C) | Done |
+| Stage 2C: Ornith on Stage 2 items and license check | TODO | Run Ornith-1.5-35B-A3B on the 284 Stage 2 items; check the licenses of the models we might deploy | | Running |
 
 ---
 
@@ -480,6 +483,172 @@ In plain words:
 
 ---
 
+## 7C. Model panel and closed-model comparison (250 questions)
+
+Source: the panel `REPORT.md` (built 2026-11-01 06:29 UTC), with `MODEL_SETTINGS.md`, `DECISIONS.md`,
+`DEVIATIONS.md` and `HANDOFF.md` from the same run. Scores only; no questions or answers are published.
+
+### 7C.1 Why we ran it
+
+Dr. Wang asked two questions:
+
+1. Is Qwen3.8-27B really the strongest open model for our 24 GB GPU?
+2. How far are the best open models from the top closed models?
+
+### 7C.2 How the new models were chosen
+
+We checked independent rankings (the Artificial Analysis leaderboard of small open-weights models) and recent
+releases in October 2026, and added the newest models that fit a 24 GB GPU:
+
+| Model | Size (total / active) | License | Notes |
+|---|---|---|---|
+| Ornith-1.5-35B-A3B | 35B / 3B | MIT | Official 4-bit file; fits fully on the GPU |
+| K2-Horizon-MoVA-36B-A4B | 36B / 4B | Apache-2.0 | Official 4-bit file; about 1.1 GB of it had to sit in CPU memory; needed a newer llama.cpp (section 8) |
+| Nanbeige4.3-33B | 33B | Apache-2.0 | 4-bit file from bartowski (no official one); fits fully on the GPU |
+| gpt-oss-20b | 21B / 3.6B | Apache-2.0 | Reference model from Stage 2 |
+
+**Pool update:** Ornith, K2-Horizon and Nanbeige were released after the original 35-model pool was built
+(section 4), so they are not in that list. This is an addition to the pool, not a change to the earlier steps.
+
+### 7C.3 Setup
+
+- **Questions:** 250 of the 503 frozen Stage 2B questions, picked at random with a fixed seed and balanced by
+  category: GPQA Diamond 98, LiveCodeBench 30, SimpleQA Verified 40, Humanity's Last Exam 40, MuSR 22,
+  CRUXEval 20.
+- **Open models:** same lab-server GPU (RTX 4500 Ada) and the same frozen settings as Stage 2 and 2B (16,384
+  thinking + 2,048 answer tokens). Each model used its own official chat template and recommended sampling. Qwen
+  and Gemma were not re-run: their Stage 2B answers to these 250 questions were reused.
+- **Closed models:** Claude Opus 5.5 and Gemini 4 Argon through their APIs, with the same prompts and the same
+  18,560-token total limit (thinking + answer), thinking effort "high". Gemini has 249 scored items (one API call
+  failed).
+
+### 7C.4 Leaderboard
+
+Accuracy = percent fully correct. Brackets are 95% confidence intervals. "Excl. CRUXEval" leaves out the 20
+CRUXEval questions for **every** model (230 questions), because Anthropic's safety filter blocked all of Claude's
+CRUXEval prompts. That column is the fairer comparison with Claude.
+
+| Rank | Model | All 250 | Excl. CRUXEval (230) |
+|---|---|---|---|
+| 1 | Gemini 4 Argon (API) | **82.7%** [77.5, 86.9] | 81.3% [75.8, 85.8] |
+| 2 | Claude Opus 5.5 (API) | **77.2%** [71.6, 82.0] | 83.9% [78.6, 88.1] |
+| 3 | **Qwen3.8-27B** | **65.6%** [59.5, 71.2] | 63.0% [56.6, 69.0] |
+| 4 | Ornith-1.5-35B-A3B | **64.0%** [57.9, 69.7] | 62.6% [56.2, 68.6] |
+| 5 | Gemma 4 31B | **62.4%** [56.3, 68.2] | 60.0% [53.6, 66.1] |
+| 6 | Nanbeige4.3-33B | **59.2%** [53.0, 65.1] | 56.5% [50.1, 62.8] |
+| 7 | K2-Horizon-MoVA-36B-A4B | **56.4%** [50.2, 62.4] | 53.9% [47.5, 60.2] |
+| 8 | gpt-oss-20b | **42.4%** [36.4, 48.6] | 37.8% [31.8, 44.2] |
+
+Per benchmark (accuracy %; number of questions in the header):
+
+| Model | GPQA (98) | LiveCodeBench (30) | SimpleQA (40) | HLE (40) | MuSR (22) | CRUXEval (20) |
+|---|---|---|---|---|---|---|
+| Gemini 4 Argon (API) | 95.9 | 86.7 | 75.0 | 37.5 | 100.0 | 100.0 (19 items) |
+| Claude Opus 5.5 (API) | 90.8 | 96.7 | 75.0 | 60.0 | 95.5 | 0.0 (all blocked) |
+| Qwen3.8-27B | 87.8 | 83.3 | 12.5 | 22.5 | 90.9 | 95.0 |
+| Ornith-1.5-35B-A3B | 86.7 | 63.3 | 17.5 | 30.0 | 95.5 | 80.0 |
+| Gemma 4 31B | 86.7 | 80.0 | 10.0 | 20.0 | 77.3 | 90.0 |
+| Nanbeige4.3-33B | 82.7 | 80.0 | 5.0 | 7.5 | 90.9 | 90.0 |
+| K2-Horizon-MoVA-36B-A4B | 79.6 | 63.3 | 2.5 | 17.5 | 86.4 | 85.0 |
+| gpt-oss-20b | 45.9 | 50.0 | 5.0 | 10.0 | 95.5 | 95.0 |
+
+### 7C.5 Open models vs Qwen
+
+Same 250 questions for every model. Paired test (McNemar), corrected for making 5 comparisons (Holm).
+
+| Model | Difference from Qwen (points) | 95% CI | Corrected p | Significant? |
+|---|---|---|---|---|
+| Ornith-1.5-35B-A3B | -1.6 | [-6.0, +2.8] | 0.60 | No |
+| Gemma 4 31B | -3.2 | [-7.6, +1.2] | 0.46 | No |
+| Nanbeige4.3-33B | -6.4 | [-11.2, -1.6] | 0.042 | **Yes, worse** |
+| K2-Horizon-MoVA-36B-A4B | -9.2 | [-14.0, -4.8] | 0.0008 | **Yes, worse** |
+| gpt-oss-20b | -23.2 | [-29.6, -17.2] | < 0.0001 | **Yes, worse** |
+
+In plain words:
+
+- **Qwen3.8-27B is still the best open model that fits our GPU**, but not by much.
+- **Ornith and Gemma are statistically tied with Qwen.** Ornith is weaker on coding (LiveCodeBench 63.3% vs
+  83.3%), but that is only 30 questions and was not tested on its own.
+- **Nanbeige, K2-Horizon and gpt-oss-20b are clearly worse than Qwen.**
+
+### 7C.6 Gap to the closed models
+
+Our two best open models against the two closed models, on the same questions. Gap = closed minus open
+(points). All four overall gaps below are significant after correction.
+
+| Open model | Closed model | Gap, all 250 [95% CI] | Gap, excl. CRUXEval [95% CI] |
+|---|---|---|---|
+| Qwen3.8-27B | Claude Opus 5.5 | +11.6 [+4.8, +18.4] | **+20.9** [+15.2, +27.0] |
+| Qwen3.8-27B | Gemini 4 Argon | +17.3 [+12.0, +22.9] | **+18.3** [+12.6, +23.9] |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | +13.2 [+6.4, +20.0] | **+21.3** [+15.2, +27.4] |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | +18.5 [+12.9, +24.1] | **+18.7** [+12.6, +24.8] |
+
+Gap by benchmark for Qwen (points; "yes" = significant after correcting for 24 comparisons):
+
+| Benchmark | vs Claude | vs Gemini |
+|---|---|---|
+| GPQA Diamond (science) | +3.1 (no) | +8.2 (no) |
+| LiveCodeBench (coding) | +13.3 (no) | +3.3 (no) |
+| SimpleQA Verified (facts) | **+62.5 (yes)** | **+62.5 (yes)** |
+| Humanity's Last Exam (expert questions) | **+37.5 (yes)** | +15.0 (no) |
+| MuSR (multi-step reasoning) | +4.5 (no) | +9.1 (no) |
+| CRUXEval (code reasoning) | Claude blocked | +5.3 (no) |
+
+**Main finding:**
+
+- **The closed models are about 18 to 21 points ahead overall** (excluding CRUXEval; 12 to 18 points counting
+  all 250 questions). This gap is real.
+- **Most of the gap is factual knowledge.** On SimpleQA (short facts) the closed models are about **60 points**
+  ahead. Small open models simply store fewer facts.
+- **On science, coding and multi-step reasoning, Qwen is close** (3 to 13 points behind) **and none of these
+  differences is significant.** The other significant gap is Claude on Humanity's Last Exam (+37.5).
+- This suggests that giving the open models a way to look facts up could close much of the gap (section 10).
+
+### 7C.7 Speed and efficiency
+
+Same GPU and token limits. Qwen and Gemma times come from their Stage 2B run.
+
+| Model | Score (all 250) | Mean time per question | Total time (250) | Speed vs Qwen | Decode speed | Peak GPU memory |
+|---|---|---|---|---|---|---|
+| Qwen3.8-27B | 65.6% | 419 s | 29.1 h | 1.0x | 21 tok/s | 17,126 MiB |
+| **Ornith-1.5-35B-A3B** | **64.0%** | **59 s** | **4.1 h** | **7.1x faster** | 117 tok/s | 20,632 MiB |
+| Gemma 4 31B | 62.4% | 289 s | 20.1 h | 1.4x faster | 18 tok/s | 20,858 MiB |
+| Nanbeige4.3-33B | 59.2% | 438 s | 30.4 h | about the same | 18 tok/s | 22,186 MiB |
+| K2-Horizon-MoVA-36B-A4B | 56.4% | 129 s | 8.9 h | 3.3x faster | 53 tok/s | 23,128 MiB |
+| gpt-oss-20b | 42.4% | 104 s | 7.2 h | 4.0x faster | 99 tok/s | 11,630 MiB |
+
+**Ornith is statistically tied with Qwen but about 7 times faster** (59 s vs 419 s per question). It only uses
+about 3B parameters per token, which is why it is so fast. For many students sharing one GPU, that matters a lot.
+K2-Horizon's speed is not fully comparable, because part of it ran from CPU memory.
+
+### 7C.8 Caveats
+
+- **Claude's blocked questions.** Anthropic's safety filter refused all 20 of Claude's CRUXEval prompts and 3
+  GPQA prompts. They count as wrong in the all-250 score. The CRUXEval prompt format (a worked example ending in an
+  open "thought" tag) triggers the filter. Same prompts as every other model; no fallback model was used.
+- **Closed models can't be force-stopped.** Open models are told to stop thinking at 16,384 tokens and answer. The
+  APIs can't do that, so a closed model that thinks too long gets no answer (counted wrong). Gemini ran out on
+  **13 of 40** Humanity's Last Exam questions, Claude on 1 of 40. This can only lower their scores.
+- **Possible training-data contamination.** All six benchmarks are public, and the closed models may have seen some
+  of these questions in training. We cannot check this. It could raise their scores.
+- **Small samples per benchmark.** Per-benchmark results rest on 20 to 98 questions and are noisy. The overall
+  paired tests are the main evidence.
+- **Forced answers.** If every answer given after hitting the thinking limit is counted wrong, the order changes
+  (for example Qwen drops to 50.0% and Gemma stays at 62.4%). Gemma rarely hits the limit; Qwen did on 81 of 250.
+
+### 7C.9 Grading
+
+SimpleQA and the Humanity's Last Exam short answers need a model to grade them. **Two independent judges
+(gpt-oss-20b and Qwen3.8-27B) graded all 503 such answers and agreed on 98.4%** (Cohen's kappa 0.96). gpt-oss-20b
+was the main judge; Qwen judged gpt-oss-20b's own answers, so no model was graded only by itself. Most
+disagreements were on the closed models' answers (Claude 95.4% agreement, Gemini 94.6%).
+
+### 7C.10 Cost
+
+The full API run cost **$16.08** (Claude $6.58, Gemini $9.50), plus **$1.30** for the pilot.
+
+---
+
 ## 8. Changes from the original plan
 
 Each item is documented in the file named.
@@ -527,6 +696,19 @@ Stage 2B changes (Stage 2B `DECISIONS.md`, `DEVIATIONS.md`, `RUN_PLAN.md`):
     answers. The two judges agreed on all 257 and no score changed (section 7B.6).
 17. **Time limits.** Each item had a 40-minute limit and the model server was restarted after 5 minutes with no
     response, as the Stage 2B spec requires (Stage 2 allowed longer). No item hit the 40-minute limit.
+
+Model panel and closed-model changes (panel `DEVIATIONS.md`, `DECISIONS.md`):
+
+18. **Newer llama.cpp for K2-Horizon only.** The frozen build (b11349) does not support K2-Horizon's architecture,
+    so K2-Horizon ran on build b11454 (commit `4625240437`), the oldest release that supports it, built separately
+    with the same options. Every other model used the frozen b11349. K2-Horizon also did not fit fully on the GPU,
+    so by the Stage 1 placement rule about 1.1 GB of its expert weights ran from CPU memory.
+19. **Gemini thinking setting changed after the pilot** (2026-11-01). The plan used a 16,384-token thinking budget,
+    but Gemini 4 Argon has no token budget: in the pilot, small budgets gave no thinking at all and 16,384 did not
+    cap it. It was switched to thinking level "high" with the same 18,560-token total limit. This matches the open
+    models' "high" reasoning effort and gave the same results on all 12 pilot items.
+20. **Per-model API budget cap** (2026-11-01). A `--max-usd-per-model` limit was added so each closed model has its
+    own spending cap, on top of the shared budget. Actual spend was $16.08 (section 7C.10).
 
 ---
 
@@ -602,11 +784,15 @@ time: **about 12 hours** (`RUN_PLAN.md`). Finished results are kept, so this onl
 | Multilingual | Global-MMLU-Lite | 45 |
 | Tool calling | BFCL | 60 |
 
-### 10.2 Comparison with Claude and Gemini
+### 10.2 Stage 2C, then local retrieval
 
-A comparison with **Claude Opus 5.5 and Gemini 4 Argon** on **250 of the same questions** is planned once API
-credits are approved. 250 questions is enough to detect a 10-point gap. The code is built and tested with mock
-calls only; no API has been called yet.
+The Claude and Gemini comparison is done (section 7C). Next:
+
+1. **Stage 2C results (running):** Ornith-1.5-35B-A3B on the 284 Stage 2 items, to see if it stays tied with Qwen
+   on a second, different set of questions, plus a license check for the models we might deploy.
+2. **Local retrieval:** give Qwen and Ornith an offline Wikipedia search running on the lab server, then re-test
+   them. Section 7C shows most of the gap to the closed models is factual knowledge (SimpleQA), so this tests how
+   much of that gap a local fact lookup can close, without sending any data outside Morgan.
 
 ### 10.3 Grading checks for Stage 2B
 
