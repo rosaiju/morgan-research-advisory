@@ -1,6 +1,6 @@
 # Project details: choosing an open-weight LLM for the Morgan lab server
 
-Last updated 2026-11-02. Author: Rohan Sainju (rosai2@morgan.edu).
+Last updated 2026-11-04. Author: Rohan Sainju (rosai2@morgan.edu).
 
 This file holds the full record behind the short [README](../README.md): every table, the step-by-step model
 selection, hardware and software details, run times, the full list of changes from the plan, reproduction steps and
@@ -8,8 +8,8 @@ the earlier reports. Section numbers are the same as in earlier versions of the 
 match. Results here are unchanged; the README shows the most important ones.
 
 Every number comes from a file in this repository, from the run logs and results files (`local/runs/`, which git
-does not track), or from the Stage 2B and model-panel results archives (`REPORT.md` and its notes, kept outside
-git). Anything not yet confirmed is listed under [Open questions](#open-questions).
+does not track), or from the Stage 2B, model-panel, Stage 2C and Stage 2D results archives (`REPORT.md` and its notes, kept
+outside git). Anything not yet confirmed is listed under [Open questions](#open-questions).
 
 **No benchmark questions, answer keys or model answers appear in this file or anywhere in git.** Answer keys,
 benchmark data and rendered prompts are git-ignored (see `.gitignore`).
@@ -26,6 +26,8 @@ Fine-tuning is listed as out of scope in `01-study-scope.md`.
 - [7. Benchmarks and results (Stage 1 and Stage 2)](#7-benchmarks-and-results)
 - [7B. Stage 2B results (expanded benchmarks)](#7b-stage-2b-results-expanded-benchmarks)
 - [7C. Model panel and closed-model comparison (250 questions)](#7c-model-panel-and-closed-model-comparison-250-questions)
+- [7D. Stage 2C: Ornith on the Stage 2 items, and licenses](#7d-stage-2c-ornith-on-the-stage-2-items-and-licenses)
+- [7E. Stage 2D: local Wikipedia search (250 questions)](#7e-stage-2d-local-wikipedia-search-250-questions)
 - [8. Changes from the original plan (full list)](#8-changes-from-the-original-plan)
 - [9. How to reproduce](#9-how-to-reproduce)
 - [10. What's next (full)](#10-whats-next)
@@ -43,9 +45,11 @@ Times from the logs are in UTC.
 | Stage 1 (home computer) | Calibration 2026-10-02; probes 2026-10-03; official run 2026-10-04 (04:54 to 15:32); finalists recorded 2026-10-05 | 7 models x 22 items, 6,144 thinking tokens + 1,536 answer tokens | Qwen3.8-27B and Gemma 4 31B 21/22, gpt-oss-20b 20/22; these 3 went to Stage 2 | Done |
 | Stage 2 (home + lab server) | gpt-oss-20b at home 2026-10-05 to 10-06; Qwen3.8-27B and Gemma 4 31B on the lab server 2026-10-15 to 10-17; analysis 2026-10-19 | 3 models x 284 new items, 16,384 thinking tokens + 2,048 answer tokens | Qwen 235/284 (82.7%), Gemma 233/284 (82.0%), gpt-oss 198/284 (69.7%). Qwen and Gemma are not significantly different; both beat gpt-oss | Done (forced-item reruns for Qwen and Gemma not yet run, see section 10) |
 | Stage 2B (expanded benchmarks) | Set-up and pilot 2026-10-23; run started 2026-10-24; generation finished and scored 2026-10-28 | Qwen3.8-27B and Gemma 4 31B x 503 new items from 6 benchmarks (Tier 1), on the lab server, same settings as Stage 2 | Qwen 65.6%, Gemma 62.4%. Qwen is slightly ahead but not significantly (p = 0.068). Tied on GPQA; Qwen leads on coding and reasoning (section 7B) | Done; re-graded 2026-10-28 by an independent judge, no score changed (6 more benchmarks ready to run, see section 10) |
-| Model panel (open models) | 2026-10-29 to 2026-11-01 | 4 more open models (Ornith-1.5-35B-A3B, K2-Horizon-MoVA-36B-A4B, Nanbeige4.3-33B, gpt-oss-20b) x 250 Stage 2B questions, on the lab server, same settings; compared with Qwen and Gemma on the same questions | Qwen still the best open model (65.6%). Ornith (64.0%) and Gemma (62.4%) are not significantly different from Qwen; Ornith is about 7 times faster (section 7C) | Done |
+| Model panel (open models) | 2026-10-29 to 2026-11-01 | 4 more open models (Ornith-1.5-35B-A3B, K2-Horizon-MoVA-36B-A4B, Nanbeige4.3-33B, gpt-oss-20b) x 250 Stage 2B questions, on the lab server, same settings; compared with Qwen and Gemma on the same questions | Qwen still the best open model (65.6%). Ornith (64.0%) and Gemma (62.4%) are not significantly different from Qwen; Ornith is about 7 times faster (section 7C). On the Stage 2 items Ornith is significantly worse than Qwen (Stage 2C, section 7D) | Done |
 | Closed-model comparison | 2026-11-01 | Claude Opus 5.5 and Gemini 4 Argon through their APIs on the same 250 questions and prompts | Closed models lead by about 18 to 21 points (excluding CRUXEval), mostly on factual knowledge (section 7C) | Done |
-| Stage 2C: Ornith on Stage 2 items and license check | Not yet recorded (see Open questions) | Run Ornith-1.5-35B-A3B on the 284 Stage 2 items; check the licenses of the models we might deploy | | Running |
+| Stage 2C: Ornith on Stage 2 items and license check | 2026-11-02 (generation 13:57 to 16:23) | Ornith-1.5-35B-A3B on the 284 Stage 2 items with the frozen Stage 2 settings; license check of the 5 models we might deploy | Ornith 194/266 = 72.9% vs Qwen 218/266 = 82.0% on the 266 items scored so far: significantly worse (-9.0 points, Holm p 0.00116). All 5 licenses allow free student use (section 7D) | Done; 18 student items pending laptop scoring (cannot reverse the result) |
+| Stage 2D: local Wikipedia search | Set-up 2026-11-02; main run started 2026-11-02 23:15; report 2026-11-04 06:57 | Qwen3.8-27B and Ornith-1.5-35B-A3B with an offline Wikipedia search (BM25), same 250 panel questions and settings | Qwen 65.6% -> 72.4% (significant), Ornith 64.0% -> 68.0% (not significant); closes 29% of the gap to the closed models on average (section 7E) | Done |
+| Stage 2E: improved search | | Better search for the same two models | | Running |
 
 ---
 
@@ -574,8 +578,10 @@ Same 250 questions for every model. Paired test (McNemar), corrected for making 
 In plain words:
 
 - **Qwen3.8-27B is still the best open model that fits our GPU**, but not by much.
-- **Ornith and Gemma are statistically tied with Qwen.** Ornith is weaker on coding (LiveCodeBench 63.3% vs
-  83.3%), but that is only 30 questions and was not tested on its own.
+- **Ornith and Gemma are statistically tied with Qwen on these 250 questions.** Ornith is weaker on coding
+  (LiveCodeBench 63.3% vs 83.3%), but that is only 30 questions and was not tested on its own. **Update (Stage 2C):**
+  on the Stage 2 items Ornith is significantly worse than Qwen (72.9% vs 82.0% on 266 scored items, Holm p 0.00116;
+  section 7D), so it is not tied with Qwen overall.
 - **Nanbeige, K2-Horizon and gpt-oss-20b are clearly worse than Qwen.**
 
 ### 7C.6 Gap to the closed models
@@ -624,7 +630,8 @@ Same GPU and token limits. Qwen and Gemma times come from their Stage 2B run.
 | K2-Horizon-MoVA-36B-A4B | 56.4% | 129 s | 8.9 h | 3.3x faster | 53 tok/s | 23,128 MiB |
 | gpt-oss-20b | 42.4% | 104 s | 7.2 h | 4.0x faster | 99 tok/s | 11,630 MiB |
 
-**Ornith is statistically tied with Qwen but about 7 times faster** (59 s vs 419 s per question). It only uses
+**Ornith is statistically tied with Qwen on these 250 questions but about 7 times faster** (59 s vs 419 s per
+question). On the Stage 2 items it is significantly worse than Qwen (section 7D). It only uses
 about 3B parameters per token, which is why it is so fast. For many students sharing one GPU, that matters a lot.
 K2-Horizon's speed is not fully comparable, because part of it ran from CPU memory.
 
@@ -653,6 +660,273 @@ disagreements were on the closed models' answers (Claude 95.4% agreement, Gemini
 ### 7C.10 Cost
 
 The full API run cost **$16.08** (Claude $6.58, Gemini $9.50), plus **$1.30** for the pilot.
+
+---
+
+## 7D. Stage 2C: Ornith on the Stage 2 items, and licenses
+
+Copied from the Stage 2C results archive (`REPORT.md`, 2026-11-02). Benchmark names are the internal ids (bbeh_mini = BBEH, ifeval = IFEval, math500 = MATH-500, mmlu_pro = MMLU-Pro). The plain-language conclusion is in the README (section 5.2).
+
+Ornith-1.5-35B-A3B was run on all 284 frozen Stage 2 items on the Morgan RTX 4500 Ada (GPU 1) with the frozen Stage 2 shared settings (same prompts, 16,384 thinking + 2,048 answer tokens, n_ctx 23,552, server forced conclusion, loop early-stop, per-item seeds) and Ornith's own panel settings (official Q4_K_M GGUF, official template, enable_thinking, T 1.0 / top_p 0.95 / top_k 20). Details: DECISIONS.md.
+
+**Scoring status: 266 of 284 items scored on this server; 18 student items are pending laptop scoring** (the student grader and Docker sandbox exist only on the laptop; see LAPTOP_SCORING.md). The server scorer is the laptop's score_local.py/scorers.py unchanged and reproduces the laptop's Qwen, Gemma and gpt-oss Stage 2 scores on all 798 non-student rows (0 disagreements), so the four non-student benchmark scores below are final; the overall Stage 2 figure is on 266 items until the laptop step is done.
+
+
+### 7D.1 Stage 2 scores per benchmark (primary: truncated = wrong)
+
+| Model | bbeh_mini | ifeval | math500 | mmlu_pro | student | Overall (266 items, identical for all) | Stage 2 official overall (284) |
+|---|---|---|---|---|---|---|---|
+| Ornith-1.5-35B-A3B | 29/67 = 43.3% | 64/80 = 80.0% | 55/58 = 94.8% | 46/61 = 75.4% | pending laptop scoring | 194/266 = 72.9% | pending laptop scoring |
+| Qwen3.8-27B | 42/67 = 62.7% | 74/80 = 92.5% | 56/58 = 96.6% | 46/61 = 75.4% | 17/18 = 94.4% | 218/266 = 82.0% | 235/284 = 82.7% |
+| Gemma 4 31B | 38/67 = 56.7% | 75/80 = 93.8% | 56/58 = 96.6% | 49/61 = 80.3% | 15/18 = 83.3% | 218/266 = 82.0% | 233/284 = 82.0% |
+| gpt-oss-20b | 22/67 = 32.8% | 68/80 = 85.0% | 51/58 = 87.9% | 41/61 = 67.2% | 16/18 = 88.9% | 182/266 = 68.4% | 198/284 = 69.7% |
+
+Status counts (all 284 items): Ornith-1.5-35B-A3B BUDGET_TRUNCATED 8, CORRECT 194, INCORRECT 64, PENDING_LAPTOP 18; Qwen3.8-27B BUDGET_TRUNCATED 6, CORRECT 235, INCORRECT 43; Gemma 4 31B BUDGET_TRUNCATED 12, CORRECT 233, INCORRECT 39; gpt-oss-20b BUDGET_TRUNCATED 8, CORRECT 198, EXTRACTION_FAILURE 8, INCORRECT 70
+
+### 7D.2 Paired tests on the Stage 2 items (Ornith vs each Stage 2 finalist)
+
+Exact McNemar (two-sided), paired bootstrap 95% CI (10,000 resamples), Holm across the 3 overall comparisons; per-benchmark rows Holm-corrected across all of them. Full tables incl. truncated-excluded sensitivity: analysis/paired_analysis_*.md.
+
+| Ornith vs | n | Ornith acc | other acc | diff (pp) | 95% CI | Ornith-only / other-only right | McNemar p | Holm p | significant |
+|---|---|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | 266 | 72.9 | 82.0 | -9.0 | [-13.9, -4.5] | 10 / 34 | 0.000388 | 0.00116 | **yes** |
+| Gemma 4 31B | 266 | 72.9 | 82.0 | -9.0 | [-13.9, -4.1] | 11 / 35 | 0.000536 | 0.00116 | **yes** |
+| gpt-oss-20b | 266 | 72.9 | 68.4 | +4.5 | [-0.8, +9.8] | 31 / 19 | 0.119 | 0.119 | no |
+
+| Ornith vs | benchmark | n | diff (pp) | 95% CI | Ornith-only / other-only | McNemar p | Holm p |
+|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | bbeh_mini | 67 | -19.4 | [-31.3, -7.5] | 4 / 17 | 0.0072 | 0.0864 |
+| Qwen3.8-27B | ifeval | 80 | -12.5 | [-22.5, -3.8] | 3 / 13 | 0.0213 | 0.213 |
+| Qwen3.8-27B | math500 | 58 | -1.7 | [-5.2, +0.0] | 0 / 1 | 1 | 1 |
+| Qwen3.8-27B | mmlu_pro | 61 | +0.0 | [-8.2, +8.2] | 3 / 3 | 1 | 1 |
+| Gemma 4 31B | bbeh_mini | 67 | -13.4 | [-26.9, +0.0] | 7 / 16 | 0.0931 | 0.838 |
+| Gemma 4 31B | ifeval | 80 | -13.8 | [-22.5, -5.0] | 2 / 13 | 0.00739 | 0.0864 |
+| Gemma 4 31B | math500 | 58 | -1.7 | [-5.2, +0.0] | 0 / 1 | 1 | 1 |
+| Gemma 4 31B | mmlu_pro | 61 | -4.9 | [-13.1, +3.3] | 2 / 5 | 0.453 | 1 |
+| gpt-oss-20b | bbeh_mini | 67 | +10.4 | [-1.5, +22.4] | 13 / 6 | 0.167 | 1 |
+| gpt-oss-20b | ifeval | 80 | -5.0 | [-15.0, +5.0] | 6 / 10 | 0.454 | 1 |
+| gpt-oss-20b | math500 | 58 | +6.9 | [+0.0, +15.5] | 5 / 1 | 0.219 | 1 |
+| gpt-oss-20b | mmlu_pro | 61 | +8.2 | [+0.0, +18.0] | 7 / 2 | 0.18 | 1 |
+
+Sensitivity (items truncated by either model excluded): vs Qwen3.8-27B -9.4 pp (n 256, Holm p 0.000364); vs Gemma 4 31B -9.9 pp (n 252, Holm p 0.000337); vs gpt-oss-20b +3.2 pp (n 252, Holm p 0.302).
+
+### 7D.3 Qwen3.8-27B vs Ornith-1.5-35B-A3B on everything both have run
+
+Same GPU (RTX 4500 Ada 24 GB), same llama.cpp build b11349, same Q4_K_M quantization and Stage 2 budgets. diff = Ornith − Qwen (pp). Exact McNemar; paired bootstrap 95% CI (10,000 resamples, seeds 20261202+k); Holm across the benchmark rows (both stages together) and separately across the two overall rows. Time = mean wall seconds per item.
+
+| stage | benchmark | n | Qwen acc | Ornith acc | diff (pp) | 95% CI | Ornith-only / Qwen-only | McNemar p | Holm p | significant | Qwen s/item | Ornith s/item | speed-up |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Stage 2 | bbeh_mini | 67 | 62.7 | 43.3 | -19.4 | [-31.3, -7.5] | 4 / 17 | 0.0072 | 0.072 | no | 496 | 86 | 5.8× |
+| Stage 2 | ifeval | 80 | 92.5 | 80.0 | -12.5 | [-22.5, -3.8] | 3 / 13 | 0.0213 | 0.191 | no | 100 | 8 | 12.2× |
+| Stage 2 | math500 | 58 | 96.6 | 94.8 | -1.7 | [-5.2, +0.0] | 0 / 1 | 1 | 1 | no | 95 | 12 | 7.8× |
+| Stage 2 | mmlu_pro | 61 | 75.4 | 75.4 | +0.0 | [-8.2, +8.2] | 3 / 3 | 1 | 1 | no | 189 | 25 | 7.6× |
+| Panel | gpqa_diamond | 98 | 87.8 | 86.7 | -1.0 | [-7.1, +5.1] | 4 / 5 | 1 | 1 | no | 422 | 58 | 7.2× |
+| Panel | livecodebench | 30 | 83.3 | 63.3 | -20.0 | [-36.7, -3.3] | 1 / 7 | 0.0703 | 0.562 | no | 551 | 105 | 5.2× |
+| Panel | simpleqa_verified | 40 | 12.5 | 17.5 | +5.0 | [-5.0, +15.0] | 3 / 1 | 0.625 | 1 | no | 314 | 4 | 71.4× |
+| Panel | hle_text | 40 | 22.5 | 30.0 | +7.5 | [-5.0, +20.0] | 5 / 2 | 0.453 | 1 | no | 684 | 109 | 6.3× |
+| Panel | musr | 22 | 90.9 | 95.5 | +4.5 | [+0.0, +13.6] | 1 / 0 | 1 | 1 | no | 248 | 48 | 5.2× |
+| Panel | cruxeval_o | 20 | 95.0 | 80.0 | -15.0 | [-30.0, +0.0] | 0 / 3 | 0.25 | 1 | no | 69 | 13 | 5.3× |
+| Stage 2 | overall (266 items) | 266 | 82.0 | 72.9 | -9.0 | [-13.9, -4.5] | 10 / 34 | 0.000388 | 0.000776 | **yes** | 206 | 31 | 6.7× |
+| Panel | overall (250 items) | 250 | 65.6 | 64.0 | -1.6 | [-6.0, +2.8] | 14 / 18 | 0.597 | 0.597 | no | 419 | 59 | 7.1× |
+| Stage 2 | student | 18 | 94.4 | pending laptop scoring | | | | | | | 13 | 4 | |
+
+Speed and memory (whole run, same GPU):
+
+| | Qwen3.8-27B (Stage 2) | Ornith (Stage 2C) | Qwen3.8-27B (panel) | Ornith (panel) |
+|---|---|---|---|---|
+| mean / median s per item | 206 / 71 | 31 / 8 | 419 / 409 | 59 / 27 |
+| total generation hours | 16.3 (284 items) | 2.4 (284 items) | 29.1 (250) | 4.1 (250) |
+| median decode tok/s | 21.7 | 117.3 | 21.4 | 117.0 |
+| mean thinking tokens | 4189 | 3021 | 8605 | 6163 |
+| thinking limit hit (forced) | 31 | 32 | 81 | 57 |
+| peak GPU memory (MiB, 24,570 total) | 17126 | 20616 | 17126 | 20632 |
+| parameters total / active | 27B / 27B (dense) | 35B / 3B (MoE) | | |
+
+For reference, Stage 2 Gemma 4 31B: 199 s/item, 18.1 tok/s, peak 20858 MiB (same GPU). gpt-oss-20b's Stage 2 ran on the laptop RTX 4060 8 GB (158 s/item) and is not speed-comparable.
+
+### 7D.4 Licenses (official Hugging Face model cards, read 2026-11-02 at the pinned revisions)
+
+| Model | License | URL | Free to serve to students at a university? | Restrictions / flags |
+|---|---|---|---|---|
+| Qwen3.8-27B | Apache 2.0 (LICENSE file in repo) | https://huggingface.co/Qwen/Qwen3.8-27B | **Yes** | Keep the license and copyright notices when redistributing the weights; mark changed files; no trademark rights. No user caps, no acceptable-use policy. |
+| Ornith-1.5-35B-A3B | MIT (card metadata) | https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B | **Yes, on the stated terms** | Keep the copyright + license notice when redistributing. **Flag:** the card's `license_link` (…/blob/main/LICENSE) returns HTTP 404, so the repo holds no license text. The card says it is built on Qwen3.5 and Gemma 4 (both Apache 2.0, compatible with MIT), but nobody has published the exact copyright line. Ask ornith-ai to add the LICENSE file, or record the card at the pinned revision (done: licenses/). No user caps or acceptable-use policy. |
+| Gemma 4 31B (it) | Apache 2.0 | https://huggingface.co/google/gemma-4-31B-it (license page https://ai.google.dev/gemma/docs/gemma_4_license) | **Yes** | Plain Apache 2.0 text: notices + mark changes, no trademark rights. Unlike Gemma 1–3, the Gemma 4 terms carry no Gemma Prohibited Use Policy and no flow-down of use restrictions. The card encourages (does not require) content-safety safeguards. |
+| Nanbeige4.3-33B | Apache 2.0 (card metadata; no LICENSE file in repo) | https://huggingface.co/Nanbeige/Nanbeige4.3-33B | **Yes** | Apache 2.0 notices. Minor flag: there is no license text file in the repo, only the metadata tag. |
+| K2-Horizon-MoVA-36B-A4B | Apache 2.0 (card metadata; no LICENSE file in repo) | https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B | **Yes** | Apache 2.0 notices. Same minor flag as Nanbeige. |
+
+None of the five licenses limits the number of users, requires a commercial agreement above a user threshold, or imposes an acceptable-use policy. Serving the model behind a web app is not "redistribution", so the notice duties apply only if the weights themselves are handed out. A university still needs its own usage policy, student-data/privacy review and content safeguards, but no license blocks free student use. Card copies and SHA-256: licenses/SOURCES.txt. (Not legal advice; the university's counsel should confirm.)
+
+---
+
+## 7E. Stage 2D: local Wikipedia search (250 questions)
+
+Copied from the Stage 2D results archive (`REPORT.md`, generated 2026-11-04). "Retrieval" = the local Wikipedia search. The plain-language summary is in the README (section 5.1).
+
+Generated 2026-11-04T06:57:32+00:00. Items: the 250-question panel subset (`subset_250.json`): gpqa_diamond 98, livecodebench 30, simpleqa_verified 40, hle_text 40, musr 22, cruxeval_o 20.
+
+**Set-up.** Qwen3.8-27B and Ornith-1.5-35B-A3B were rerun on the same 250 questions with exactly the panel settings (same GGUF files, llama.cpp b11349, official chat templates, sampling, seeds, thinking budget 16,384 + 2,048, n_ctx 23,552, one GPU), except that each prompt starts with passages retrieved from an offline English Wikipedia index (wikimedia/wikipedia 20231101.en, snapshot 1 Nov 2023; 18,940,032 passages of ≤200 words). Retrieval: BM25 (Pyserini/Lucene, k1 0.9, b 0.4) top-10 passages in rank order, keeping each passage only if the block's passage characters (title + text) stay within 3,000 (a passage that would overflow is skipped); no reranker (frozen in RETRIEVAL_CONFIG.json, SHA-256 `f1a873b08d27232b…`, chosen on 100 separate SimpleQA questions). The query is the question text; nothing about the test questions was used to tune retrieval. Scoring: the panel scorers; SimpleQA and HLE short answers judged by gpt-oss-20b (primary) and Qwen3.8-27B (second), judges see the original question without passages. "Without retrieval" numbers are the panel's (Qwen: its Stage 2B answers, as in the panel). Claude Opus 5.5 and Gemini 4 Argon ran without retrieval.
+
+### 7E.1 With vs without retrieval (same model, same 250 questions)
+
+diff = with − without (percentage points). Paired bootstrap 95% CI (10,000 resamples, seed 2026); exact McNemar on discordant items (b = right only with retrieval, c = right only without). Holm correction within each table (4 overall tests; 12 per-benchmark tests).
+
+| model | items | without | with | diff (pp) | 95% CI | b / c | exact p | Holm p | significant |
+|---|---|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | all 250 (n 250) | 65.6 | 72.4 | +6.8 | [+2.0, +11.6] | 28 / 11 | 0.0095 | 0.0379 | **yes** |
+| Qwen3.8-27B | excl. CRUXEval (230) (n 230) | 63.0 | 70.4 | +7.4 | [+2.2, +12.6] | 28 / 11 | 0.0095 | 0.0379 | **yes** |
+| Ornith-1.5-35B-A3B | all 250 (n 250) | 64.0 | 68.0 | +4.0 | [-1.2, +9.2] | 26 / 16 | 0.1641 | 0.3283 | no |
+| Ornith-1.5-35B-A3B | excl. CRUXEval (230) (n 230) | 62.6 | 66.5 | +3.9 | [-1.7, +9.6] | 25 / 16 | 0.2110 | 0.3283 | no |
+
+Per benchmark:
+
+| model | benchmark | n | without | with | diff (pp) | 95% CI | b / c | Holm p | significant |
+|---|---|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | gpqa_diamond | 98 | 87.8 | 93.9 | +6.1 | [+2.0, +11.2] | 6 / 0 | 0.3125 | no |
+| Qwen3.8-27B | livecodebench | 30 | 83.3 | 73.3 | -10.0 | [-23.3, +0.0] | 0 / 3 | 1.0000 | no |
+| Qwen3.8-27B | simpleqa_verified | 40 | 12.5 | 57.5 | +45.0 | [+25.0, +62.5] | 20 / 2 | 0.0015 | **yes** |
+| Qwen3.8-27B | hle_text | 40 | 22.5 | 12.5 | -10.0 | [-22.5, +2.5] | 2 / 6 | 1.0000 | no |
+| Qwen3.8-27B | musr | 22 | 90.9 | 90.9 | +0.0 | [+0.0, +0.0] | 0 / 0 | 1.0000 | no |
+| Qwen3.8-27B | cruxeval_o | 20 | 95.0 | 95.0 | +0.0 | [+0.0, +0.0] | 0 / 0 | 1.0000 | no |
+| Ornith-1.5-35B-A3B | gpqa_diamond | 98 | 86.7 | 85.7 | -1.0 | [-8.2, +5.1] | 5 / 6 | 1.0000 | no |
+| Ornith-1.5-35B-A3B | livecodebench | 30 | 63.3 | 63.3 | +0.0 | [-10.0, +10.0] | 1 / 1 | 1.0000 | no |
+| Ornith-1.5-35B-A3B | simpleqa_verified | 40 | 17.5 | 60.0 | +42.5 | [+22.5, +60.0] | 19 / 2 | 0.0024 | **yes** |
+| Ornith-1.5-35B-A3B | hle_text | 40 | 30.0 | 17.5 | -12.5 | [-22.5, -2.5] | 0 / 5 | 0.5625 | no |
+| Ornith-1.5-35B-A3B | musr | 22 | 95.5 | 86.4 | -9.1 | [-22.7, +0.0] | 0 / 2 | 1.0000 | no |
+| Ornith-1.5-35B-A3B | cruxeval_o | 20 | 80.0 | 85.0 | +5.0 | [+0.0, +15.0] | 1 / 0 | 1.0000 | no |
+
+### 7E.2 Gap to Claude Opus 5.5 and Gemini 4 Argon, before and after retrieval
+
+gap = closed − open accuracy (pp; positive = closed model ahead), on the items both models have (Gemini: 249). closed = gap before − gap after; share = closed / gap before (only when the gap before is positive). The closed models ran without retrieval (panel answers). The test is on the gap AFTER retrieval (paired bootstrap CI, exact McNemar, Holm within the overall table (8) and the per-benchmark table (24)). Claude's 20 CRUXEval items were refused by Anthropic's safety filter (counted wrong), so read the excluding-CRUXEval rows for the overall comparison.
+
+| open model | closed model | items | closed acc | open before | open after | gap before | gap after | closed (pp) | share closed | gap after 95% CI | Holm p (after) | still significant |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | Claude Opus 5.5 | all 250 (n 250) | 77.2 | 65.6 | 72.4 | +11.6 | +4.8 | +6.8 | 58.6% | [-2.0, +11.6] | 0.2007 | no |
+| Qwen3.8-27B | Claude Opus 5.5 | excl. CRUXEval (230) (n 230) | 83.9 | 63.0 | 70.4 | +20.9 | +13.5 | +7.4 | 35.4% | [+7.4, +19.6] | 0.0002 | **yes** |
+| Qwen3.8-27B | Gemini 4 Argon | all 250 (n 249) | 82.7 | 65.5 | 72.3 | +17.3 | +10.4 | +6.8 | 39.5% | [+5.6, +15.7] | 0.0004 | **yes** |
+| Qwen3.8-27B | Gemini 4 Argon | excl. CRUXEval (230) (n 230) | 81.3 | 63.0 | 70.4 | +18.3 | +10.9 | +7.4 | 40.5% | [+5.2, +16.5] | 0.0005 | **yes** |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | all 250 (n 250) | 77.2 | 64.0 | 68.0 | +13.2 | +9.2 | +4.0 | 30.3% | [+2.4, +16.0] | 0.0256 | **yes** |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | excl. CRUXEval (230) (n 230) | 83.9 | 62.6 | 66.5 | +21.3 | +17.4 | +3.9 | 18.4% | [+10.9, +23.9] | 0.0000 | **yes** |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | all 250 (n 249) | 82.7 | 64.3 | 67.9 | +18.5 | +14.9 | +3.6 | 19.6% | [+9.2, +20.5] | 0.0000 | **yes** |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | excl. CRUXEval (230) (n 230) | 81.3 | 62.6 | 66.5 | +18.7 | +14.8 | +3.9 | 20.9% | [+8.7, +20.9] | 0.0000 | **yes** |
+| Qwen3.8-27B | Claude Opus 5.5 | gpqa_diamond (n 98) | 90.8 | 87.8 | 93.9 | +3.1 | -3.1 | +6.1 | 200.0% | [-8.2, +2.0] | 1.0000 | no |
+| Qwen3.8-27B | Claude Opus 5.5 | livecodebench (n 30) | 96.7 | 83.3 | 73.3 | +13.3 | +23.3 | -10.0 | -75.0% | [+10.0, +40.0] | 0.2656 | no |
+| Qwen3.8-27B | Claude Opus 5.5 | simpleqa_verified (n 40) | 75.0 | 12.5 | 57.5 | +62.5 | +17.5 | +45.0 | 72.0% | [-5.0, +40.0] | 1.0000 | no |
+| Qwen3.8-27B | Claude Opus 5.5 | hle_text (n 40) | 60.0 | 22.5 | 12.5 | +37.5 | +47.5 | -10.0 | -26.7% | [+32.5, +62.5] | 0.0001 | **yes** |
+| Qwen3.8-27B | Claude Opus 5.5 | musr (n 22) | 95.5 | 90.9 | 90.9 | +4.5 | +4.5 | +0.0 | 0.0% | [+0.0, +13.6] | 1.0000 | no |
+| Qwen3.8-27B | Claude Opus 5.5 | cruxeval_o (n 20) | 0.0 | 95.0 | 95.0 | -95.0 | -95.0 | +0.0 | – | [-100.0, -85.0] | 0.0001 | **yes** |
+| Qwen3.8-27B | Gemini 4 Argon | gpqa_diamond (n 98) | 95.9 | 87.8 | 93.9 | +8.2 | +2.0 | +6.1 | 75.0% | [-2.0, +6.1] | 1.0000 | no |
+| Qwen3.8-27B | Gemini 4 Argon | livecodebench (n 30) | 86.7 | 83.3 | 73.3 | +3.3 | +13.3 | -10.0 | -300.0% | [+0.0, +30.0] | 1.0000 | no |
+| Qwen3.8-27B | Gemini 4 Argon | simpleqa_verified (n 40) | 75.0 | 12.5 | 57.5 | +62.5 | +17.5 | +45.0 | 72.0% | [-2.5, +37.5] | 1.0000 | no |
+| Qwen3.8-27B | Gemini 4 Argon | hle_text (n 40) | 37.5 | 22.5 | 12.5 | +15.0 | +25.0 | -10.0 | -66.7% | [+7.5, +42.5] | 0.2329 | no |
+| Qwen3.8-27B | Gemini 4 Argon | musr (n 22) | 100.0 | 90.9 | 90.9 | +9.1 | +9.1 | +0.0 | 0.0% | [+0.0, +22.7] | 1.0000 | no |
+| Qwen3.8-27B | Gemini 4 Argon | cruxeval_o (n 19) | 100.0 | 94.7 | 94.7 | +5.3 | +5.3 | +0.0 | 0.0% | [+0.0, +15.8] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | gpqa_diamond (n 98) | 90.8 | 86.7 | 85.7 | +4.1 | +5.1 | -1.0 | -25.0% | [-2.0, +12.2] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | livecodebench (n 30) | 96.7 | 63.3 | 63.3 | +33.3 | +33.3 | +0.0 | 0.0% | [+16.7, +50.0] | 0.0391 | **yes** |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | simpleqa_verified (n 40) | 75.0 | 17.5 | 60.0 | +57.5 | +15.0 | +42.5 | 73.9% | [-7.5, +35.0] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | hle_text (n 40) | 60.0 | 30.0 | 17.5 | +30.0 | +42.5 | -12.5 | -41.7% | [+27.5, +57.5] | 0.0003 | **yes** |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | musr (n 22) | 95.5 | 95.5 | 86.4 | +0.0 | +9.1 | -9.1 | – | [+0.0, +22.7] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Claude Opus 5.5 | cruxeval_o (n 20) | 0.0 | 80.0 | 85.0 | -80.0 | -85.0 | +5.0 | – | [-100.0, -70.0] | 0.0003 | **yes** |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | gpqa_diamond (n 98) | 95.9 | 86.7 | 85.7 | +9.2 | +10.2 | -1.0 | -11.1% | [+4.1, +17.3] | 0.1206 | no |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | livecodebench (n 30) | 86.7 | 63.3 | 63.3 | +23.3 | +23.3 | +0.0 | 0.0% | [+6.7, +40.0] | 0.6250 | no |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | simpleqa_verified (n 40) | 75.0 | 17.5 | 60.0 | +57.5 | +15.0 | +42.5 | 73.9% | [-2.5, +35.0] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | hle_text (n 40) | 37.5 | 30.0 | 17.5 | +7.5 | +20.0 | -12.5 | -166.7% | [+2.5, +37.5] | 0.8606 | no |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | musr (n 22) | 100.0 | 95.5 | 86.4 | +4.5 | +13.6 | -9.1 | -200.0% | [+0.0, +27.3] | 1.0000 | no |
+| Ornith-1.5-35B-A3B | Gemini 4 Argon | cruxeval_o (n 19) | 100.0 | 84.2 | 84.2 | +15.8 | +15.8 | +0.0 | 0.0% | [+0.0, +31.6] | 1.0000 | no |
+
+### 7E.3 Retrieval recall on the test items and accuracy split by it
+
+Found = the normalized reference answer (lower-case, accents and punctuation removed) appears as whole words in the retrieved passages (title + text) — the same rule as on the dev set. For SimpleQA and HLE exact-match items the reference answer is the target; for GPQA and HLE multiple-choice the text of the correct option is used (indicative only: long option texts rarely appear verbatim, short ones such as numbers can match by chance). LiveCodeBench, MuSR and CRUXEval have no answer string to look for.
+
+| benchmark | target | n with target | found | recall |
+|---|---|---|---|---|
+| simpleqa_verified | reference answer | 40 | 18 | 45.0% |
+| hle_text | reference answer | 26 | 1 | 3.8% |
+| hle_text | correct option text | 14 | 1 | 7.1% |
+| gpqa_diamond | correct option text | 98 | 8 | 8.2% |
+
+Dev-set recall of the frozen setup (100 separate SimpleQA questions): 48.0%.
+
+Accuracy split by whether retrieval found the answer (SimpleQA + HLE exact-match items; with = with retrieval, without = panel). If accuracy WITH retrieval is low where the answer WAS found, the model failed to read it (reading failure); where it was not found, retrieval failed.
+
+| model | answer found in passages? | n | correct without | correct with | change |
+|---|---|---|---|---|---|
+| Qwen3.8-27B | yes | 19 | 3 (15.8%) | 18 (94.7%) | +15 |
+| Qwen3.8-27B | no | 47 | 9 (19.1%) | 8 (17.0%) | -1 |
+| Ornith-1.5-35B-A3B | yes | 19 | 4 (21.1%) | 18 (94.7%) | +14 |
+| Ornith-1.5-35B-A3B | no | 47 | 11 (23.4%) | 11 (23.4%) | +0 |
+
+SimpleQA only, items where the answer was in the passages: Qwen3.8-27B 17/18 correct with retrieval; Ornith-1.5-35B-A3B 17/18 correct with retrieval.
+Retrieval failures (answer not in passages) cap what retrieval can add; reading failures (answer present, model still wrong) show how well the model uses the passages.
+
+### 7E.4 Where retrieval hurt (and helped)
+
+right→wrong = correct without retrieval, wrong with it; wrong→right = the reverse. Part of both is sampling noise: the two runs use the same seed but a different prompt, so even with no real effect some items flip.
+
+| model | benchmark | n | right→wrong | wrong→right | net |
+|---|---|---|---|---|---|
+| Qwen3.8-27B | gpqa_diamond | 98 | 0 | 6 | +6 |
+| Qwen3.8-27B | livecodebench | 30 | 3 | 0 | -3 |
+| Qwen3.8-27B | simpleqa_verified | 40 | 2 | 20 | +18 |
+| Qwen3.8-27B | hle_text | 40 | 6 | 2 | -4 |
+| Qwen3.8-27B | musr | 22 | 0 | 0 | +0 |
+| Qwen3.8-27B | cruxeval_o | 20 | 0 | 0 | +0 |
+| Qwen3.8-27B | **all** | 250 | 11 | 28 | +17 |
+| Ornith-1.5-35B-A3B | gpqa_diamond | 98 | 6 | 5 | -1 |
+| Ornith-1.5-35B-A3B | livecodebench | 30 | 1 | 1 | +0 |
+| Ornith-1.5-35B-A3B | simpleqa_verified | 40 | 2 | 19 | +17 |
+| Ornith-1.5-35B-A3B | hle_text | 40 | 5 | 0 | -5 |
+| Ornith-1.5-35B-A3B | musr | 22 | 2 | 0 | -2 |
+| Ornith-1.5-35B-A3B | cruxeval_o | 20 | 0 | 1 | +1 |
+| Ornith-1.5-35B-A3B | **all** | 250 | 16 | 26 | +10 |
+
+Benchmarks where Wikipedia should not matter (GPQA, LiveCodeBench, MuSR, CRUXEval; 170 items): Qwen3.8-27B 3 right→wrong vs 6 wrong→right; Ornith-1.5-35B-A3B 9 right→wrong vs 7 wrong→right.
+
+### 7E.5 Cost
+
+**Retrieval itself** (one query at a time, CPU BM25 + no reranker): mean 0.20 s, median 0.10 s, 95th percentile 0.83 s, max 1.20 s per question. Index: 16.2 GB on disk, plus the 20.6 GB passage collection it was built from (which can be deleted; the index stores the passages); building took 8 min on this 96-thread CPU. Searching runs in a Java process (JDK 21) on CPU; no GPU is needed for retrieval.
+
+**Effect on the model's work** (paired per item, with − without; prompt tokens from the server):
+
+| model | benchmark | n | extra prompt tokens (mean) | thinking tokens without → with (mean) | change | seconds/item without → with (mean) | forced conclusions without → with |
+|---|---|---|---|---|---|---|---|
+| Qwen3.8-27B | gpqa_diamond | 98 | 742 | 8700 → 8695 | -5 (-0%) | 422 → 424 | 30 → 30 |
+| Qwen3.8-27B | livecodebench | 30 | 768 | 11157 → 11891 | +734 (+7%) | 551 → 587 | 14 → 16 |
+| Qwen3.8-27B | simpleqa_verified | 40 | 632 | 6680 → 2837 | -3843 (-58%) | 314 → 135 | 6 → 3 |
+| Qwen3.8-27B | hle_text | 40 | 704 | 14068 → 14614 | +545 (+4%) | 684 → 711 | 30 → 30 |
+| Qwen3.8-27B | musr | 22 | 547 | 4836 → 3760 | -1076 (-22%) | 248 → 197 | 1 → 0 |
+| Qwen3.8-27B | cruxeval_o | 20 | 800 | 1379 → 1005 | -374 (-27%) | 69 → 51 | 0 → 0 |
+| Qwen3.8-27B | **all** | 250 | 710 | 8605 → 8039 | -566 (-7%) | 419 → 394 | 81 → 79 |
+| Ornith-1.5-35B-A3B | gpqa_diamond | 98 | 744 | 6089 → 5809 | -280 (-5%) | 58 → 56 | 20 → 15 |
+| Ornith-1.5-35B-A3B | livecodebench | 30 | 779 | 10937 → 10494 | -443 (-4%) | 105 → 102 | 14 → 17 |
+| Ornith-1.5-35B-A3B | simpleqa_verified | 40 | 637 | 367 → 238 | -129 (-35%) | 4 → 3 | 0 → 0 |
+| Ornith-1.5-35B-A3B | hle_text | 40 | 705 | 11699 → 12084 | +385 (+3%) | 109 → 112 | 21 → 23 |
+| Ornith-1.5-35B-A3B | musr | 22 | 547 | 4947 → 3541 | -1407 (-28%) | 48 → 36 | 2 → 1 |
+| Ornith-1.5-35B-A3B | cruxeval_o | 20 | 804 | 1224 → 718 | -506 (-41%) | 13 → 9 | 0 → 0 |
+| Ornith-1.5-35B-A3B | **all** | 250 | 711 | 6163 → 5877 | -286 (-5%) | 59 → 57 | 57 → 56 |
+
+Forced conclusions = items where thinking hit the 16,384-token budget and the forced-conclusion message was injected (scorer flag). Qwen's without-retrieval seconds come from the Stage 2B run on the same GPU and settings (October 2026).
+
+### 7E.6 Judge agreement (SimpleQA + HLE short answers, with retrieval)
+
+| answers by | n judged by both | agreement | Cohen's κ | gpt-oss-20b says correct | Qwen3.8-27B says correct |
+|---|---|---|---|---|---|
+| Qwen3.8-27B | 66 | 100.0% | 1.00 | 26 | 26 |
+| Ornith-1.5-35B-A3B | 65 | 96.9% | 0.94 | 29 | 31 |
+
+Qwen3.8-27B also judges its own answers here (as in the panel); the primary verdict is always gpt-oss-20b's.
+
+### 7E.7 Run health
+
+Statuses with retrieval: Qwen3.8-27B SCORABLE 250; Ornith-1.5-35B-A3B BUDGET_TRUNCATED 4, SCORABLE 246. Any non-SCORABLE status counts as wrong, as in the panel.
+
+### 7E.8 Caveats
+
+- **Snapshot date.** Wikipedia as of 1 November 2023. Facts that changed or appeared later are missing; the benchmarks themselves (HLE, January 2025; SimpleQA Verified, 2025) post-date the dump, so the questions and answer keys cannot be in it, but SimpleQA questions were written FROM Wikipedia pages, which is why retrieval can help so much there.
+- **BM25 limits.** Lexical matching only: paraphrased questions, multi-hop questions and questions whose key term is rare in the answer passage are missed. A dense or hybrid retriever, query rewriting by the model, or more passages (limited here by the 4,992-token prompt room of the frozen context) could find more.
+- **Small per-benchmark samples** (20–98 items); per-benchmark differences are noisy, read the paired tests. Some right→wrong/wrong→right flips are sampling noise because the prompt changed.
+- **Closed models ran without retrieval.** The comparison is "open model + local Wikipedia" vs "closed model alone"; the closed models would likely gain from retrieval too. Claude's CRUXEval items were refused.
+- **Two runs, one sample each.** Without-retrieval answers are the panel's (Qwen's from Stage 2B, October 2026); with-retrieval answers are new. Same seeds, but the different prompt makes them different samples.
+- **Recall measure** is string matching; an answer phrased differently in the passage counts as not found, and short numeric answers can match by chance.
 
 ---
 
@@ -716,6 +990,36 @@ Model panel and closed-model changes (panel `DEVIATIONS.md`, `DECISIONS.md`):
     models' "high" reasoning effort and gave the same results on all 12 pilot items.
 20. **Per-model API budget cap** (2026-11-01). A `--max-usd-per-model` limit was added so each closed model has its
     own spending cap, on top of the shared budget. Actual spend was $16.08 (section 7C.10).
+
+Stage 2C changes (Stage 2C `DECISIONS.md`; the Stage 2C archive has no `DEVIATIONS.md`):
+
+21. **Stage 2 items scored on the lab server, except the student items.** The answer key and scorers were
+    available on the server, so 266 of 284 items were scored there with the laptop's scorer unchanged. It
+    reproduced the laptop's Qwen, Gemma and gpt-oss scores on all 798 non-student rows (0 disagreements). The 18
+    student items need the laptop (the app grader and Docker exist only there) and are pending.
+22. **Own runner lock and port.** The Stage 2 approval gate and runner lock are tied to the Qwen/Gemma freeze, so
+    Stage 2C used a copy of the Stage 2 run loop with its own lock (in /data/stage2c) and port 8185. No Stage 2
+    file was edited.
+23. **Per-item time limit from Ornith's panel speed.** The watchdog limit (2,117 s) used Ornith's slowest long
+    panel item (109.9 tok/s) instead of a Stage 2 speed probe, which Ornith never had.
+
+Stage 2D changes (Stage 2D `DEVIATIONS.md`, `DECISIONS.md`):
+
+24. **Only intended change: a block of Wikipedia passages at the start of each prompt.** Everything else (model
+    files, llama.cpp b11349, templates, sampling, seeds, 16,384 + 2,048 tokens, n_ctx 23,552) is the panel /
+    Stage 2B setting. Mean +~700 prompt tokens; the longest prompt (4,544 tokens) fits the 4,992-token room.
+25. **Pyserini (Lucene) instead of bm25s** for the BM25 search, with a portable JDK 21. bm25s builds its index in
+    memory and 19 million passages would not fit.
+26. **Passage budget of 3,000 characters instead of a fixed number of passages.** Every fixed top-k setup
+    overflowed the prompt room on 1 to 30 test items (long chemistry-name lists), so a character budget was
+    added and tuned on the 100 dev questions. Only test prompt lengths were checked, never answers.
+27. **No reranker.** A cross-encoder reranker (ms-marco-MiniLM-L-6-v2) was tested on the dev questions but found
+    the answer less often than plain BM25 order at every size.
+28. **Search done once before generation.** The search is deterministic, so passages for all 250 questions were
+    computed and frozen before the model runs.
+29. **Baselines and timing from earlier runs.** "Without search" scores and times are the panel's (Qwen's from
+    its Stage 2B run, 2026-10-24 to 28; Ornith's from the panel, 2026-10-29), same GPU and settings. Port 8186;
+    run order Ornith then Qwen.
 
 ---
 
@@ -791,15 +1095,20 @@ time: **about 12 hours** (`RUN_PLAN.md`). Finished results are kept, so this onl
 | Multilingual | Global-MMLU-Lite | 45 |
 | Tool calling | BFCL | 60 |
 
-### 10.2 Stage 2C, then local retrieval
+### 10.2 Stage 2C, local retrieval, then better search
 
-The Claude and Gemini comparison is done (section 7C). Next:
+The Claude and Gemini comparison is done (section 7C). Stage 2C (section 7D) and Stage 2D, the local Wikipedia
+search (section 7E), are done. Next:
 
-1. **Stage 2C results (running):** Ornith-1.5-35B-A3B on the 284 Stage 2 items, to see if it stays tied with Qwen
-   on a second, different set of questions, plus a license check for the models we might deploy.
-2. **Local retrieval:** give Qwen and Ornith an offline Wikipedia search running on the lab server, then re-test
-   them. Section 7C shows most of the gap to the closed models is factual knowledge (SimpleQA), so this tests how
-   much of that gap a local fact lookup can close, without sending any data outside Morgan.
+1. **Stage 2C laptop step:** score Ornith's 18 student items on the laptop (app grader + Docker), to get its
+   official 284-item Stage 2 score. This cannot change the Qwen vs Ornith result.
+2. **Stage 2E: improved search (running).** Stage 2D showed that when the search found the answer, both models
+   were right 94.7% of the time, but it found the answer on only 45.0% of SimpleQA questions. Stage 2E tries
+   meaning-based (dense) search, reranking, more passages, query rewriting, and searching only when the question
+   needs facts.
+3. **Stage 2F:** faster answers (multi-token prediction, less thinking on easy questions), code self-testing, and
+   one combined setup that routes each question to the right model and tools.
+4. **Write-up** of the whole project.
 
 ### 10.3 Grading checks for Stage 2B
 
@@ -824,4 +1133,7 @@ These were marked TODO in earlier versions of the README.
   down at the time. The README (section 4) now says what the 7 have in common, which candidates were too large and
   which 10 would have fit but were never tested. Still open: why Ministral 3 14B Reasoning was chosen over the
   in-pool models that fit, and the size of the 8 candidates marked "not stated in our sources" in section 4.3.
-- **Stage 2C start date** (section 2): not yet recorded in the results files.
+- **Stage 2C start date** (section 2): **answered (2026-11-04):** generation ran 2026-11-02 13:57 to 16:23 UTC
+  (Stage 2C `HANDOFF.md`).
+- **Ornith's license file** (section 7D.4): Ornith's model card says MIT but links to a LICENSE file that does
+  not exist in its repo. Ask ornith-ai to add it before deploying Ornith.
